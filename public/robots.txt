@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /studio
+Disallow: /studio.html
+
+Sitemap: https://narristotle.com/sitemap.xml

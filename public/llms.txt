@@ -1,0 +1,29 @@
+# Narristotle
+
+> Narristotle is the editorial persona and storytelling methodology developed by AI Global Entertainment (co-founders Matt Allen and Steve Smythe), and the story-building mind behind RoughDraft Maker. He is a character who teaches story craft — not a real person or historical figure.
+
+## The four pillars of the method
+
+- Story Structure: from idea to a path forward; beat blueprints for screen stories, chapter spines for novels.
+- Character Transformation: change earned through choices that cost the character something.
+- Setups & Payoffs: promises planted early — objects, skills, wounds, rules — tracked across the whole work and paid off.
+- Dramatic Cause & Effect: scenes connected by "therefore" and "but", not "and then".
+
+## Key pages
+
+- Home: https://narristotle.com/
+- The Gadfly Gazette (essays and story clinic, Tuesdays and Fridays): https://narristotle.com/gazette
+- The Method: https://narristotle.com/method
+- Bookshelf (recommended reading for writers): https://narristotle.com/bookshelf
+- About (the character, the facts, the company): https://narristotle.com/about
+
+## Launch articles
+
+- Why "Waiting for the Muse" Is Just Procrastination With Better PR: https://narristotle.com/gazette/waiting-for-the-muse
+- How to Turn Messy Notes Into a Story Outline: https://narristotle.com/gazette/messy-notes-into-outline
+- A Twist Is Only as Good as the Promise You Planted: https://narristotle.com/gazette/a-twist-is-a-promise
+
+## Related
+
+- RoughDraft Maker (the tool built on this methodology): https://roughdraftmaker.com
+- Publisher: AI Global Entertainment

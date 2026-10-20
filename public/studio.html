@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Studio — Narristotle (Editors Only)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<style>
+  .studio{max-width:1080px;margin:0 auto;padding:34px 24px 70px}
+  .badge{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.12em;padding:4px 10px;border-radius:999px;background:#fdf3d7;color:#8a6410;border:1px solid var(--gold)}
+  .badge.live{background:#e7f5e9;color:#22652c;border-color:#9fd0a4}
+  .cols{display:grid;grid-template-columns:340px 1fr;gap:28px;margin-top:24px}
+  @media(max-width:860px){.cols{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:8px;padding:18px}
+  .post-item{border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin-bottom:10px;cursor:pointer;background:#fff}
+  .post-item:hover{border-color:var(--navy)}
+  .post-item h4{font-family:'Inter',sans-serif;font-size:15.5px;color:var(--navy);margin-bottom:4px}
+  .status{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+  .st-draft{color:#8a6410}.st-published{color:#22652c}.st-scheduled{color:#2c4a73}
+  label{display:block;font-size:13px;font-weight:600;color:var(--navy);margin:14px 0 5px}
+  input,select,textarea{width:100%;border:1px solid var(--line);border-radius:6px;padding:9px 11px;font:inherit;font-size:15px}
+  textarea{min-height:180px}
+  .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  button{font:inherit;cursor:pointer}
+  .btn-sm{padding:8px 14px;font-size:14px}
+  .btn-danger{background:#fff;color:#a33;border-color:#a33}
+  .btn-danger:hover{background:#fdf0f0}
+  .hist{font-size:14px;color:var(--muted)}
+  .hist li{margin-bottom:8px;list-style:none;border-bottom:1px solid var(--line);padding-bottom:8px}
+  .warn{display:none;border:1px solid #e5b4b4;background:#fdf3f3;color:#7a2323;border-radius:8px;padding:12px 16px;margin-top:14px;font-size:14.5px}
+  #signin{text-align:center;padding:60px 20px}
+</style>
+<script src="/firebase-config.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+</head>
+<body>
+<header class="site">
+  <div class="header-in">
+    <a class="brand" href="/" aria-label="Narristotle home">
+      <span class="brand-mark">N</span>
+      <span class="brand-name">NARRISTOTLE&#8482;<span class="brand-sub">STUDIO — EDITORS ONLY</span></span>
+    </a>
+    <nav class="main" style="display:flex">
+      <a href="/">View site</a>
+      <a href="#" id="signout" style="display:none">Sign out</a>
+    </nav>
+  </div>
+</header>
+
+<main class="studio">
+  <div id="signin">
+    <h1 style="font-size:32px;margin-bottom:10px">Narristotle Studio</h1>
+    <p style="color:var(--muted);max-width:32em;margin:0 auto 22px">Drafts, scheduling, publishing, and history for the Gadfly Gazette and the Bookshelf. Editors only — this page is not in the public navigation.</p>
+    <p id="mode-badge" style="margin-bottom:20px"></p>
+    <button class="btn btn-navy" id="signin-btn">Sign in with Google</button>
+    <button class="btn btn-ghost" id="local-btn" style="display:none">Continue in local preview mode</button>
+    <p id="signin-note" style="color:var(--muted);font-size:14px;margin-top:16px"></p>
+  </div>
+
+  <div id="app" style="display:none">
+    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+      <h1 style="font-size:30px">Studio</h1>
+      <span class="badge" id="app-mode">LOCAL PREVIEW</span>
+      <span style="color:var(--muted);font-size:14.5px" id="who"></span>
+      <button class="btn btn-navy btn-sm" id="new-btn" style="margin-left:auto">+ New post</button>
+    </div>
+
+    <div class="cols">
+      <div>
+        <div class="card">
+          <h3 style="font-size:18px;margin-bottom:12px">Posts</h3>
+          <select id="filter" style="margin-bottom:14px">
+            <option value="all">All statuses</option>
+            <option value="draft">Drafts</option>
+            <option value="scheduled">Scheduled</option>
+            <option value="published">Published</option>
+          </select>
+          <div id="list"></div>
+        </div>
+        <div class="card" style="margin-top:20px">
+          <h3 style="font-size:18px;margin-bottom:12px">Publication history</h3>
+          <ul class="hist" id="history"></ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="font-size:18px" id="editor-title">Select a post, or create a new one</h3>
+        <label>Title</label>
+        <input id="f-title" placeholder="Snarky, honest headline">
+        <label>Category</label>
+        <select id="f-category">
+          <option>Contrarian Craft</option>
+          <option>The Story Clinic</option>
+          <option>Matt &amp; Steve Desk</option>
+          <option>Bookshelf</option>
+        </select>
+        <label>Author</label>
+        <input id="f-author" value="Narristotle">
+        <label>Summary box (the short answer shown under the headline)</label>
+        <textarea id="f-summary" style="min-height:80px" placeholder="Two crisp sentences a reader — or an answer engine — can quote."></textarea>
+        <label>Body (HTML)</label>
+        <textarea id="f-body" placeholder="&lt;p&gt;Full article or story body…&lt;/p&gt;"></textarea>
+        <label>Schedule for (optional — Pacific)</label>
+        <input id="f-schedule" type="datetime-local">
+        <div class="warn" id="scan-warn"></div>
+        <div class="row">
+          <button class="btn btn-ghost btn-sm" id="save-btn">Save draft</button>
+          <button class="btn btn-ghost btn-sm" id="sched-btn">Schedule</button>
+          <button class="btn btn-navy btn-sm" id="pub-btn">Publish now</button>
+          <button class="btn btn-ghost btn-sm" id="unpub-btn">Unpublish</button>
+          <button class="btn btn-danger btn-sm" id="del-btn" style="margin-left:auto">Delete</button>
+        </div>
+        <p style="color:var(--muted);font-size:13.5px;margin-top:14px">Publishing is single-editor: whoever is signed in can publish, unpublish, and override a schedule. No second approval is required. Every action is written to the publication history.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+(function(){
+  var cfg = window.NARRISTOTLE_FIREBASE_CONFIG || {};
+  var connected = !!(cfg.apiKey && cfg.projectId);
+  var db = null, auth = null, actor = "Local editor";
+  var modeBadge = document.getElementById('mode-badge');
+  var note = document.getElementById('signin-note');
+
+  if (connected) {
+    firebase.initializeApp(cfg);
+    auth = firebase.auth(); db = firebase.firestore();
+    modeBadge.innerHTML = '<span class="badge live">CONNECTED TO FIRESTORE</span>';
+    note.textContent = 'Sign in with an editor account (Steve or Matt).';
+  } else {
+    modeBadge.innerHTML = '<span class="badge">LOCAL PREVIEW — NOT YET CONNECTED</span>';
+    note.innerHTML = 'To connect: create the Web app for the narristotle site in the Firebase project, paste its config into <code>public/firebase-config.js</code>, and redeploy. Until then, everything here works in this browser only.';
+    document.getElementById('signin-btn').style.display = 'none';
+    document.getElementById('local-btn').style.display = 'inline-block';
+  }
+
+  // ------- data layer (Firestore when connected, localStorage otherwise) -------
+  var LS_POSTS='narr_posts_v1', LS_HIST='narr_hist_v1';
+  function lsGet(k,d){ try{ return JSON.parse(localStorage.getItem(k))||d; }catch(e){ return d; } }
+  function lsSet(k,v){ localStorage.setItem(k, JSON.stringify(v)); }
+  function seed(){
+    if (lsGet(LS_POSTS,null)) return;
+    var now = Date.now();
+    lsSet(LS_POSTS, [
+      {id:'p1', title:'Why “Waiting for the Muse” Is Just Procrastination With Better PR', category:'Contrarian Craft', author:'Narristotle', summary:'Inspiration helps. A character who wants something—and a consequence for going after it—gives you somewhere to begin.', body:'<p>Live at /gazette/waiting-for-the-muse</p>', status:'published', createdAt:now-86400000, updatedAt:now-86400000, scheduledFor:null},
+      {id:'p2', title:'How to Turn Messy Notes Into a Story Outline', category:'The Story Clinic', author:'Narristotle', summary:'Find the person, the problem, and the choices that connect your ideas.', body:'<p>Live at /gazette/messy-notes-into-outline</p>', status:'published', createdAt:now-86400000, updatedAt:now-86400000, scheduledFor:null},
+      {id:'p3', title:'A Twist Is Only as Good as the Promise You Planted', category:'The Story Clinic', author:'Narristotle', summary:'Give an early detail a reason to matter later.', body:'<p>Live at /gazette/a-twist-is-a-promise</p>', status:'published', createdAt:now-86400000, updatedAt:now-86400000, scheduledFor:null}
+    ]);
+    lsSet(LS_HIST, [{at:now-86400000, actor:'Muse (launch build)', action:'published', title:'Launch set: 3 Gazette articles'}]);
+  }
+  function getPosts(cb){
+    if (db) { db.collection('narristotle_posts').orderBy('updatedAt','desc').get().then(function(s){ cb(s.docs.map(function(d){ var x=d.data(); x.id=d.id; return x; })); }); }
+    else { seed(); cb(lsGet(LS_POSTS,[])); }
+  }
+  function savePost(p, cb){
+    if (db) {
+      var ref = p.id ? db.collection('narristotle_posts').doc(p.id) : db.collection('narristotle_posts').doc();
+      p.id = ref.id; ref.set(p).then(function(){ cb(p); });
+    } else {
+      var posts = lsGet(LS_POSTS,[]);
+      if (!p.id) { p.id = 'p'+Date.now(); posts.unshift(p); } else { posts = posts.map(function(x){ return x.id===p.id?p:x; }); }
+      lsSet(LS_POSTS, posts); cb(p);
+    }
+  }
+  function deletePost(id, cb){
+    if (db) { db.collection('narristotle_posts').doc(id).delete().then(cb); }
+    else { lsSet(LS_POSTS, lsGet(LS_POSTS,[]).filter(function(x){ return x.id!==id; })); cb(); }
+  }
+  function logHist(action, title, cb){
+    var entry = {at: Date.now(), actor: actor, action: action, title: title};
+    if (db) { db.collection('narristotle_history').add(entry).then(function(){ cb && cb(); }); }
+    else { var h = lsGet(LS_HIST,[]); h.unshift(entry); lsSet(LS_HIST, h.slice(0,100)); cb && cb(); }
+  }
+  function getHist(cb){
+    if (db) { db.collection('narristotle_history').orderBy('at','desc').limit(50).get().then(function(s){ cb(s.docs.map(function(d){ return d.data(); })); }); }
+    else { cb(lsGet(LS_HIST,[])); }
+  }
+
+  // ------- guardrail scan (launch rules) -------
+  function scan(text){
+    var problems = [];
+    if (/\$\s?\d/.test(text)) problems.push('Contains a dollar figure. Narristotle never shows consumer prices.');
+    if (/\b(price|pricing)\b/i.test(text)) problems.push('Mentions pricing. Keep product prices off this site.');
+    if (/\d+\s?(minute|min|second|sec)s?\b[^.]{0,60}(draft|generat|writ)/i.test(text) || /(draft|generat)[^.]{0,60}\d+\s?(minute|min|second|sec)s?\b/i.test(text)) problems.push('Reads like an internal drafting-speed benchmark. Those never appear in public copy.');
+    return problems;
+  }
+
+  // ------- UI -------
+  var current = null;
+  var $ = function(id){ return document.getElementById(id); };
+  function refresh(){
+    var f = $('filter').value;
+    getPosts(function(posts){
+      $('list').innerHTML = posts.filter(function(p){ return f==='all'||p.status===f; }).map(function(p){
+        return '<div class="post-item" data-id="'+p.id+'"><span class="status st-'+p.status+'">'+p.status+(p.scheduledFor?' · '+new Date(p.scheduledFor).toLocaleString():'')+'</span><h4>'+escapeHtml(p.title||'(untitled)')+'</h4><span style="font-size:13px;color:var(--muted)">'+escapeHtml(p.category||'')+' · '+escapeHtml(p.author||'')+'</span></div>';
+      }).join('') || '<p style="color:var(--muted);font-size:14.5px">No posts in this view yet.</p>';
+      document.querySelectorAll('.post-item').forEach(function(el){ el.addEventListener('click', function(){ load(posts.filter(function(p){return p.id===el.getAttribute('data-id');})[0]); }); });
+    });
+    getHist(function(h){
+      $('history').innerHTML = h.map(function(e){ return '<li><strong>'+escapeHtml(e.action)+'</strong> — '+escapeHtml(e.title)+'<br>'+new Date(e.at).toLocaleString()+' · '+escapeHtml(e.actor)+'</li>'; }).join('') || '<li>No history yet.</li>';
+    });
+  }
+  function escapeHtml(s){ return String(s||'').replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function load(p){
+    current = p;
+    $('editor-title').textContent = p ? 'Edit post' : 'New post';
+    $('f-title').value = p?p.title:''; $('f-category').value = p?p.category:'Contrarian Craft';
+    $('f-author').value = p?p.author:'Narristotle'; $('f-summary').value = p?p.summary:'';
+    $('f-body').value = p?p.body:''; $('f-schedule').value = p&&p.scheduledFor? new Date(p.scheduledFor).toISOString().slice(0,16):'';
+    $('scan-warn').style.display='none';
+  }
+  function collect(status){
+    return { id: current?current.id:null, title: $('f-title').value.trim(), category: $('f-category').value,
+      author: $('f-author').value.trim()||'Narristotle', summary: $('f-summary').value.trim(), body: $('f-body').value,
+      status: status, scheduledFor: status==='scheduled' && $('f-schedule').value ? new Date($('f-schedule').value).getTime() : null,
+      createdAt: current?current.createdAt:Date.now(), updatedAt: Date.now() };
+  }
+  function act(status, verb){
+    var p = collect(status);
+    if (!p.title) { alert('Give the post a title first.'); return; }
+    if (status==='published' || status==='scheduled') {
+      var problems = scan(p.title+' '+p.summary+' '+p.body);
+      if (problems.length) { var w=$('scan-warn'); w.innerHTML='<strong>Blocked by the launch rules:</strong><br>'+problems.join('<br>'); w.style.display='block'; return; }
+    }
+    $('scan-warn').style.display='none';
+    savePost(p, function(saved){ current = saved; logHist(verb, p.title, refresh); load(saved); });
+  }
+  $('save-btn').addEventListener('click', function(){ act('draft','saved draft'); });
+  $('pub-btn').addEventListener('click', function(){ act('published','published'); });
+  $('sched-btn').addEventListener('click', function(){ if(!$('f-schedule').value){ alert('Pick a date and time to schedule for.'); return; } act('scheduled','scheduled'); });
+  $('unpub-btn').addEventListener('click', function(){ if(current) act('draft','unpublished'); });
+  $('del-btn').addEventListener('click', function(){ if(current && confirm('Delete this post? This is recorded in the history.')){ var t=current.title; deletePost(current.id, function(){ logHist('deleted', t, refresh); load(null); current=null; }); } });
+  $('new-btn').addEventListener('click', function(){ current=null; load(null); });
+  $('filter').addEventListener('change', refresh);
+
+  function enter(name){
+    actor = name || 'Local editor';
+    $('who').textContent = 'Signed in as '+actor;
+    $('app-mode').textContent = connected ? 'CONNECTED TO FIRESTORE' : 'LOCAL PREVIEW';
+    if (connected) $('app-mode').className='badge live';
+    $('signin').style.display='none'; $('app').style.display='block';
+    $('signout').style.display='inline';
+    refresh(); load(null);
+  }
+  $('local-btn').addEventListener('click', function(){ enter('Local editor'); });
+  $('signin-btn').addEventListener('click', function(){
+    if (!auth) return;
+    auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(function(e){ alert(e.message); });
+  });
+  $('signout').addEventListener('click', function(e){ e.preventDefault(); if (auth) auth.signOut(); location.reload(); });
+  if (auth) { auth.onAuthStateChanged(function(u){ if (u) enter(u.email); }); }
+})();
+</script>
+</body>
+</html>
