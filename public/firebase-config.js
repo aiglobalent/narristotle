@@ -1,13 +1,10 @@
-// Narristotle Studio connection settings.
-// Fill these in from Firebase Console > Project settings > Your apps > Web app
-// for the "narristotle" app in the myroughdrafter project, then redeploy.
-// Until then, /studio runs in local preview mode (data stays in the browser)
-// so the editorial workflow can be reviewed end to end.
-// Web config values are not secrets; access is controlled by Firebase Auth
-// plus the editor allowlist in firestore.rules.
+// Narristotle Studio Firebase connection — project myroughdrafter, web app "Narristotle Studio".
+// Registered 2026-10-20. These values are the project's public web config (not secrets).
 window.NARRISTOTLE_FIREBASE_CONFIG = {
-  apiKey: "",
-  authDomain: "",
-  projectId: "",
-  appId: ""
+  "apiKey": "AIzaSyCOVOQkapUmQSUEVtdOIdZVcjhVFAB-_0s",
+  "authDomain": "myroughdrafter.firebaseapp.com",
+  "projectId": "myroughdrafter",
+  "storageBucket": "myroughdrafter.firebasestorage.app",
+  "messagingSenderId": "533696073228",
+  "appId": "1:533696073228:web:c936fb1c0b29609583e829"
 };
