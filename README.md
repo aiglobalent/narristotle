@@ -21,9 +21,13 @@ Static site on Firebase Hosting (site `narristotle`, project `myroughdrafter`), 
 
 ## Deploy
 
+Deploys use the established AGE pattern: the `firebase-deployer@myroughdrafter`
+service account (roles/firebasehosting.admin; key at `~/firebase-deployer-key.json`
+on Steve's Mac, supplied transiently per deploy, never stored) exchanged for an
+OAuth token — or a normal `firebase login` session. Create the site once, then:
+
 ```bash
-npm install -g firebase-tools   # once
-firebase login                  # once, as an editor account
+firebase hosting:sites:create narristotle --project myroughdrafter   # once
 firebase deploy --only hosting:narristotle,firestore:rules --project myroughdrafter
 ```
 
