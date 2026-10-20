@@ -63,5 +63,5 @@ curl -s -o /dev/null -w "%{http_code}\n" https://narristotle.web.app/gazette/wai
 
 ## Assets
 
-- `public/assets/narristotle-bust.jpg` — launch bust, cropped from the approved design mockup (October 2026). Replace with a Matt-inspired bust when an approved Matt reference is available; do not block launches on it.
+- `public/assets/narristotle-bust.jpg` — launch bust, cropped from the approved design mockup (October 2026). NOTE: this one binary file is NOT in git — the agent's GitHub tooling moves text only, so the file travels with the launch build folder; drop it in `public/assets/` after cloning, before deploying (the home page degrades gracefully to a monogram if it is missing). Replace with a Matt-inspired bust when an approved Matt reference is available; do not block launches on it.
 - Book covers on the Bookshelf are clean text treatments by design (no third-party cover art), with free full texts linked at Project Gutenberg.
