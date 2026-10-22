@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=20261020c">
-<link rel="stylesheet" href="/assets/block.css?v=20261021d">
+<link rel="stylesheet" href="/assets/block.css?v=20261021f">
 </head>
 <body>
 <div class="news-strip"><span class="ns-tag">JUST DROPPED</span><a href="/bookshelf">Steve Smythe&rsquo;s <em>A Tomato, a Donkey, and the Stars</em> just joined Our Own Shelf &mdash; a children&rsquo;s chapter book draft, free to read &#8594;</a></div>
@@ -52,149 +52,34 @@
       <p class="fine">Dreamed up by Alex. Built by Narristotle. Every tool runs 100% in your browser &mdash; no accounts, no uploads, your words never leave the page.</p>
     </section>
     <div id="plazaView">
-    <section class="plaza" aria-label="The Writer's Block town plaza">
-      <div class="sky">
-      <span class="sun"></span>
-      <span class="cloud" style="left:7%;top:8px;width:76px;height:22px"></span>
-      <span class="cloud" style="left:36%;top:22px;width:56px;height:17px;animation-delay:-3s"></span>
-      <span class="cloud" style="right:15%;top:4px;width:66px;height:20px;animation-delay:-6s"></span>
+    <div class="blockbar">
+      <span class="bb-tag">Pick a shop. Get unstuck.</span>
+      <span class="bb-btns">
+        <button type="button" class="bb-btn" id="randomBtn">&#127922; Randomize</button>
+        <button type="button" class="bb-btn" id="howBtn">? How it works</button>
+      </span>
     </div>
-      <div class="plaza-row">
-        <button type="button" class="bldg" data-room="cafe" style="--lift:30px;--tilt:-2.4deg" aria-label="Step inside The Cut-Up Cafe">
-          <span class="bubble">Slice your sentences. Keep the weird half.</span>
-          <svg viewBox="0 0 300 360" aria-hidden="true">
-            <defs><pattern id="cawn" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="16" height="16" fill="#fdf6df"/><rect width="8" height="16" fill="#b0402f"/></pattern><linearGradient id="cbody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2764f"/><stop offset="1" stop-color="#d6452c"/></linearGradient></defs><ellipse cx="150" cy="350" rx="108" ry="9" fill="rgba(10,40,20,.25)"/>
-            <path d="M40 128 L72 82 L228 82 L260 128 Z" fill="#b23a26" stroke="#171008" stroke-width="6" stroke-linejoin="round"/><path d="M78 89 L222 89" stroke="#fff" stroke-width="5" opacity=".25" stroke-linecap="round"/>
-            <path d="M50 118 L18 106 M50 226 L18 240" stroke="#171008" stroke-width="5" fill="none"/>
-            <g transform="rotate(-3 31 168)">
-              <rect x="13" y="94" width="37" height="152" rx="9" fill="#e8b13c" stroke="#171008" stroke-width="5"/>
-              <text x="31.5" y="129" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="21" fill="#40260f">C</text>
-              <text x="31.5" y="163" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="21" fill="#40260f">A</text>
-              <text x="31.5" y="197" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="21" fill="#40260f">F</text>
-              <text x="31.5" y="231" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="21" fill="#40260f">E</text>
-            </g>
-            <rect x="48" y="128" width="204" height="196" fill="url(#cbody)" stroke="#171008" stroke-width="6"/><rect x="52" y="290" width="196" height="30" fill="#000" opacity=".12"/>
-            <rect x="64" y="140" width="172" height="40" rx="6" fill="#fdf6df" stroke="#171008" stroke-width="4"/>
-            <text x="150" y="166" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="15.5" letter-spacing="1" fill="#102C4E">THE CUT-UP CAFE</text>
-            <path d="M58 186 L242 186 L254 210 L46 210 Z" fill="url(#cawn)" stroke="#171008" stroke-width="4" stroke-linejoin="round"/>
-            <rect x="62" y="222" width="102" height="80" rx="4" fill="#ffca6a" stroke="#171008" stroke-width="5"/><polygon points="76,226 106,226 86,298 68,298" fill="#fff" opacity=".26"/>
-            <path d="M102 240 q4 -7 0 -14 M116 240 q-4 -7 0 -14" stroke="#ffffff" stroke-width="3" fill="none" opacity=".85"/>
-            <rect x="94" y="252" width="32" height="22" rx="5" fill="#fff8ea" stroke="#171008" stroke-width="4"/>
-            <path d="M126 258 q13 5 0 13" stroke="#171008" stroke-width="4" fill="none"/>
-            <path d="M84 286 L140 286" stroke="#171008" stroke-width="4"/>
-            <polygon class="spill" points="186,324 126,348 192,348" fill="#ffd98a" opacity="0"/>
-            <g class="door">
-              <rect x="182" y="218" width="54" height="106" fill="#a03a26" stroke="#171008" stroke-width="5"/>
-              <rect x="192" y="230" width="34" height="40" fill="#ffca6a" stroke="#171008" stroke-width="3"/>
-              <circle cx="228" cy="278" r="4" fill="#e8b13c" stroke="#171008" stroke-width="2"/>
-            </g>
-            <rect x="176" y="324" width="70" height="8" fill="#3d3d3d"/>
-            <ellipse cx="92" cy="330" rx="30" ry="7" fill="#fdf6df" stroke="#171008" stroke-width="4"/>
-            <path d="M92 336 L92 348" stroke="#171008" stroke-width="4"/>
-            <g stroke="#171008" stroke-width="3" fill="none"><circle cx="84" cy="323" r="3.5"/><circle cx="99" cy="323" r="3.5"/><path d="M87 320 L101 311 M97 320 L83 311"/></g>
-          </svg>
-          <span class="bname">No. 1 &middot; The Cut-Up Cafe</span>
-        </button>
-        <button type="button" class="bldg" data-room="pitch" style="--lift:4px;--tilt:-.8deg" aria-label="Step inside The Pitch Bar">
-          <span class="bubble">Five blanks in. One clean pitch out.</span>
-          <svg viewBox="0 0 300 360" aria-hidden="true">
-            <defs><radialGradient id="pglow" cx="50%" cy="40%" r="80%"><stop offset="0%" stop-color="#ffe9ad"/><stop offset="100%" stop-color="#f7bd54"/></radialGradient><linearGradient id="pbody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9a63e0"/><stop offset="1" stop-color="#6d3bc4"/></linearGradient></defs><ellipse cx="150" cy="350" rx="102" ry="9" fill="rgba(10,40,20,.25)"/>
-            <g class="beams"><polygon points="66,92 24,-6 108,-6" fill="#fff8d6" opacity=".38"/><polygon points="234,92 192,-6 276,-6" fill="#fff8d6" opacity=".38"/></g>
-            <rect x="48" y="94" width="204" height="20" rx="7" fill="#53289c" stroke="#171008" stroke-width="5"/>
-            <rect x="58" y="110" width="184" height="214" fill="url(#pbody)" stroke="#171008" stroke-width="6"/><rect x="62" y="290" width="176" height="30" fill="#000" opacity=".13"/>
-            <path d="M84 200 L84 126 Q150 84 216 126 L216 200 Z" fill="#fdf6df" stroke="#171008" stroke-width="6" stroke-linejoin="round"/>
-            <g fill="#ffdf7e" stroke="#171008" stroke-width="2">
-              <circle cx="90" cy="158" r="4.5"/><circle cx="97" cy="130" r="4.5"/><circle cx="114" cy="110" r="4.5"/><circle cx="134" cy="99" r="4.5"/><circle cx="150" cy="95" r="4.5"/><circle cx="166" cy="99" r="4.5"/><circle cx="186" cy="110" r="4.5"/><circle cx="203" cy="130" r="4.5"/><circle cx="210" cy="158" r="4.5"/>
-            </g>
-            <text x="150" y="152" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="19" fill="#102C4E">THE PITCH</text>
-            <text x="153" y="180" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="19" letter-spacing="7" fill="#102C4E">BAR</text>
-            <rect x="68" y="216" width="54" height="66" fill="#3a1c70" stroke="#171008" stroke-width="5"/>
-            <path d="M100 224 L108 214" stroke="#7ae0ff" stroke-width="2.5"/>
-            <circle cx="106" cy="222" r="3.5" fill="#b6e26a" stroke="#171008" stroke-width="2"/>
-            <path d="M78 230 L112 230 L95 250 Z" stroke="#ff7ad9" stroke-width="3.5" fill="none" stroke-linejoin="round"/>
-            <path d="M95 250 L95 262 M84 264 L106 264" stroke="#ff7ad9" stroke-width="3.5" fill="none"/>
-            <rect x="178" y="216" width="54" height="66" fill="url(#pglow)" stroke="#171008" stroke-width="5"/>
-            <g fill="#171008"><ellipse cx="197" cy="257" rx="7" ry="5.5" transform="rotate(-20 197 257)"/><rect x="202.5" y="228" width="3.5" height="29"/><path d="M203 228 q14 2 12 12 q-6 -6 -12 -6 Z"/></g>
-            <rect x="126" y="216" width="24" height="108" fill="#5b2ea6" stroke="#171008" stroke-width="5"/>
-            <polygon class="spill" points="152,324 106,348 158,348" fill="#ffd98a" opacity="0"/>
-            <g class="door">
-              <rect x="150" y="216" width="24" height="108" fill="#6d3bc4" stroke="#171008" stroke-width="5"/>
-              <path d="M157 258 L157 272" stroke="#e8b13c" stroke-width="3"/>
-            </g>
-            <rect x="120" y="324" width="64" height="8" fill="#3d3d3d"/>
-          </svg>
-          <span class="bname">No. 2 &middot; The Pitch Bar</span>
-        </button>
-        <button type="button" class="bldg" data-room="almanac" style="--lift:10px;--tilt:.8deg" aria-label="Step inside The Town Almanac">
-          <span class="bubble">Every town is hiding a story&hellip;</span>
-          <svg viewBox="0 0 300 360" aria-hidden="true">
-            <defs><linearGradient id="abody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#35b6cf"/><stop offset="1" stop-color="#1f8aa5"/></linearGradient></defs><ellipse cx="150" cy="350" rx="110" ry="9" fill="rgba(10,40,20,.25)"/><rect x="42" y="168" width="216" height="156" fill="url(#abody)" stroke="#171008" stroke-width="6"/><rect x="46" y="292" width="208" height="28" fill="#000" opacity=".10"/>
-            <rect x="120" y="78" width="60" height="246" fill="#2ea3bd" stroke="#171008" stroke-width="6"/>
-            <path d="M110 80 L150 28 L190 80 Z" fill="#e2574c" stroke="#171008" stroke-width="6" stroke-linejoin="round"/><path d="M128 72 L150 42 L172 72" stroke="#fff" stroke-width="4" fill="none" opacity=".25" stroke-linecap="round"/>
-            <circle cx="150" cy="21" r="5" fill="#e8b13c" stroke="#171008" stroke-width="3"/>
-            <circle cx="150" cy="112" r="18" fill="#fdf6df" stroke="#171008" stroke-width="4"/>
-            <path d="M150 112 L150 100 M150 112 L159 117" stroke="#171008" stroke-width="3.5" fill="none"/>
-            <rect x="56" y="142" width="188" height="34" rx="5" fill="#fdf6df" stroke="#171008" stroke-width="4"/>
-            <text x="150" y="164" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="14.5" letter-spacing=".5" fill="#102C4E">THE TOWN ALMANAC</text>
-            <rect x="56" y="196" width="62" height="76" fill="#ffca6a" stroke="#171008" stroke-width="5"/>
-            <circle cx="87" cy="226" r="15" fill="#7ec8e3" stroke="#171008" stroke-width="3"/>
-            <ellipse cx="87" cy="226" rx="6.5" ry="15" fill="none" stroke="#171008" stroke-width="2"/>
-            <path d="M72 226 L102 226 M87 241 L87 250 M78 250 L96 250" stroke="#171008" stroke-width="2.5" fill="none"/>
-            <rect x="182" y="196" width="62" height="76" fill="#ffca6a" stroke="#171008" stroke-width="5"/>
-            <rect x="192" y="210" width="42" height="32" fill="#f4ead2" stroke="#171008" stroke-width="3"/>
-            <path d="M196 220 q6 -5 12 0 t12 0 M196 232 q6 -5 12 0 t12 0" stroke="#171008" stroke-width="2" fill="none"/>
-            <circle cx="215" cy="219" r="4.5" fill="#d64545" stroke="#171008" stroke-width="2"/>
-            <polygon class="spill" points="132,324 92,348 140,348" fill="#ffd98a" opacity="0"/>
-            <g class="door">
-              <rect x="128" y="226" width="44" height="98" fill="#146b80" stroke="#171008" stroke-width="5"/>
-              <rect x="138" y="238" width="24" height="30" fill="#ffca6a" stroke="#171008" stroke-width="3"/>
-              <circle cx="164" cy="278" r="3.5" fill="#e8b13c" stroke="#171008" stroke-width="2"/>
-            </g>
-            <rect x="122" y="324" width="56" height="8" fill="#3d3d3d"/>
-          </svg>
-          <span class="bname">No. 3 &middot; The Town Almanac</span>
-        </button>
-        <button type="button" class="bldg" data-room="apothecary" style="--lift:30px;--tilt:2.4deg" aria-label="Step inside The Name Apothecary">
-          <span class="bubble">Names, jobs &amp; petty secrets &mdash; pulled fresh.</span>
-          <svg viewBox="0 0 300 360" aria-hidden="true">
-            <defs><linearGradient id="nbody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f58ec0"/><stop offset="1" stop-color="#e05a9a"/></linearGradient></defs><ellipse cx="150" cy="350" rx="100" ry="9" fill="rgba(10,40,20,.25)"/><path d="M56 156 L150 98 L244 156 L244 324 L56 324 Z" fill="url(#nbody)" stroke="#171008" stroke-width="6" stroke-linejoin="round"/><path d="M60 296 L240 296 L240 320 L60 320 Z" fill="#000" opacity=".10"/>
-            <path d="M46 158 L150 92 L254 158" stroke="#171008" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M72 149 L150 101 L228 149" stroke="#fff" stroke-width="4" fill="none" opacity=".20" stroke-linecap="round"/>
-            <g transform="rotate(-5 150 133)">
-              <rect x="82" y="112" width="136" height="42" rx="6" fill="#fdf6df" stroke="#171008" stroke-width="5"/>
-              <text x="150" y="131" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="12.5" letter-spacing="2" fill="#102C4E">THE NAME</text>
-              <text x="150" y="148" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="13.5" letter-spacing="1" fill="#102C4E">APOTHECARY</text>
-            </g>
-            <circle cx="150" cy="182" r="12" fill="#ffca6a" stroke="#171008" stroke-width="4"/>
-            <path d="M150 170 L150 194 M138 182 L162 182" stroke="#171008" stroke-width="2.5"/>
-            <g>
-              <path d="M74 150 L74 163" stroke="#171008" stroke-width="3"/>
-              <circle cx="74" cy="175" r="13" fill="#ffd98a" opacity=".55"/>
-              <rect x="67" y="163" width="14" height="19" rx="3" fill="#ffd98a" stroke="#171008" stroke-width="3"/>
-              <path d="M226 150 L226 163" stroke="#171008" stroke-width="3"/>
-              <circle cx="226" cy="175" r="13" fill="#ffd98a" opacity=".55"/>
-              <rect x="219" y="163" width="14" height="19" rx="3" fill="#ffd98a" stroke="#171008" stroke-width="3"/>
-            </g>
-            <rect x="70" y="210" width="92" height="78" fill="#7c2d55" stroke="#171008" stroke-width="5"/>
-            <rect x="77" y="217" width="78" height="64" fill="#ffca6a" opacity=".92"/>
-            <path d="M103 217 L103 281 M129 217 L129 281 M77 238 L155 238 M77 260 L155 260" stroke="#8a5a20" stroke-width="3"/>
-            <g fill="#40260f">
-              <circle cx="90" cy="227" r="2.6"/><circle cx="116" cy="227" r="2.6"/><circle cx="142" cy="227" r="2.6"/>
-              <circle cx="90" cy="249" r="2.6"/><circle cx="116" cy="249" r="2.6"/><circle cx="142" cy="249" r="2.6"/>
-              <circle cx="90" cy="270" r="2.6"/><circle cx="116" cy="270" r="2.6"/><circle cx="142" cy="270" r="2.6"/>
-            </g>
-            <polygon class="spill" points="190,324 140,348 198,348" fill="#ffd98a" opacity="0"/>
-            <g class="door">
-              <path d="M184 324 L184 238 Q207 216 230 238 L230 324 Z" fill="#463356" stroke="#171008" stroke-width="5"/>
-              <path d="M196 300 L196 250 Q207 240 218 250 L218 300 Z" fill="#ffca6a" stroke="#171008" stroke-width="3"/>
-              <circle cx="222" cy="284" r="3.5" fill="#e8b13c" stroke="#171008" stroke-width="2"/>
-            </g>
-            <rect x="178" y="324" width="60" height="8" fill="#3d3d3d"/>
-            <ellipse cx="104" cy="340" rx="16" ry="4" fill="#6b6f76"/>
-          </svg>
-          <span class="bname">No. 4 &middot; The Name Apothecary</span>
-        </button>
-      </div>
-      <div class="court" aria-hidden="true"><span class="ctable" style="left:16%"></span><span class="ctable" style="right:14%"></span></div>
+    <div class="howpanel" id="howPanel" hidden>
+      <p><strong>Four shops, four ways unstuck.</strong> The Cut-Up Cafe slices your stuck paragraph and collides the halves into sparks. The Pitch Bar fixes your real book pitch in five blanks. The Town Almanac invents a story town &mdash; setting, industry, rumor and all. The Name Apothecary pulls a name, a day job, and a petty secret for your next character. Everything runs right here in your browser; your words never leave the page.</p>
+    </div>
+    <section class="plaza scene" aria-label="The Writer's Block town plaza — pick a shop">
+      <img class="scene-img" fetchpriority="high" src="/assets/scenes/plaza.jpg" alt="A painted storybook town plaza in winter: four glowing shops around a snowy cobblestone circle by the sea" width="2200" height="733">
+      <button type="button" class="hotspot" data-room="cafe" style="left:0;top:5%;width:23.5%;height:86%" aria-label="Step inside The Cut-Up Cafe">
+        <span class="bubble">Slice your sentences. Keep the weird half.</span>
+        <span class="hot-label"><span class="hl-no">No. 1 &middot; </span>The Cut-Up Cafe</span>
+      </button>
+      <button type="button" class="hotspot" data-room="pitch" style="left:23.5%;top:5%;width:20.5%;height:86%" aria-label="Step inside The Pitch Bar">
+        <span class="bubble">Five blanks in. One clean pitch out.</span>
+        <span class="hot-label"><span class="hl-no">No. 2 &middot; </span>The Pitch Bar</span>
+      </button>
+      <button type="button" class="hotspot" data-room="almanac" style="left:44%;top:3%;width:18.5%;height:88%" aria-label="Step inside The Town Almanac">
+        <span class="bubble">Every town is hiding a story&hellip;</span>
+        <span class="hot-label"><span class="hl-no">No. 3 &middot; </span>The Town Almanac</span>
+      </button>
+      <button type="button" class="hotspot" data-room="apothecary" style="left:62.5%;top:5%;width:19.5%;height:86%" aria-label="Step inside The Name Apothecary">
+        <span class="bubble">Names, jobs &amp; petty secrets &mdash; pulled fresh.</span>
+        <span class="hot-label"><span class="hl-no">No. 4 &middot; </span>The Name Apothecary</span>
+      </button>
     </section>
     <div class="street-cap"><span>Est. tonight. Open all hours.</span><span class="hint">Hover a building &mdash; doors open for the curious. Click to step inside.</span></div>
     </div>
@@ -222,7 +107,11 @@
         <p class="note">The Slicer cuts every sentence near its middle &mdash; at a conjunction or verb when it can find one &mdash; and lays the beginnings and endings on two paper strips.</p>
       </div>
       <div class="tablewrap" id="tableWrap" style="margin-top:20px;display:none">
-        <div class="strips">
+        <div class="coltabs" role="tablist" aria-label="Choose a paper strip">
+          <button type="button" data-coltab="left">Beginnings</button>
+          <button type="button" data-coltab="right" class="on">Endings</button>
+        </div>
+        <div class="strips show-right">
           <div>
             <div class="colhead">Beginnings</div>
             <div id="leftCol"></div>
@@ -344,6 +233,6 @@
   <button type="button" data-room="apothecary"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5 h16 M4 12 h16 M4 19 h16 M9.3 5 v14 M14.7 5 v14" stroke="currentColor" stroke-width="1.8" fill="none"/><circle cx="6.6" cy="8.5" r=".4" fill="currentColor"/><circle cx="12" cy="15.5" r=".4" fill="currentColor"/></svg><span>Apothecary</span></button>
   <button type="button" id="hudExit" class="hud-exit"><span>&#8592; Street</span></button>
 </div>
-<script src="/assets/block.js?v=20261021c"></script>
+<script src="/assets/block.js?v=20261021d"></script>
 </body>
 </html>

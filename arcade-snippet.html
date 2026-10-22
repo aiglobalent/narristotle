@@ -1,0 +1,100 @@
+<section class="arcade" id="arcade" data-arcade>
+  <div class="wrap">
+    <div class="arcade-banner">
+      <span class="emblem"><img src="/assets/narristotle-bust.jpg" alt="Narristotle — marble bust wearing tortoiseshell glasses"></span>
+      <div>
+        <p>Narristotle&rsquo;s Story &amp; Song Arcade</p>
+        <h2>Think You Have Writer&rsquo;s Block? Give Me 5 Words and 30 Seconds.</h2>
+      </div>
+    </div>
+
+    <div class="arcade-toggle" role="tablist" aria-label="Arcade mode">
+      <span class="pill">
+        <button type="button" data-mode-btn="story" class="active">&#128214; Plot Roulette (Story Libs)</button>
+        <button type="button" data-mode-btn="song">&#127928; Song Draft Maker</button>
+      </span>
+    </div>
+
+    <div class="arcade-card">
+      <div class="arcade-panel">
+        <div class="arcade-genres" data-genres="story">
+          <span class="g-label">First, pick a genre:</span>
+          <button type="button" data-genre="thriller" class="active">&#127917; Thriller</button>
+          <button type="button" data-genre="cozy">&#128373;&#65038; Cozy Mystery</button>
+          <button type="button" data-genre="scifi">&#128640; Sci-Fi</button>
+          <button type="button" data-genre="kids">&#128009; Children&rsquo;s Adventure</button>
+        </div>
+        <div class="arcade-genres" data-genres="song" style="display:none">
+          <span class="g-label">First, pick a genre:</span>
+          <button type="button" data-genre="country" class="active">&#129312; Country Heartbreak</button>
+          <button type="button" data-genre="hiphop">&#127908; Hip-Hop Roast</button>
+          <button type="button" data-genre="ballad">&#127928; 80s Power Ballad</button>
+        </div>
+
+        <h3>Your 5 Quick Inputs</h3>
+
+        <div data-fields="story">
+          <div class="arcade-field"><label>1. Someone terrible at their job</label><input type="text" value="A forgetful detective" data-default="A forgetful detective"></div>
+          <div class="arcade-field"><label>2. A weird object in their pocket</label><input type="text" value="A rubber duck" data-default="A rubber duck"></div>
+          <div class="arcade-field"><label>3. The worst place to get snowed in</label><input type="text" value="A haunted motel" data-default="A haunted motel"></div>
+          <div class="arcade-field"><label>4. Something they desperately want</label><input type="text" value="A second chance" data-default="A second chance"></div>
+          <div class="arcade-field"><label>5. A secret nobody should know</label><input type="text" value="The duck talks" data-default="The duck talks"></div>
+        </div>
+
+        <div data-fields="song" style="display:none">
+          <div class="arcade-field"><label>1. A beat-up vehicle or ride</label><input type="text" value="2004 Honda Civic" data-default="2004 Honda Civic"></div>
+          <div class="arcade-field"><label>2. A specific local hangout spot</label><input type="text" value="Bakersfield Applebee's" data-default="Bakersfield Applebee's"></div>
+          <div class="arcade-field"><label>3. Something petty left behind</label><input type="text" value="half a bottle of ranch" data-default="half a bottle of ranch"></div>
+          <div class="arcade-field"><label>4. A 2 AM bad habit</label><input type="text" value="texting my ex from the booth" data-default="texting my ex from the booth"></div>
+          <div class="arcade-field"><label>5. The one thing you want back</label><input type="text" value="my vintage leather jacket" data-default="my vintage leather jacket"></div>
+        </div>
+
+        <button type="button" class="arcade-reveal-btn" data-reveal>Reveal &rarr;</button>
+      </div>
+
+      <div class="arcade-panel arcade-result">
+        <div data-tease>
+          <p class="r-kicker" data-tease-kicker>Plot Roulette &middot; Sealed &amp; Waiting</p>
+          <h3 data-tease-title>Something ridiculous is about to happen on this page.</h3>
+          <div class="r-body" data-tease-body>Right now, this card is blank, smug, and absolutely bursting with potential &mdash; rather like a writer before coffee.
+
+Your 5 words are the ingredients. The genre is the oven. Hit Reveal and I shall serve you a tiny story with a beginning, a middle, and a cliffhanger rude enough to make you glad you pressed Reveal.
+
+No spoilers. But between us? The duck is ready for its close-up.</div>
+        </div>
+
+        <div data-result-wrap style="display:none">
+          <p class="r-kicker" data-result-kicker>Plot Roulette</p>
+          <h3 data-result-title></h3>
+          <div class="r-body" data-result-body></div>
+
+          <div class="arcade-bubble" data-song-bubble style="display:none">
+            <img src="/assets/narristotle-bust.jpg" alt="Narristotle">
+            <p>&ldquo;Every great country song or rap track is just a 3-minute movie. Want to turn this into an actual screenplay or book?&rdquo;</p>
+          </div>
+
+          <div class="arcade-actions">
+            <button type="button" class="arcade-share" data-share-btn>&#128228; Share Card / Text This to a Friend</button>
+            <a class="arcade-feed" data-feed-btn href="https://roughdraftmaker.com" target="_blank" rel="noopener">&#9889; Wait... This Is Good. Turn It Into a Book on RoughDraft Maker &rarr;</a>
+            <p class="arcade-status" data-status aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arcade-modal" data-modal style="display:none" role="dialog" aria-label="Your meme card">
+    <div class="arcade-modal-backdrop" data-modal-close></div>
+    <div class="arcade-modal-panel">
+      <button type="button" class="arcade-modal-x" data-modal-close aria-label="Close">&times;</button>
+      <h3>Your Meme Card</h3>
+      <p class="arcade-modal-sub">Painted right in your browser. Post it anywhere.</p>
+      <img data-modal-img alt="Your Narristotle Arcade meme card">
+      <div class="arcade-modal-actions">
+        <button type="button" class="arcade-feed" data-download-btn>&#128248; Download Meme Card (PNG)</button>
+        <button type="button" class="arcade-share" data-copy-btn>&#128279; Copy Share Link</button>
+      </div>
+      <p class="arcade-status" data-modal-status aria-live="polite"></p>
+    </div>
+  </div>
+</section>

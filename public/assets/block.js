@@ -23,6 +23,7 @@
     if (!ROOMMETA[id]) return;
     $("plazaView").style.display = "none";
     $("roomView").hidden = false;
+    $("roomView").setAttribute("data-scene", id);
     $("hud").hidden = false;
     document.body.classList.add("in-room");
     ROOMORDER.forEach(function (k) { $(k).style.display = (k === id) ? "block" : "none"; });
@@ -35,6 +36,7 @@
   }
   function exitRoom() {
     $("roomView").hidden = true;
+    $("roomView").removeAttribute("data-scene");
     $("hud").hidden = true;
     document.body.classList.remove("in-room");
     $("plazaView").style.display = "";
@@ -45,6 +47,25 @@
   });
   $("exitRoom").addEventListener("click", exitRoom);
   $("hudExit").addEventListener("click", exitRoom);
+  /* warm the room backdrops so first entry paints instantly */
+  ROOMORDER.forEach(function (k) { var im = new Image(); im.src = "/assets/scenes/" + k + ".jpg"; });
+  /* block bar: randomize + how it works */
+  $("randomBtn").addEventListener("click", function () {
+    enterRoom(ROOMORDER[Math.floor(Math.random() * ROOMORDER.length)]);
+  });
+  $("howBtn").addEventListener("click", function () {
+    var p = $("howPanel"); p.hidden = !p.hidden;
+  });
+  /* cafe strip tabs (mobile): show one paper strip at a time */
+  document.querySelectorAll("[data-coltab]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      document.querySelectorAll("[data-coltab]").forEach(function (x) { x.classList.toggle("on", x === b); });
+      var strips = document.querySelector(".strips");
+      if (!strips) return;
+      strips.classList.toggle("show-left", b.getAttribute("data-coltab") === "left");
+      strips.classList.toggle("show-right", b.getAttribute("data-coltab") === "right");
+    });
+  });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && document.body.classList.contains("in-room")) exitRoom();
   });
@@ -101,8 +122,8 @@
      free pixel offset: it sticks where you release it, and the collided
      sentence is whichever ending sits nearest the center row. */
   function rowH() {
-    var h = document.querySelector("#leftCol .half");
-    return h ? h.offsetHeight : (window.innerWidth <= 640 ? 64 : 58);
+    var h = document.querySelector("#rTrack .half") || document.querySelector("#leftCol .half");
+    return (h && h.offsetHeight) || (window.innerWidth <= 640 ? 64 : 58);
   }
   function clampDrag() {
     var rh = rowH(), N = cafe.lefts.length;
