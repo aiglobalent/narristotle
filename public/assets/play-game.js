@@ -298,6 +298,9 @@ story: [
   }
 
   function showReveal() {
+    /* The payoff screen gets the full display: drop any keyboard left up
+       from the write-your-own box, or it eats the bottom of the story. */
+    if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
     var deck = DECKS[deckKey];
     gameView.style.display = "none";
     revealView.style.display = "";
@@ -582,6 +585,16 @@ story: [
   window.addEventListener("resize", function () {
     if (revealView.style.display !== "none") fitStory();
   });
+  /* iOS shrinks only the VISUAL viewport when the keyboard opens/closes —
+     refit then too, or text sized for the tall screen clips in the short one. */
+  if (window.visualViewport) {
+    var vvT = null;
+    window.visualViewport.addEventListener("resize", function () {
+      if (revealView.style.display === "none") return;
+      clearTimeout(vvT);
+      vvT = setTimeout(fitStory, 120);
+    });
+  }
   $("againBtn").addEventListener("click", function () { startRound(deckKey); });
   $("deckBtn").addEventListener("click", function () { showStart(); });
 
