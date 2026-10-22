@@ -145,7 +145,7 @@ story: [
   var busy = false;
 
   var $ = function (id) { return document.getElementById(id); };
-  var gameView = $("gameView"), revealView = $("revealView");
+  var gameView = $("gameView"), revealView = $("revealView"), startView = $("startView");
   var promptEl = $("promptText"), stepEl = $("stepLabel");
   var gridEl = $("handGrid"), ownEl = $("ownInput");
 
@@ -236,10 +236,21 @@ story: [
     }, 120);
   }
 
+  function showStart() {
+    startView.style.display = "";
+    gameView.style.display = "none";
+    revealView.style.display = "none";
+    document.querySelector(".steprow").style.display = "none";
+    document.querySelector(".packbar").style.display = "";
+    document.querySelector(".apphead").style.display = "";
+    window.scrollTo(0, 0);
+  }
+
   function startRound(key) {
     deckKey = key;
     step = 0;
     answers = [];
+    startView.style.display = "none";
     revealView.style.display = "none";
     gameView.style.display = "";
     document.querySelector(".steprow").style.display = "";
@@ -294,10 +305,9 @@ story: [
     void revealView.offsetWidth;
     revealView.classList.add("enter");
     document.querySelector(".steprow").style.display = "none";
-    if (window.innerHeight <= 720) {
-      document.querySelector(".packbar").style.display = "none";
-      document.querySelector(".apphead").style.display = "none";
-    }
+    /* The story gets the whole stage in the reveal — chrome steps aside. */
+    document.querySelector(".packbar").style.display = "none";
+    document.querySelector(".apphead").style.display = "none";
     $("storyTitle").textContent = withPeriod(titleText());
     var body = $("storyBody");
     body.innerHTML = "";
@@ -334,7 +344,7 @@ story: [
     var card = document.querySelector(".storycard");
     var bodyEl = $("storyBody"), titleEl = $("storyTitle");
     if (!card || !bodyEl || !titleEl) return;
-    /* Reset to the CSS sizes, then step compactness up until everything fits. */
+    /* Reset to the CSS sizes. */
     bodyEl.style.fontSize = "";
     bodyEl.style.lineHeight = "";
     titleEl.style.fontSize = "";
@@ -347,13 +357,30 @@ story: [
       if (sb) sb.style.fontSize = "";
       if (ss) ss.style.fontSize = "";
     }
-    var base = parseFloat(getComputedStyle(bodyEl).fontSize) || 16.5;
-    var titleBase = parseFloat(getComputedStyle(titleEl).fontSize) || 26;
+    var base = parseFloat(getComputedStyle(bodyEl).fontSize) || 18.5;
+    var titleBase = parseFloat(getComputedStyle(titleEl).fontSize) || 28;
+    function applyScale(sc) {
+      bodyEl.style.fontSize = Math.min(26, base * sc) + "px";
+      bodyEl.style.lineHeight = String(Math.min(1.62, 1.5 + (sc - 1) * 0.25));
+      titleEl.style.fontSize = Math.min(40, titleBase * sc) + "px";
+    }
+    /* GROW first: the story is the main event — scale up until the card is filled. */
+    var s = 1;
+    for (var g = 1.05; g <= 1.5; g += 0.05) {
+      applyScale(g);
+      if (card.scrollHeight > card.clientHeight + 1) break;
+      s = g;
+    }
+    applyScale(s);
+    if (card.scrollHeight <= card.clientHeight + 1) return;
+    /* SHRINK: long stories step compactness up until everything fits. */
+    var curBase = parseFloat(bodyEl.style.fontSize) || base;
+    var curTitle = parseFloat(titleEl.style.fontSize) || titleBase;
     for (var st = 1; st <= 20; st++) {
       if (card.scrollHeight <= card.clientHeight + 1) break;
-      bodyEl.style.fontSize = Math.max(11.5, base - st * 0.55) + "px";
-      bodyEl.style.lineHeight = String(Math.max(1.3, 1.45 - st * 0.012));
-      titleEl.style.fontSize = Math.max(19, titleBase - st * 0.6) + "px";
+      bodyEl.style.fontSize = Math.max(11.5, curBase - st * 0.55) + "px";
+      bodyEl.style.lineHeight = String(Math.max(1.3, 1.5 - st * 0.012));
+      titleEl.style.fontSize = Math.max(19, curTitle - st * 0.6) + "px";
       if (st >= 5) card.style.padding = "16px";
       if (st >= 8) bodyEl.querySelectorAll(".sec-label").forEach(function (l) { l.style.marginTop = "8px"; });
       if (st >= 12) card.style.padding = "12px 14px";
@@ -520,12 +547,8 @@ story: [
     });
   }
 
-  /* ——— Deck discovery: a one-time hint + a pulse that points up ——— */
-  var hintSeen = false;
-  try { hintSeen = !!localStorage.getItem("narr decks seen"); } catch (e) { hintSeen = true; }
+  /* ——— Deck discovery now lives on the landing page; this just retires the old hint flag ——— */
   function dismissHint() {
-    var hint = $("deckHint");
-    if (hint) hint.hidden = true;
     try { localStorage.setItem("narr decks seen", "1"); } catch (e) {}
   }
   function pulseBar() {
@@ -534,12 +557,6 @@ story: [
     void bar.offsetWidth;
     bar.classList.add("hinting");
     setTimeout(function () { bar.classList.remove("hinting"); }, 1900);
-  }
-  if (!hintSeen) {
-    setTimeout(function () {
-      if (revealView.style.display === "none") { $("deckHint").hidden = false; pulseBar(); }
-    }, 700);
-    setTimeout(dismissHint, 9000);
   }
 
   /* ——— Wiring ——— */
@@ -566,7 +583,22 @@ story: [
     if (revealView.style.display !== "none") fitStory();
   });
   $("againBtn").addEventListener("click", function () { startRound(deckKey); });
-  $("deckBtn").addEventListener("click", function () { startRound(deckKey); pulseBar(); });
+  $("deckBtn").addEventListener("click", function () { showStart(); });
 
-  startRound("thriller");
+  /* ——— Landing + hamburger menu ——— */
+  var menuSheet = $("menuSheet");
+  function openMenu() { menuSheet.hidden = false; }
+  function closeMenu() { menuSheet.hidden = true; }
+  $("playBtn").addEventListener("click", function () { startRound(deckKey); });
+  $("menuBtn").addEventListener("click", openMenu);
+  $("menuClose").addEventListener("click", closeMenu);
+  $("howBtn").addEventListener("click", function () { closeMenu(); showStart(); });
+  menuSheet.querySelectorAll(".deckitem").forEach(function (b) {
+    b.addEventListener("click", closeMenu);
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !menuSheet.hidden) closeMenu();
+  });
+
+  showStart();
 })();

@@ -22,8 +22,68 @@ button{font-family:inherit}
 /* ——— App header: the name, big and yellow, then what the buttons are ——— */
 .apphead{
   flex:none;text-align:center;padding:16px 12px 10px;
-  padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right));
+  padding-left:max(60px,env(safe-area-inset-left));padding-right:max(60px,env(safe-area-inset-right));
 }
+/* ——— Hamburger: fixed top-right, present in every view ——— */
+.burger{
+  position:fixed;top:calc(10px + env(safe-area-inset-top));right:10px;z-index:65;
+  width:46px;height:46px;background:#000000;border:2.5px solid #FACC15;border-radius:11px;
+  color:#FACC15;font-size:20px;font-weight:900;line-height:1;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+/* ——— Menu sheet ——— */
+#menuSheet{
+  position:fixed;inset:0;z-index:70;background:rgba(0,0,0,0.99);
+  display:flex;flex-direction:column;overflow-y:auto;
+  padding:calc(64px + env(safe-area-inset-top)) 22px calc(24px + env(safe-area-inset-bottom));
+  padding-left:max(22px,env(safe-area-inset-left));padding-right:max(22px,env(safe-area-inset-right));
+}
+#menuSheet[hidden]{display:none}
+#menuSheet .sheetclose{position:absolute;top:calc(10px + env(safe-area-inset-top));right:10px}
+.sheetlabel{
+  color:#8a8a8f;font-size:12px;font-weight:900;letter-spacing:0.16em;text-transform:uppercase;
+  margin:20px 0 4px;
+}
+.sheetlabel:first-of-type{margin-top:0}
+.sheetitem{
+  display:block;width:100%;text-align:left;background:none;border:0;cursor:pointer;
+  color:#FFFFFF;font:inherit;font-size:23px;font-weight:900;letter-spacing:-0.01em;
+  padding:13px 2px;border-bottom:1px solid #26262a;text-decoration:none;
+}
+.sheetitem.deckitem{color:#FACC15}
+/* ——— Landing / how-to ——— */
+#startView{
+  flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  display:flex;flex-direction:column;gap:15px;
+  width:100%;max-width:720px;margin:0 auto;
+  padding:8px 18px calc(20px + env(safe-area-inset-bottom));
+  padding-left:max(18px,env(safe-area-inset-left));padding-right:max(18px,env(safe-area-inset-right));
+}
+#startView .hook{
+  font-size:clamp(26px,7.4vw,36px);font-weight:900;line-height:1.14;letter-spacing:-0.02em;color:#FFFFFF;
+}
+#startView .lede{font-size:16.5px;font-weight:600;line-height:1.5;color:#d7d7db}
+#startView .steps{list-style:none;display:flex;flex-direction:column;gap:11px}
+#startView .steps li{display:flex;gap:12px;align-items:flex-start;font-size:16px;font-weight:600;line-height:1.42;color:#d7d7db}
+#startView .steps b{
+  flex:none;width:27px;height:27px;border-radius:50%;background:#FACC15;color:#000000;
+  display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;margin-top:1px;
+}
+#startView .steps strong{color:#FFFFFF}
+.playbtn{
+  flex:none;width:100%;background:#FACC15;color:#000000;border:0;border-radius:13px;cursor:pointer;
+  font:inherit;font-size:18px;font-weight:900;letter-spacing:0.04em;text-transform:uppercase;
+  min-height:58px;padding:17px;
+}
+.decklist{display:flex;flex-direction:column;gap:9px}
+.deckrow{
+  display:block;width:100%;text-align:left;background:#0d0d0f;border:2px solid #2c2c30;border-radius:13px;
+  cursor:pointer;padding:13px 15px;color:#FFFFFF;font:inherit;
+}
+.deckrow b{display:block;font-size:16.5px;font-weight:900;color:#FACC15;text-transform:uppercase;letter-spacing:0.03em}
+.deckrow span{display:block;margin-top:2px;font-size:14.5px;font-weight:600;color:#c9c9cd;line-height:1.35}
+.deckrow.active{border-color:#FACC15}
+#startView .fineprint{color:#8a8a8f;font-size:13px;font-weight:600;text-align:center}
 .apphead h1{
   font-family:'Archivo Black',Inter,'Helvetica Neue',Helvetica,Arial,sans-serif;
   font-size:clamp(30px,8.6vw,44px);line-height:1.04;letter-spacing:0.01em;
@@ -49,13 +109,7 @@ button{font-family:inherit}
 .packbar button.active{background:#FACC15;color:#000000;box-shadow:none}
 .packbar.hinting button:not(.active){animation:tabPulse 0.85s ease 2}
 @keyframes tabPulse{0%,100%{background:transparent}50%{background:rgba(250,204,21,0.28)}}
-#deckHint{
-  position:fixed;bottom:calc(16px + env(safe-area-inset-bottom));left:12px;right:12px;z-index:6;
-  background:#000000;color:#FFFFFF;border:2px solid #FACC15;border-radius:12px;
-  padding:12px 14px;font-size:14.5px;font-weight:800;letter-spacing:-0.01em;
-  box-shadow:0 10px 28px rgba(0,0,0,0.45);
-}
-#deckHint[hidden]{display:none}
+
 /* ——— Step row ——— */
 .steprow{
   flex:none;display:flex;justify-content:space-between;align-items:center;
@@ -104,11 +158,11 @@ button{font-family:inherit}
 .handgrid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;box-sizing:border-box;gap:11px}
 .whitecard{
   background:#FFFFFF;color:#000000;border:0;border-radius:15px;cursor:pointer;
-  padding:16px 15px;min-height:56px;height:100%;text-align:left;
+  padding:13px 14px;min-height:56px;height:100%;text-align:left;
   box-sizing:border-box;display:flex;align-items:flex-start;
   overflow-wrap:break-word;word-break:break-word;hyphens:manual;
   box-shadow:inset 0 -3px 0 rgba(0,0,0,0.16);
-  font-size:17px;font-weight:700;line-height:1.28;letter-spacing:-0.02em;
+  font-size:15.5px;font-weight:700;line-height:1.24;letter-spacing:-0.02em;
   transition:background 120ms ease,transform 200ms ease;
 }
 .whitecard.picked{background:#FACC15}
@@ -139,9 +193,9 @@ button{font-family:inherit}
   box-shadow:inset 0 -4px 0 rgba(0,0,0,0.14);
 }
 .storycard h2{
-  font-size:26px;font-weight:900;line-height:1.1;margin-bottom:13px;flex:none;
+  font-size:28px;font-weight:900;line-height:1.1;margin-bottom:13px;flex:none;
 }
-.storybody{font-size:17.5px;font-weight:600;line-height:1.45;letter-spacing:-0.015em;flex:none}
+.storybody{font-size:18.5px;font-weight:600;line-height:1.5;letter-spacing:-0.015em;flex:none}
 .storybody .pill{
   background:#000000;color:#FFFFFF;font-weight:800;
   padding:1px 8px 3px;border-radius:7px;margin:0 4px;
@@ -153,12 +207,12 @@ button{font-family:inherit}
 .stamp{
   margin-top:auto;align-self:flex-end;flex:none;
   width:max-content;max-width:100%;
-  border:3px solid #000000;border-radius:10px;padding:8px 14px 10px;
-  transform:rotate(-3deg);line-height:1.25;
+  border:2.5px solid #000000;border-radius:9px;padding:6px 11px 7px;
+  transform:rotate(-3deg);line-height:1.22;
   background:#FFFFFF;position:relative;z-index:2;text-decoration:none;
 }
-.stamp b{display:block;font-size:18px;font-weight:900}
-.stamp span{font-size:13px;font-weight:700}
+.stamp b{display:block;font-size:15.5px;font-weight:900}
+.stamp span{font-size:11.5px;font-weight:700}
 #shareBtn{
   flex:none;background:#FFFFFF;color:#000000;border:0;border-radius:11px;cursor:pointer;
   padding:16px;min-height:54px;font:inherit;font-size:17px;font-weight:900;letter-spacing:-0.01em;width:100%;
@@ -189,12 +243,15 @@ button{font-family:inherit}
   .packbar button{min-height:44px;padding:9px 4px;font-size:14px}
   .blackcard{flex:none;padding:17px}
   .blackcard p{font-size:22px}
+  .whitecard{font-size:14.5px;padding:11px 12px}
+  #startView .hook{font-size:24px}
+  #startView{gap:11px}
   .storycard{padding:18px}
-  .storycard h2{font-size:23px;margin-bottom:10px}
+  .storycard h2{font-size:24px;margin-bottom:10px}
   #shareBtn,#stealBtn{padding:13px;min-height:48px}
-  .stamp{padding:6px 10px 7px}
-  .stamp b{font-size:15px}
-  .stamp span{font-size:11.5px}
+  .stamp{padding:5px 9px 6px}
+  .stamp b{font-size:13.5px}
+  .stamp span{font-size:10.5px}
 }
 @media (min-width:760px){
   #gameView,#revealView{max-width:720px;margin:0 auto;width:100%}

@@ -21,9 +21,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/play-game.css?v=20261022b">
+  <link rel="stylesheet" href="/assets/play-game.css?v=20261022c">
 </head>
 <body>
+  <button type="button" id="menuBtn" class="burger" aria-label="Open menu">&#9776;</button>
+
   <header class="apphead">
     <h1>Plot Roulette</h1>
     <p>Four decks &mdash; tap one to switch the game</p>
@@ -32,14 +34,45 @@
     <button type="button" data-deck="thriller" class="active">Thriller</button><button type="button" data-deck="romantasy">Romantasy</button><button type="button" data-deck="country">Country</button><button type="button" data-deck="sitcom">Sitcom</button>
   </nav>
 
-  <div id="deckHint" hidden>Four decks up top. Tap one to switch games.</div>
+  <div id="menuSheet" hidden>
+    <button type="button" id="menuClose" class="burger sheetclose" aria-label="Close menu">&#10005;</button>
+    <p class="sheetlabel">Play</p>
+    <button type="button" id="howBtn" class="sheetitem">How to play</button>
+    <button type="button" class="sheetitem deckitem" data-deck="thriller">Thriller</button>
+    <button type="button" class="sheetitem deckitem" data-deck="romantasy">Romantasy</button>
+    <button type="button" class="sheetitem deckitem" data-deck="country">Country</button>
+    <button type="button" class="sheetitem deckitem" data-deck="sitcom">Sitcom</button>
+    <p class="sheetlabel">More from Narristotle</p>
+    <a class="sheetitem" href="/block">The Writer&rsquo;s Block &#8599;</a>
+    <a class="sheetitem" href="/arcade">The Arcade &#8599;</a>
+    <a class="sheetitem" href="/bookshelf">The Bookshelf &#8599;</a>
+    <a class="sheetitem" href="/">Narristotle home &#8599;</a>
+  </div>
 
-  <div class="steprow">
+  <main id="startView">
+    <h2 class="hook">One black card.<br>Four white cards.<br>Five taps.</h2>
+    <p class="lede">Plot Roulette deals you a story one card at a time. Pick a deck, tap the white card you&rsquo;d defend in public for every prompt, and the game assembles your answers into a story, a pitch, or a song.</p>
+    <ol class="steps">
+      <li><b>1</b><span><strong>Pick a deck.</strong> Four flavors of trouble, up top.</span></li>
+      <li><b>2</b><span><strong>Tap a white card</strong> for every black prompt &mdash; or type your own answer.</span></li>
+      <li><b>3</b><span><strong>Read what you made.</strong> Share the card &mdash; or steal the pitch and turn it into a real story.</span></li>
+    </ol>
+    <button type="button" id="playBtn" class="playbtn">Start playing</button>
+    <div class="decklist">
+      <button type="button" class="deckrow" data-deck="thriller"><b>Thriller</b><span>A snowed-in motel, a weird object, a secret.</span></button>
+      <button type="button" class="deckrow" data-deck="romantasy"><b>Romantasy</b><span>Dragon riders, sworn rivals, one enchanted bed.</span></button>
+      <button type="button" class="deckrow" data-deck="country"><b>Country</b><span>Trucks, honky-tonks, and the one that got away &mdash; a song.</span></button>
+      <button type="button" class="deckrow" data-deck="sitcom"><b>Sitcom</b><span>Roommates, neighbors, and a crisis the size of a lasagna.</span></button>
+    </div>
+    <p class="fineprint">Free &middot; No sign-up &middot; Results 100% your fault</p>
+  </main>
+
+  <div class="steprow" style="display:none">
     <span id="stepLabel">CARD 1 OF 5</span>
     <button type="button" id="shuffleBtn">Shuffle <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline><line x1="15" y1="15" x2="21" y2="21"></line><line x1="4" y1="4" x2="9" y2="9"></line></svg></button>
   </div>
 
-  <main id="gameView">
+  <main id="gameView" style="display:none">
     <section class="blackcard" aria-live="polite">
       <p id="promptText"></p>
     </section>
@@ -69,6 +102,6 @@
     <p class="sharenote" id="shareNote"></p>
   </main>
 
-<script src="/assets/play-game.js?v=20261022b"></script>
+<script src="/assets/play-game.js?v=20261022c"></script>
 </body>
 </html>
