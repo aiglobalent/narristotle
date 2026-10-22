@@ -186,42 +186,41 @@ button{font-family:inherit}
   padding:8px 12px calc(16px + env(safe-area-inset-bottom));gap:12px;
   padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right));
 }
-.storycard{
-  background:#FFFFFF;color:#000000;border-radius:20px;
-  padding:24px 22px 22px;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;
-  -webkit-overflow-scrolling:touch;
-  position:relative;display:flex;flex-direction:column;
-  box-shadow:inset 0 -4px 0 rgba(0,0,0,0.14);
+/* ——— The result IS the page (Steve's design): dark stage, huge title,
+   white-on-black text with inverted pills, one yellow conversion CTA ——— */
+.revealbrand{
+  flex:none;font-family:'Archivo Black',Inter,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color:#FACC15;font-size:23px;line-height:1.0;text-transform:uppercase;padding:8px 10px 0;
 }
-.storycard h2{
-  font-size:28px;font-weight:900;line-height:1.1;margin-bottom:13px;flex:none;padding-right:42px;
+.storywrap{
+  flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;
+  display:flex;flex-direction:column;padding:16px 10px 6px;
 }
-.storybody{font-size:18.5px;font-weight:600;line-height:1.5;letter-spacing:-0.015em;flex:none}
+.eyebrow{
+  color:#FACC15;font-size:12.5px;font-weight:900;letter-spacing:0.16em;
+  text-transform:uppercase;margin-bottom:12px;flex:none;
+}
+.titlerow{display:flex;align-items:flex-start;gap:12px;flex:none;margin-bottom:16px}
+.storywrap h2{
+  flex:1;min-width:0;font-size:40px;font-weight:900;line-height:1.08;color:#FFFFFF;letter-spacing:-0.015em;
+}
+.shareicon{
+  flex:none;width:46px;height:46px;border-radius:50%;border:2px solid #FFFFFF;
+  background:transparent;color:#FFFFFF;cursor:pointer;margin-top:4px;
+  display:flex;align-items:center;justify-content:center;
+}
+.storybody{font-size:20px;font-weight:600;line-height:1.58;letter-spacing:-0.015em;color:#FFFFFF;flex:none}
 .storybody .pill{
-  background:#000000;color:#FFFFFF;font-weight:800;
+  background:#FFFFFF;color:#000000;font-weight:800;
   padding:1px 8px 3px;border-radius:7px;margin:0 4px;
   box-decoration-break:clone;-webkit-box-decoration-break:clone;
 }
 .storybody .sec-label{
-  display:block;font-size:12.5px;font-weight:900;letter-spacing:0.14em;margin:15px 0 2px;
-}
-.stamp{
-  margin-top:auto;align-self:flex-end;flex:none;
-  width:max-content;max-width:100%;
-  border:2.5px solid #000000;border-radius:9px;padding:6px 11px 7px;
-  transform:rotate(-3deg);line-height:1.22;
-  background:#FFFFFF;position:relative;z-index:2;text-decoration:none;
-}
-.stamp b{display:block;font-size:15.5px;font-weight:900}
-.stamp span{font-size:11.5px;font-weight:700}
-#shareBtn{
-  flex:1 1 0;background:#FFFFFF;color:#000000;border:0;border-radius:11px;cursor:pointer;
-  padding:14px 8px;min-height:54px;font:inherit;font-size:15.5px;font-weight:900;letter-spacing:-0.01em;
-  display:flex;align-items:center;justify-content:center;text-align:center;
+  display:block;color:#FACC15;font-size:12.5px;font-weight:900;letter-spacing:0.16em;margin:16px 0 2px;text-transform:uppercase;
 }
 #stealBtn{
-  flex:1 1 0;display:flex;align-items:center;justify-content:center;text-align:center;background:#A7F3D0;color:#000000;
-  border-radius:11px;padding:14px 8px;min-height:54px;font-size:15.5px;font-weight:900;letter-spacing:-0.01em;
+  flex:none;display:flex;align-items:center;justify-content:center;text-align:center;background:#FACC15;color:#000000;
+  border-radius:13px;padding:17px;min-height:58px;font-size:17.5px;font-weight:900;letter-spacing:-0.01em;
   text-decoration:none;
 }
 /* ——— Restart is a big friendly + ; switching decks stays a quiet link ——— */
@@ -253,18 +252,16 @@ button{font-family:inherit}
   .whitecard{font-size:14.5px;padding:11px 12px}
   #startView .hook{font-size:24px}
   #startView{gap:11px}
-  .storycard{padding:18px}
-  .storycard h2{font-size:24px;margin-bottom:10px}
-  #shareBtn,#stealBtn{padding:13px;min-height:48px}
-  .stamp{padding:5px 9px 6px}
-  .stamp b{font-size:13.5px}
-  .stamp span{font-size:10.5px}
+  .storywrap{padding:12px 8px 4px}
+  .storywrap h2{font-size:32px}
+  .titlerow{margin-bottom:12px}
+  #stealBtn{padding:14px;min-height:52px}
 }
 @media (min-width:760px){
   #gameView,#revealView{max-width:720px;margin:0 auto;width:100%}
   .whitecard{font-size:18px}
-  .storybody{font-size:18.5px}
-  .storycard h2{font-size:30px}
+  .storybody{font-size:21px}
+  .storywrap h2{font-size:48px}
 }
 /* ——— Reduced motion ——— */
 @media (prefers-reduced-motion:reduce){

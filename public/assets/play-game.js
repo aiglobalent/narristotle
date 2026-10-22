@@ -312,6 +312,7 @@ story: [
     document.querySelector(".packbar").style.display = "none";
     document.querySelector(".apphead").style.display = "none";
     $("storyTitle").textContent = withPeriod(titleText());
+    $("revealEyebrow").textContent = deck.mode === "song" ? "Plot Roulette • Your Song" : "Plot Roulette • Your Result";
     var body = $("storyBody");
     body.innerHTML = "";
     deckSegments().forEach(function (seg) {
@@ -344,7 +345,7 @@ story: [
   }
 
   function fitStory() {
-    var card = document.querySelector(".storycard");
+    var card = document.querySelector(".storywrap");
     var bodyEl = $("storyBody"), titleEl = $("storyTitle");
     if (!card || !bodyEl || !titleEl) return;
     /* Reset to the CSS sizes. */
@@ -363,9 +364,9 @@ story: [
     var base = parseFloat(getComputedStyle(bodyEl).fontSize) || 18.5;
     var titleBase = parseFloat(getComputedStyle(titleEl).fontSize) || 28;
     function applyScale(sc) {
-      bodyEl.style.fontSize = Math.min(26, base * sc) + "px";
-      bodyEl.style.lineHeight = String(Math.min(1.62, 1.5 + (sc - 1) * 0.25));
-      titleEl.style.fontSize = Math.min(40, titleBase * sc) + "px";
+      bodyEl.style.fontSize = Math.min(27, base * sc) + "px";
+      bodyEl.style.lineHeight = String(Math.min(1.66, 1.58 + (sc - 1) * 0.2));
+      titleEl.style.fontSize = Math.min(54, titleBase * sc) + "px";
     }
     /* GROW first: the story is the main event — scale up until the card is filled. */
     var s = 1;
