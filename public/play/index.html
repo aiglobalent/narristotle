@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Play — Narristotle</title>
+  <title>Plot Roulette — Narristotle</title>
   <meta name="description" content="A stark black-and-white card game for writers. One black prompt card, four white answer cards, five taps — a micro-story, a pitch, or a song. Free in your browser at Narristotle.">
   <meta property="og:title" content="Narristotle — Play">
   <meta property="og:description" content="One black card. Four white cards. Five taps. You just wrote something unhinged.">
@@ -20,20 +20,23 @@
   <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/play-game.css?v=20261022a">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/play-game.css?v=20261022b">
 </head>
 <body>
-  <div class="packlabel">Five decks &mdash; tap one to switch the game</div>
+  <header class="apphead">
+    <h1>Plot Roulette</h1>
+    <p>Four decks &mdash; tap one to switch the game</p>
+  </header>
   <nav class="packbar" aria-label="Card packs">
-    <button type="button" data-deck="barpitch" class="active">Bar Pitch</button><button type="button" data-deck="thriller">Thriller</button><button type="button" data-deck="romantasy">Romantasy</button><button type="button" data-deck="country">Country</button><button type="button" data-deck="sitcom">Sitcom</button>
+    <button type="button" data-deck="thriller" class="active">Thriller</button><button type="button" data-deck="romantasy">Romantasy</button><button type="button" data-deck="country">Country</button><button type="button" data-deck="sitcom">Sitcom</button>
   </nav>
 
-  <div id="deckHint" hidden>Five decks up top. Tap one to switch games.</div>
+  <div id="deckHint" hidden>Four decks up top. Tap one to switch games.</div>
 
   <div class="steprow">
     <span id="stepLabel">CARD 1 OF 5</span>
-    <button type="button" id="shuffleBtn">Shuffle.</button>
+    <button type="button" id="shuffleBtn">Shuffle <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline><line x1="15" y1="15" x2="21" y2="21"></line><line x1="4" y1="4" x2="9" y2="9"></line></svg></button>
   </div>
 
   <main id="gameView">
@@ -44,8 +47,8 @@
       <div class="handgrid" id="handGrid"></div>
       <div class="ownrow">
         <input id="ownInput" type="text" placeholder="Or type your own (like a friend's name)..." autocomplete="off" maxlength="90">
-        <button type="button" id="dealBtn">Deal 4 new cards.</button>
       </div>
+      <button type="button" id="dealBtn" class="dealbtn">Deal 4 new cards</button>
     </section>
   </main>
 
@@ -66,6 +69,6 @@
     <p class="sharenote" id="shareNote"></p>
   </main>
 
-<script src="/assets/play-game.js?v=20261021l"></script>
+<script src="/assets/play-game.js?v=20261022b"></script>
 </body>
 </html>

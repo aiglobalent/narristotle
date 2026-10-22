@@ -16,35 +16,41 @@ body{
   transition:background-color 250ms ease;
 }
 body.dealing{background-color:#131313}
-.packbar,.steprow{transition:opacity 250ms ease}
-body.dealing .packbar,body.dealing .steprow{opacity:0.3}
+.packbar,.steprow,.apphead{transition:opacity 250ms ease}
+body.dealing .packbar,body.dealing .steprow,body.dealing .apphead{opacity:0.3}
 button{font-family:inherit}
-/* ——— The pack label: says out loud that the yellow bar is a menu ——— */
-.packlabel{
-  flex:none;background:#000000;color:#FACC15;
-  font-size:12.5px;font-weight:900;letter-spacing:0.14em;text-transform:uppercase;
-  text-align:center;padding:8px 12px 7px;
+/* ——— App header: the name, big and yellow, then what the buttons are ——— */
+.apphead{
+  flex:none;text-align:center;padding:16px 12px 10px;
   padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right));
 }
-/* ——— The yellow pack bar: five equal tabs, one row, no scrolling ——— */
+.apphead h1{
+  font-family:'Archivo Black',Inter,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size:clamp(30px,8.6vw,44px);line-height:1.04;letter-spacing:0.01em;
+  color:#FACC15;text-transform:uppercase;
+}
+.apphead p{
+  margin-top:7px;color:#FACC15;
+  font-size:12.5px;font-weight:900;letter-spacing:0.14em;text-transform:uppercase;
+}
+/* ——— The deck menu: chunky outlined buttons, 3 + 2, unmistakably tappable ——— */
 .packbar{
-  background:#FACC15;color:#000000;flex:none;
-  display:flex;align-items:stretch;height:56px;overflow:hidden;
-  padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);
+  background:#000000;flex:none;
+  display:flex;flex-wrap:wrap;gap:10px;
+  padding:2px 12px 4px;
+  padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right));
 }
 .packbar button{
-  flex:1 1 0;min-width:0;height:56px;min-height:56px;
-  background:none;border:0;cursor:pointer;
-  font-weight:900;font-size:clamp(12.5px,3.4vw,15px);letter-spacing:0.01em;color:rgba(0,0,0,0.78);
-  text-transform:uppercase;padding:12px 2px;white-space:nowrap;text-align:center;
-  border-left:2px solid rgba(0,0,0,0.16);
+  flex:1 1 45%;min-width:0;min-height:52px;
+  background:transparent;border:2.5px solid #FACC15;border-radius:13px;cursor:pointer;
+  font-weight:900;font-size:15.5px;letter-spacing:0.03em;color:#FACC15;
+  text-transform:uppercase;padding:13px 4px;white-space:nowrap;text-align:center;
 }
-.packbar button:first-child{border-left:0}
-.packbar button.active{background:#000000;color:#FACC15;box-shadow:inset 0 -5px 0 #FACC15}
+.packbar button.active{background:#FACC15;color:#000000;box-shadow:none}
 .packbar.hinting button:not(.active){animation:tabPulse 0.85s ease 2}
-@keyframes tabPulse{0%,100%{background:transparent}50%{background:rgba(0,0,0,0.18)}}
+@keyframes tabPulse{0%,100%{background:transparent}50%{background:rgba(250,204,21,0.28)}}
 #deckHint{
-  position:fixed;top:66px;left:12px;right:12px;z-index:6;
+  position:fixed;bottom:calc(16px + env(safe-area-inset-bottom));left:12px;right:12px;z-index:6;
   background:#000000;color:#FFFFFF;border:2px solid #FACC15;border-radius:12px;
   padding:12px 14px;font-size:14.5px;font-weight:800;letter-spacing:-0.01em;
   box-shadow:0 10px 28px rgba(0,0,0,0.45);
@@ -62,6 +68,7 @@ button{font-family:inherit}
   text-decoration:underline;text-underline-offset:3px;
   min-height:44px;padding:0 2px;margin:-12px -2px;
 }
+.steprow button svg{width:17px;height:17px;vertical-align:-3px;margin-left:3px}
 /* ——— Game view ——— */
 #gameView{
   flex:1;min-height:0;display:flex;flex-direction:column;
@@ -70,16 +77,12 @@ button{font-family:inherit}
 }
 .blackcard{
   flex:none;
-  background:#101010;border:2px solid #333338;border-radius:20px;
+  background:#101010;border:2px solid #FFFFFF;border-radius:20px;
   box-shadow:inset 0 1px 0 rgba(255,255,255,0.08);
   padding:22px;display:flex;align-items:flex-start;
 }
 .blackcard p{
   font-size:clamp(26px,6.6vw,36px);font-weight:800;line-height:1.16;
-}
-.blackcard .blank{
-  display:inline-block;width:128px;height:0.92em;margin-left:10px;
-  border-bottom:4px solid #FFFFFF;vertical-align:baseline;
 }
 .hand{flex:1.12;min-height:0;display:flex;flex-direction:column;gap:11px}
 /* ——— The deal: cards slide out left, next card slides in ——— */
@@ -101,8 +104,8 @@ button{font-family:inherit}
 .handgrid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;box-sizing:border-box;gap:11px}
 .whitecard{
   background:#FFFFFF;color:#000000;border:0;border-radius:15px;cursor:pointer;
-  padding:14px 13px;min-height:56px;height:100%;text-align:left;
-  box-sizing:border-box;display:flex;align-items:center;
+  padding:16px 15px;min-height:56px;height:100%;text-align:left;
+  box-sizing:border-box;display:flex;align-items:flex-start;
   overflow-wrap:break-word;word-break:break-word;hyphens:manual;
   box-shadow:inset 0 -3px 0 rgba(0,0,0,0.16);
   font-size:17px;font-weight:700;line-height:1.28;letter-spacing:-0.02em;
@@ -117,11 +120,11 @@ button{font-family:inherit}
 }
 .ownrow input::placeholder{color:#9a9a9a;font-weight:600}
 .ownrow input:focus{outline:2px solid #FACC15;outline-offset:1px}
-.ownrow button{
-  align-self:flex-start;background:none;border:0;color:#FFFFFF;cursor:pointer;
-  font:inherit;font-size:15px;font-weight:800;
-  text-decoration:underline;text-underline-offset:3px;
-  min-height:44px;padding:10px 2px;margin-bottom:-8px;
+/* ——— The deal button: one big yellow primary action ——— */
+.dealbtn{
+  flex:none;width:100%;background:#FACC15;color:#000000;border:0;border-radius:13px;cursor:pointer;
+  font:inherit;font-size:17px;font-weight:900;letter-spacing:0.04em;text-transform:uppercase;
+  min-height:56px;padding:16px;
 }
 /* ——— Reveal view ——— */
 #revealView{
@@ -180,6 +183,10 @@ button{font-family:inherit}
 :focus-visible{outline:3px solid #FACC15;outline-offset:2px}
 /* ——— Short screens: tighten before anything can crowd ——— */
 @media (max-height:720px){
+  .apphead{padding-top:10px}
+  .apphead h1{font-size:28px}
+  .apphead p{font-size:11px;margin-top:5px}
+  .packbar button{min-height:44px;padding:9px 4px;font-size:14px}
   .blackcard{flex:none;padding:17px}
   .blackcard p{font-size:22px}
   .storycard{padding:18px}

@@ -78,19 +78,6 @@ story: [
   };
 
   var DECKS = {
-    barpitch: {
-      bar: "BAR PITCH", mode: "conference", genre: "live",
-      title: "Panic at the Hotel Bar",
-      prompts: [
-        "Someone who has no business writing a book",
-        "A bizarre object dropped in the hotel elevator",
-        "The most awkward place to corner a literary agent",
-        "The unhinged comp-title pitch",
-        "The secret twist in Chapter 26"
-      ],
-      pools: POOLS.conference,
-      body: "It was 11:42 p.m. at the conference hotel bar when [[1l]] accidentally dropped [[2l]] right next to [[3l]]. The room went dead silent.\n\n\u201cListen to me,\u201d they whispered, grabbing the nearest VIP badge by the lapels. \u201cMy book is [[4]]\u2014except in the final chapter, [[5l]].\u201d\n\nFive seconds later, a bidding war broke out by the ice machine."
-    },
     thriller: {
       bar: "THRILLER", mode: "story", genre: "thriller",
       title: "The Last Room at the Motel",
@@ -148,10 +135,10 @@ story: [
       body: "[Scene: a cramped apartment, 7:48 p.m. [[1c]] is guarding [[2l]] like it owes them money.]\n\n\u201cTouch [[2l]] and the friendship is over. There are rules. It has rules.\u201d\n\n[Enter [[3l]], at exactly the wrong moment, holding a casserole and a grudge.]\n\n\u201cBefore anyone asks \u2014 [[4]].\u201d A pause. \u201cThat is my whole statement.\u201d\n\nWhat followed was forty-five seconds of silence, one slow zoom, and the opening skirmish of [[5l]] \u2014 a conflict so small, so stupid, and so total that the studio audience was still arguing about it at the taping next door."
     }
   };
-  var ORDER = ["barpitch", "thriller", "romantasy", "country", "sitcom"];
+  var ORDER = ["thriller", "romantasy", "country", "sitcom"];
 
   /* ——— State ——— */
-  var deckKey = "barpitch";
+  var deckKey = "thriller";
   var step = 0;
   var answers = [];
   var dealt = null;
@@ -194,13 +181,7 @@ story: [
     promptEl.innerHTML = "";
     var num = document.createElement("span");
     num.textContent = (step + 1) + ". " + deck.prompts[step] + ":";
-    var blank = document.createElement("span");
-    blank.className = "blank";
     promptEl.appendChild(num);
-    promptEl.appendChild(blank);
-    var period = document.createElement("span");
-    period.textContent = ".";
-    promptEl.appendChild(period);
     gridEl.innerHTML = "";
     dealt.forEach(function (opt) {
       var b = document.createElement("button");
@@ -263,6 +244,7 @@ story: [
     gameView.style.display = "";
     document.querySelector(".steprow").style.display = "";
     document.querySelector(".packbar").style.display = "";
+    document.querySelector(".apphead").style.display = "";
     deal();
     render();
   }
@@ -312,7 +294,10 @@ story: [
     void revealView.offsetWidth;
     revealView.classList.add("enter");
     document.querySelector(".steprow").style.display = "none";
-    if (window.innerHeight <= 720) document.querySelector(".packbar").style.display = "none";
+    if (window.innerHeight <= 720) {
+      document.querySelector(".packbar").style.display = "none";
+      document.querySelector(".apphead").style.display = "none";
+    }
     $("storyTitle").textContent = withPeriod(titleText());
     var body = $("storyBody");
     body.innerHTML = "";
@@ -583,5 +568,5 @@ story: [
   $("againBtn").addEventListener("click", function () { startRound(deckKey); });
   $("deckBtn").addEventListener("click", function () { startRound(deckKey); pulseBar(); });
 
-  startRound("barpitch");
+  startRound("thriller");
 })();
