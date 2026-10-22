@@ -2,6 +2,9 @@
 (function () {
   "use strict";
   var RDM = "https://roughdraftmaker.com/?source=play&mode=novel&prompt=";
+  /* Steve 2026-10-21: RoughDraft Maker exits DISABLED while he fixes bugs
+     there — no users sent over from the Block until he says otherwise. */
+  var RDM_ENABLED = false;
   function rdmUrl(prompt) { return RDM + encodeURIComponent(prompt); }
   function $(id) { return document.getElementById(id); }
   function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
@@ -91,26 +94,52 @@
     return [words.slice(0, best).join(" "), words.slice(best).join(" ")];
   }
 
-  var cafe = { lefts: [], rights: [], offset: 0, center: 0, sparks: [] };
+  var cafe = { lefts: [], rights: [], dragPx: 0, center: 0, sparks: [] };
 
+  /* The right strip is ONE long track (blank pad rows + endings + blank pad
+     rows) sliding inside a window the height of the left column. dragPx is a
+     free pixel offset: it sticks where you release it, and the collided
+     sentence is whichever ending sits nearest the center row. */
+  function rowH() {
+    var h = document.querySelector("#leftCol .half");
+    return h ? h.offsetHeight : (window.innerWidth <= 640 ? 64 : 58);
+  }
+  function clampDrag() {
+    var rh = rowH(), N = cafe.lefts.length;
+    var lo = -(N - 1 - cafe.center) * rh, hi = cafe.center * rh;
+    cafe.dragPx = Math.max(lo, Math.min(hi, cafe.dragPx));
+  }
+  function focusRightIndex() {
+    return cafe.center + Math.round(-cafe.dragPx / rowH());
+  }
   function collided() {
-    var ri = cafe.center + cafe.offset;
+    var ri = focusRightIndex();
     var L = (cafe.lefts[cafe.center] || "").trim();
     var R = (cafe.rights[ri] || "").trim();
     if (!L) return "";
     var out = L + (R ? " " + R : "");
     out = cap(out);
-    if (!/[.!?…]["'”’]?$/.test(out)) out += ".";
+    if (!/[.!?…]["'”\u2019]?$/.test(out)) out += ".";
     return out;
   }
 
-  function rowH() {
-    var h = document.querySelector("#leftCol .half");
-    return h ? h.offsetHeight : 58;
+  function paintTrack() {
+    var rh = rowH(), N = cafe.lefts.length, fri = focusRightIndex();
+    var track = $("rTrack");
+    track.style.transform = "translateY(" + (cafe.dragPx - cafe.center * rh) + "px)";
+    var kids = track.children;
+    for (var i = 0; i < kids.length; i++) {
+      var ri = i - cafe.center; /* child index -> ending index */
+      kids[i].classList.toggle("focus", ri === fri && ri >= 0 && ri < N);
+    }
+    var c = collided();
+    $("focusText").textContent = c || "\u2014";
+    var ss = $("sparkSend");
+    if (ss) ss.href = c ? rdmUrl(c) : "https://roughdraftmaker.com";
   }
 
   function renderCafe() {
-    var N = cafe.lefts.length;
+    var N = cafe.lefts.length, rh = rowH();
     var lc = $("leftCol"); lc.innerHTML = "";
     cafe.lefts.forEach(function (t, i) {
       var d = document.createElement("div");
@@ -119,40 +148,39 @@
       lc.appendChild(d);
     });
     var track = $("rTrack"); track.innerHTML = "";
-    for (var i = 0; i < N; i++) {
-      var ri = i + cafe.offset;
-      var d2 = document.createElement("div");
-      var has = ri >= 0 && ri < N && cafe.rights[ri];
-      d2.className = "half right" + (has ? "" : " blank") + (i === cafe.center ? " focus" : "");
-      d2.textContent = has ? cafe.rights[ri] : "";
-      track.appendChild(d2);
+    function blankRow() {
+      var d = document.createElement("div");
+      d.className = "half right blank"; d.textContent = "";
+      track.appendChild(d);
     }
-    track.style.transform = "translateY(0px)";
-    var c = collided();
-    $("focusText").textContent = c || "—";
-    $("sparkSend").href = c ? rdmUrl(c) : "https://roughdraftmaker.com";
-  }
-
-  function clampOffset() {
-    var N = cafe.lefts.length;
-    var lo = -cafe.center, hi = N - 1 - cafe.center;
-    cafe.offset = Math.max(lo, Math.min(hi, cafe.offset));
+    var i;
+    for (i = 0; i < cafe.center; i++) blankRow();
+    cafe.rights.forEach(function (t) {
+      var d = document.createElement("div");
+      d.className = "half right";
+      d.textContent = t;
+      track.appendChild(d);
+    });
+    for (i = 0; i < N - 1 - cafe.center; i++) blankRow();
+    $("rWrap").style.height = (N * rh) + "px";
+    clampDrag();
+    paintTrack();
   }
 
   function sliceDraft() {
     var text = $("draft").value;
     var sents = splitSentences(text);
     if (sents.length < 2) {
-      alert("The Slicer needs at least two sentences to rip. Paste a little more of the draft — or load the sample.");
+      alert("The Slicer needs at least two sentences to rip. Paste a little more of the draft \u2014 or load the sample.");
       return;
     }
     cafe.lefts = []; cafe.rights = [];
-    sents.forEach(function (s) {
-      var h = splitHalf(s);
+    sents.forEach(function (s2) {
+      var h = splitHalf(s2);
       cafe.lefts.push(h[0]); cafe.rights.push(h[1]);
     });
     cafe.center = Math.floor(sents.length / 2);
-    cafe.offset = 0;
+    cafe.dragPx = 0;
     $("tableWrap").style.display = "block";
     renderCafe();
     $("tableWrap").scrollIntoView({ behavior: "smooth", block: "center" });
@@ -160,55 +188,55 @@
 
   $("sampleBtn").addEventListener("click", function () { $("draft").value = SAMPLE; sliceDraft(); });
   $("sliceBtn").addEventListener("click", sliceDraft);
-  $("slideDown").addEventListener("click", function () { cafe.offset -= 1; clampOffset(); renderCafe(); });
-  $("slideUp").addEventListener("click", function () { cafe.offset += 1; clampOffset(); renderCafe(); });
+  /* Sliding the paper DOWN brings the earlier endings down into the center. */
+  $("slideDown").addEventListener("click", function () { cafe.dragPx += rowH(); clampDrag(); paintTrack(); });
+  $("slideUp").addEventListener("click", function () { cafe.dragPx -= rowH(); clampDrag(); paintTrack(); });
   $("shuffleBtn").addEventListener("click", function () {
     for (var i = cafe.rights.length - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));
       var t = cafe.rights[i]; cafe.rights[i] = cafe.rights[j]; cafe.rights[j] = t;
     }
-    cafe.offset = 0; renderCafe();
+    cafe.dragPx = 0; renderCafe();
   });
   $("saveSpark").addEventListener("click", function () {
     var c = collided();
     if (!c || cafe.sparks.indexOf(c) >= 0) return;
     cafe.sparks.unshift(c);
     var ul = $("sparksList"); ul.innerHTML = "";
-    cafe.sparks.forEach(function (s) {
+    cafe.sparks.forEach(function (sp) {
       var li = document.createElement("li");
-      var span = document.createElement("span"); span.textContent = s;
-      var a = document.createElement("a");
-      a.href = rdmUrl(s); a.target = "_blank"; a.rel = "noopener"; a.textContent = "Make it a story →";
-      li.appendChild(span); li.appendChild(a); ul.appendChild(li);
+      var span = document.createElement("span"); span.textContent = sp;
+      li.appendChild(span);
+      if (RDM_ENABLED) {
+        var a = document.createElement("a");
+        a.href = rdmUrl(sp); a.target = "_blank"; a.rel = "noopener"; a.textContent = "Make it a story \u2192";
+        li.appendChild(a);
+      }
+      ul.appendChild(li);
     });
     $("sparksBox").style.display = "block";
   });
 
-  /* drag the right strip */
+  /* Drag the right strip: free travel across every row, sticks on release. */
   (function () {
     var wrap = $("rWrap"), drag = null;
     wrap.addEventListener("pointerdown", function (e) {
       if (!cafe.lefts.length) return;
-      drag = { y: e.clientY, off: cafe.offset };
+      drag = { y: e.clientY, px: cafe.dragPx };
       wrap.setPointerCapture(e.pointerId);
+      $("rTrack").style.transition = "none";
     });
     wrap.addEventListener("pointermove", function (e) {
       if (!drag) return;
-      var dy = e.clientY - drag.y, rh = rowH();
-      var maxShift = rh * 0.9;
-      var px = Math.max(-maxShift, Math.min(maxShift, dy));
-      /* the render already reflects drag.off; the transform previews one step of slide */
-      $("rTrack").style.transform = "translateY(" + px + "px)";
-      drag.dy = px;
+      cafe.dragPx = drag.px + (e.clientY - drag.y);
+      clampDrag();
+      paintTrack();
     });
     function endDrag() {
       if (!drag) return;
-      var rh = rowH();
-      var steps = Math.round((drag.dy || 0) / rh); /* one step per gesture, past the half-row */
-      cafe.offset = drag.off - steps; /* dragging down brings earlier endings down into place */
-      clampOffset();
       drag = null;
-      renderCafe();
+      $("rTrack").style.transition = "";
+      paintTrack(); /* stays exactly where it was released */
     }
     wrap.addEventListener("pointerup", endDrag);
     wrap.addEventListener("pointercancel", endDrag);
@@ -227,7 +255,7 @@
     pitch = pitch.replace(/\.\./g, ".");
     $("pitchOut").textContent = pitch;
     var send = $("pitchSend");
-    send.href = rdmUrl(pitch); send.style.display = "inline-block";
+    if (RDM_ENABLED) { send.href = rdmUrl(pitch); send.style.display = "inline-block"; }
     $("pitchNote").textContent = "Three sentences. Say it out loud once — that's the workshop test.";
   });
   $("copyPitch").addEventListener("click", function () {
@@ -300,7 +328,7 @@
     lastTown = "A story set in " + name + ", " + state + " (population " + pop + "), where the main industry is " +
       ind + ". The strangest business in town is " + biz + ". Local rumor: " + rumor + ". After dark, everybody ends up at " + drink + ".";
     var send = $("townSend");
-    send.href = rdmUrl(lastTown); send.style.display = "inline-block";
+    if (RDM_ENABLED) { send.href = rdmUrl(lastTown); send.style.display = "inline-block"; }
     $("townCard").scrollIntoView({ behavior: "smooth", block: "center" });
   });
 
@@ -354,11 +382,14 @@
       var pj = document.createElement("div"); pj.className = "pjob"; pj.textContent = c.job;
       var ps = document.createElement("div"); ps.className = "psec"; ps.textContent = "Petty secret: " + c.secret + ".";
       plate.appendChild(pn); plate.appendChild(pj); plate.appendChild(ps);
-      var a = document.createElement("a");
-      a.className = "shop-btn gold send"; a.href = rdmUrl(c.prompt);
-      a.target = "_blank"; a.rel = "noopener";
-      a.textContent = "Send " + c.name.split(" ")[0] + " to RoughDraft Maker →";
-      d.appendChild(plate); d.appendChild(a);
+      d.appendChild(plate);
+      if (RDM_ENABLED) {
+        var a = document.createElement("a");
+        a.className = "shop-btn gold send"; a.href = rdmUrl(c.prompt);
+        a.target = "_blank"; a.rel = "noopener";
+        a.textContent = "Send " + c.name.split(" ")[0] + " to RoughDraft Maker →";
+        d.appendChild(a);
+      }
       cab.appendChild(d);
     }
     cab.style.display = "block";
