@@ -8,32 +8,58 @@
   function clean(s) { return (s || "").trim().replace(/[.\s]+$/, ""); }
   function cap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
 
-  /* ---------- street navigation ---------- */
-  document.querySelectorAll("[data-goto]").forEach(function (b) {
-    b.addEventListener("click", function () {
-      var el = $(b.getAttribute("data-goto"));
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  /* ---------- plaza <-> room navigation ---------- */
+  var ROOMMETA = {
+    cafe: ["No. 1", "The Cut-Up Cafe"],
+    pitch: ["No. 2", "The Pitch Bar"],
+    almanac: ["No. 3", "The Town Almanac"],
+    apothecary: ["No. 4", "The Name Apothecary"]
+  };
+  var ROOMORDER = ["cafe", "pitch", "almanac", "apothecary"];
+  function enterRoom(id) {
+    if (!ROOMMETA[id]) return;
+    $("plazaView").style.display = "none";
+    $("roomView").hidden = false;
+    $("hud").hidden = false;
+    document.body.classList.add("in-room");
+    ROOMORDER.forEach(function (k) { $(k).style.display = (k === id) ? "block" : "none"; });
+    $("roomNo").textContent = ROOMMETA[id][0];
+    $("roomName").textContent = ROOMMETA[id][1];
+    document.querySelectorAll("#hud [data-room]").forEach(function (b) {
+      b.classList.toggle("on", b.getAttribute("data-room") === id);
     });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  function exitRoom() {
+    $("roomView").hidden = true;
+    $("hud").hidden = true;
+    document.body.classList.remove("in-room");
+    $("plazaView").style.display = "";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  document.querySelectorAll("[data-room]").forEach(function (b) {
+    b.addEventListener("click", function () { enterRoom(b.getAttribute("data-room")); });
   });
-  document.querySelectorAll("[data-top]").forEach(function (a) {
-    a.addEventListener("click", function (e) {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+  $("exitRoom").addEventListener("click", exitRoom);
+  $("hudExit").addEventListener("click", exitRoom);
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && document.body.classList.contains("in-room")) exitRoom();
   });
 
   /* ================= THE CUT-UP CAFE ================= */
   var SAMPLE = "The lighthouse keeper had not spoken to another living soul since the ferry stopped running in October. " +
     "Every morning she polished the great lens as if the fog were a debt she intended to repay. " +
     "The stranger arrived on a Tuesday with no luggage and a key that fit her door. " +
+    "She wore a pair of golden slippers into the hardware store at midnight. " +
+    "I want a tomato sandwich on toasted sourdough before the rain starts. " +
     "He claimed the sea had taken his name, so the town would have to lend him one. " +
     "June hid the letter from the mainland in the flour tin where she kept all dangerous things. " +
-    "By Friday, three gulls had learned to knock at the window for bread. " +
     "The radio, which had been silent for a decade, began to read the weather in her mother's voice. " +
     "She decided that if the light could not save the ships, it could at least warn them.";
 
   var HOOKS = { and: 1, but: 1, or: 1, yet: 1, so: 1, because: 1, when: 1, while: 1, until: 1, before: 1,
     after: 1, as: 1, if: 1, though: 1, although: 1, since: 1, with: 1, into: 1, through: 1, from: 1,
+    on: 1, in: 1, of: 1, at: 1, to: 1, for: 1, by: 1, over: 1, under: 1, about: 1,
     who: 1, which: 1, that: 1, where: 1, once: 1, unless: 1, like: 1 };
 
   function splitSentences(text) {

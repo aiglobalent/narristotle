@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=20261020c">
-<link rel="stylesheet" href="/assets/block.css?v=20261021b">
+<link rel="stylesheet" href="/assets/block.css?v=20261021c">
 </head>
 <body>
 <div class="news-strip"><span class="ns-tag">JUST DROPPED</span><a href="/bookshelf">Steve Smythe&rsquo;s <em>A Tomato, a Donkey, and the Stars</em> just joined Our Own Shelf &mdash; a children&rsquo;s chapter book draft, free to read &#8594;</a></div>
@@ -51,60 +51,166 @@
       <p class="under">Welcome to the Block &mdash; one little street, four working shops, every one of them built to unstick a stuck writer.</p>
       <p class="fine">Dreamed up by Alex. Built by Narristotle. Every tool runs 100% in your browser &mdash; no accounts, no uploads, your words never leave the page.</p>
     </section>
-
-    <section class="street" aria-label="The Writer's Block street view">
+    <div id="plazaView">
+    <section class="plaza" aria-label="The Writer's Block town plaza">
       <div class="sky" aria-hidden="true">
         <span class="star" style="left:6%;top:12px"></span><span class="star" style="left:22%;top:26px"></span>
         <span class="star" style="left:47%;top:9px"></span><span class="star" style="left:71%;top:22px"></span>
         <span class="star" style="left:88%;top:14px"></span><span class="star" style="left:96%;top:30px"></span>
         <span class="lamp" style="left:24.5%"></span><span class="lamp" style="left:49.5%"></span><span class="lamp" style="left:74.5%"></span>
       </div>
-      <div class="shops">
-        <button type="button" class="shop" data-goto="cafe" style="--acc:#a63d3d" aria-label="Enter The Cut-Up Cafe">
-          <div class="facade" style="background:linear-gradient(180deg,#8a4a3a,#74402f)">
-            <div class="cornice"></div>
-            <div class="signboard"><span class="no">No. 1</span><span class="nm">THE CUT-UP CAFE</span><span class="sb">Paper-Slicing Sentence Slider</span></div>
-            <div class="awning"></div>
-            <div class="windows"><div class="win"></div><div class="win"></div></div>
-            <div class="door"></div><div class="step"></div>
-          </div>
+      <div class="plaza-row">
+        <button type="button" class="bldg" data-room="cafe" style="--lift:30px;--tilt:-2.4deg" aria-label="Step inside The Cut-Up Cafe">
+          <span class="bubble">Slice your sentences. Keep the weird half.</span>
+          <svg viewBox="0 0 300 360" aria-hidden="true">
+            <defs><pattern id="cawn" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="16" height="16" fill="#fdf6df"/><rect width="8" height="16" fill="#b0402f"/></pattern></defs>
+            <path d="M40 128 L72 82 L228 82 L260 128 Z" fill="#5d3428" stroke="#171008" stroke-width="6" stroke-linejoin="round"/>
+            <path d="M50 118 L18 106 M50 226 L18 240" stroke="#171008" stroke-width="5" fill="none"/>
+            <g transform="rotate(-3 31 168)">
+              <rect x="13" y="94" width="37" height="152" rx="9" fill="#e8b13c" stroke="#171008" stroke-width="5"/>
+              <text x="31.5" y="129" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="21" fill="#40260f">C</text>
+              <text x="31.5" y="163" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="21" fill="#40260f">A</text>
+              <text x="31.5" y="197" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="21" fill="#40260f">F</text>
+              <text x="31.5" y="231" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="21" fill="#40260f">E</text>
+            </g>
+            <rect x="48" y="128" width="204" height="196" fill="#8a4a3a" stroke="#171008" stroke-width="6"/>
+            <rect x="64" y="140" width="172" height="40" rx="6" fill="#fdf6df" stroke="#171008" stroke-width="4"/>
+            <text x="150" y="166" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="15.5" letter-spacing="1" fill="#102C4E">THE CUT-UP CAFE</text>
+            <path d="M58 186 L242 186 L254 210 L46 210 Z" fill="url(#cawn)" stroke="#171008" stroke-width="4" stroke-linejoin="round"/>
+            <rect x="62" y="222" width="102" height="80" rx="4" fill="#ffca6a" stroke="#171008" stroke-width="5"/>
+            <path d="M102 240 q4 -7 0 -14 M116 240 q-4 -7 0 -14" stroke="#ffffff" stroke-width="3" fill="none" opacity=".85"/>
+            <rect x="94" y="252" width="32" height="22" rx="5" fill="#fff8ea" stroke="#171008" stroke-width="4"/>
+            <path d="M126 258 q13 5 0 13" stroke="#171008" stroke-width="4" fill="none"/>
+            <path d="M84 286 L140 286" stroke="#171008" stroke-width="4"/>
+            <polygon class="spill" points="186,324 126,348 192,348" fill="#ffd98a" opacity="0"/>
+            <g class="door">
+              <rect x="182" y="218" width="54" height="106" fill="#70382a" stroke="#171008" stroke-width="5"/>
+              <rect x="192" y="230" width="34" height="40" fill="#ffca6a" stroke="#171008" stroke-width="3"/>
+              <circle cx="228" cy="278" r="4" fill="#e8b13c" stroke="#171008" stroke-width="2"/>
+            </g>
+            <rect x="176" y="324" width="70" height="8" fill="#3d3d3d"/>
+            <ellipse cx="92" cy="330" rx="30" ry="7" fill="#fdf6df" stroke="#171008" stroke-width="4"/>
+            <path d="M92 336 L92 348" stroke="#171008" stroke-width="4"/>
+            <g stroke="#171008" stroke-width="3" fill="none"><circle cx="84" cy="323" r="3.5"/><circle cx="99" cy="323" r="3.5"/><path d="M87 320 L101 311 M97 320 L83 311"/></g>
+          </svg>
+          <span class="bname">No. 1 &middot; The Cut-Up Cafe</span>
         </button>
-        <button type="button" class="shop" data-goto="pitch" style="--acc:#2e5d46" aria-label="Enter The Pitch Bar">
-          <div class="facade" style="background:linear-gradient(180deg,#3c5a49,#2f4638)">
-            <div class="cornice"></div>
-            <div class="signboard"><span class="no">No. 2</span><span class="nm">THE PITCH BAR</span><span class="sb">Pitch Roulette &amp; Pitch Fixer</span></div>
-            <div class="awning"></div>
-            <div class="windows"><div class="win"></div><div class="win dim"></div></div>
-            <div class="door"></div><div class="step"></div>
-          </div>
+        <button type="button" class="bldg" data-room="pitch" style="--lift:4px;--tilt:-.8deg" aria-label="Step inside The Pitch Bar">
+          <span class="bubble">Five blanks in. One clean pitch out.</span>
+          <svg viewBox="0 0 300 360" aria-hidden="true">
+            <defs><radialGradient id="pglow" cx="50%" cy="40%" r="80%"><stop offset="0%" stop-color="#ffe9ad"/><stop offset="100%" stop-color="#f7bd54"/></radialGradient></defs>
+            <g class="beams"><polygon points="66,92 24,-6 108,-6" fill="#fff3c4" opacity=".14"/><polygon points="234,92 192,-6 276,-6" fill="#fff3c4" opacity=".14"/></g>
+            <rect x="48" y="94" width="204" height="20" rx="7" fill="#223528" stroke="#171008" stroke-width="5"/>
+            <rect x="58" y="110" width="184" height="214" fill="#2f4638" stroke="#171008" stroke-width="6"/>
+            <path d="M84 200 L84 126 Q150 84 216 126 L216 200 Z" fill="#fdf6df" stroke="#171008" stroke-width="6" stroke-linejoin="round"/>
+            <g fill="#ffdf7e" stroke="#171008" stroke-width="2">
+              <circle cx="90" cy="158" r="4.5"/><circle cx="97" cy="130" r="4.5"/><circle cx="114" cy="110" r="4.5"/><circle cx="134" cy="99" r="4.5"/><circle cx="150" cy="95" r="4.5"/><circle cx="166" cy="99" r="4.5"/><circle cx="186" cy="110" r="4.5"/><circle cx="203" cy="130" r="4.5"/><circle cx="210" cy="158" r="4.5"/>
+            </g>
+            <text x="150" y="152" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="19" fill="#102C4E">THE PITCH</text>
+            <text x="153" y="180" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="19" letter-spacing="7" fill="#102C4E">BAR</text>
+            <rect x="68" y="216" width="54" height="66" fill="#16281c" stroke="#171008" stroke-width="5"/>
+            <path d="M100 224 L108 214" stroke="#7ae0ff" stroke-width="2.5"/>
+            <circle cx="106" cy="222" r="3.5" fill="#b6e26a" stroke="#171008" stroke-width="2"/>
+            <path d="M78 230 L112 230 L95 250 Z" stroke="#ff7ad9" stroke-width="3.5" fill="none" stroke-linejoin="round"/>
+            <path d="M95 250 L95 262 M84 264 L106 264" stroke="#ff7ad9" stroke-width="3.5" fill="none"/>
+            <rect x="178" y="216" width="54" height="66" fill="url(#pglow)" stroke="#171008" stroke-width="5"/>
+            <g fill="#171008"><ellipse cx="197" cy="257" rx="7" ry="5.5" transform="rotate(-20 197 257)"/><rect x="202.5" y="228" width="3.5" height="29"/><path d="M203 228 q14 2 12 12 q-6 -6 -12 -6 Z"/></g>
+            <rect x="126" y="216" width="24" height="108" fill="#24402e" stroke="#171008" stroke-width="5"/>
+            <polygon class="spill" points="152,324 106,348 158,348" fill="#ffd98a" opacity="0"/>
+            <g class="door">
+              <rect x="150" y="216" width="24" height="108" fill="#2b4a34" stroke="#171008" stroke-width="5"/>
+              <path d="M157 258 L157 272" stroke="#e8b13c" stroke-width="3"/>
+            </g>
+            <rect x="120" y="324" width="64" height="8" fill="#3d3d3d"/>
+          </svg>
+          <span class="bname">No. 2 &middot; The Pitch Bar</span>
         </button>
-        <button type="button" class="shop" data-goto="almanac" style="--acc:#b07a2a" aria-label="Enter The Town Almanac">
-          <div class="facade" style="background:linear-gradient(180deg,#7d6242,#665031)">
-            <div class="cornice"></div>
-            <div class="signboard"><span class="no">No. 3</span><span class="nm">THE TOWN ALMANAC</span><span class="sb">Small-Town Setting Generator</span></div>
-            <div class="awning"></div>
-            <div class="windows"><div class="win"></div><div class="win"></div></div>
-            <div class="door"></div><div class="step"></div>
-          </div>
+        <button type="button" class="bldg" data-room="almanac" style="--lift:10px;--tilt:.8deg" aria-label="Step inside The Town Almanac">
+          <span class="bubble">Every town is hiding a story&hellip;</span>
+          <svg viewBox="0 0 300 360" aria-hidden="true">
+            <rect x="42" y="168" width="216" height="156" fill="#8a6a42" stroke="#171008" stroke-width="6"/>
+            <rect x="120" y="78" width="60" height="246" fill="#9a7748" stroke="#171008" stroke-width="6"/>
+            <path d="M110 80 L150 28 L190 80 Z" fill="#54401f" stroke="#171008" stroke-width="6" stroke-linejoin="round"/>
+            <circle cx="150" cy="21" r="5" fill="#e8b13c" stroke="#171008" stroke-width="3"/>
+            <circle cx="150" cy="112" r="18" fill="#fdf6df" stroke="#171008" stroke-width="4"/>
+            <path d="M150 112 L150 100 M150 112 L159 117" stroke="#171008" stroke-width="3.5" fill="none"/>
+            <rect x="56" y="142" width="188" height="34" rx="5" fill="#fdf6df" stroke="#171008" stroke-width="4"/>
+            <text x="150" y="164" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="14.5" letter-spacing=".5" fill="#102C4E">THE TOWN ALMANAC</text>
+            <rect x="56" y="196" width="62" height="76" fill="#ffca6a" stroke="#171008" stroke-width="5"/>
+            <circle cx="87" cy="226" r="15" fill="#7ec8e3" stroke="#171008" stroke-width="3"/>
+            <ellipse cx="87" cy="226" rx="6.5" ry="15" fill="none" stroke="#171008" stroke-width="2"/>
+            <path d="M72 226 L102 226 M87 241 L87 250 M78 250 L96 250" stroke="#171008" stroke-width="2.5" fill="none"/>
+            <rect x="182" y="196" width="62" height="76" fill="#ffca6a" stroke="#171008" stroke-width="5"/>
+            <rect x="192" y="210" width="42" height="32" fill="#f4ead2" stroke="#171008" stroke-width="3"/>
+            <path d="M196 220 q6 -5 12 0 t12 0 M196 232 q6 -5 12 0 t12 0" stroke="#171008" stroke-width="2" fill="none"/>
+            <circle cx="215" cy="219" r="4.5" fill="#d64545" stroke="#171008" stroke-width="2"/>
+            <polygon class="spill" points="132,324 92,348 140,348" fill="#ffd98a" opacity="0"/>
+            <g class="door">
+              <rect x="128" y="226" width="44" height="98" fill="#5f4630" stroke="#171008" stroke-width="5"/>
+              <rect x="138" y="238" width="24" height="30" fill="#ffca6a" stroke="#171008" stroke-width="3"/>
+              <circle cx="164" cy="278" r="3.5" fill="#e8b13c" stroke="#171008" stroke-width="2"/>
+            </g>
+            <rect x="122" y="324" width="56" height="8" fill="#3d3d3d"/>
+          </svg>
+          <span class="bname">No. 3 &middot; The Town Almanac</span>
         </button>
-        <button type="button" class="shop" data-goto="apothecary" style="--acc:#5d4470" aria-label="Enter The Name Apothecary">
-          <div class="facade" style="background:linear-gradient(180deg,#5f4a6e,#4a3a58)">
-            <div class="cornice"></div>
-            <div class="signboard"><span class="no">No. 4</span><span class="nm">THE NAME APOTHECARY</span><span class="sb">Names, Day Jobs &amp; Petty Secrets</span></div>
-            <div class="awning"></div>
-            <div class="windows"><div class="win dim"></div><div class="win"></div></div>
-            <div class="door"></div><div class="step"></div>
-          </div>
+        <button type="button" class="bldg" data-room="apothecary" style="--lift:30px;--tilt:2.4deg" aria-label="Step inside The Name Apothecary">
+          <span class="bubble">Names, jobs &amp; petty secrets &mdash; pulled fresh.</span>
+          <svg viewBox="0 0 300 360" aria-hidden="true">
+            <path d="M56 156 L150 98 L244 156 L244 324 L56 324 Z" fill="#5f4a6e" stroke="#171008" stroke-width="6" stroke-linejoin="round"/>
+            <path d="M46 158 L150 92 L254 158" stroke="#171008" stroke-width="8" fill="none" stroke-linecap="round"/>
+            <g transform="rotate(-5 150 133)">
+              <rect x="82" y="112" width="136" height="42" rx="6" fill="#fdf6df" stroke="#171008" stroke-width="5"/>
+              <text x="150" y="131" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="12.5" letter-spacing="2" fill="#102C4E">THE NAME</text>
+              <text x="150" y="148" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="13.5" letter-spacing="1" fill="#102C4E">APOTHECARY</text>
+            </g>
+            <circle cx="150" cy="182" r="12" fill="#ffca6a" stroke="#171008" stroke-width="4"/>
+            <path d="M150 170 L150 194 M138 182 L162 182" stroke="#171008" stroke-width="2.5"/>
+            <g>
+              <path d="M74 150 L74 163" stroke="#171008" stroke-width="3"/>
+              <circle cx="74" cy="175" r="13" fill="#ffd98a" opacity=".35"/>
+              <rect x="67" y="163" width="14" height="19" rx="3" fill="#ffd98a" stroke="#171008" stroke-width="3"/>
+              <path d="M226 150 L226 163" stroke="#171008" stroke-width="3"/>
+              <circle cx="226" cy="175" r="13" fill="#ffd98a" opacity=".35"/>
+              <rect x="219" y="163" width="14" height="19" rx="3" fill="#ffd98a" stroke="#171008" stroke-width="3"/>
+            </g>
+            <rect x="70" y="210" width="92" height="78" fill="#3d2c4c" stroke="#171008" stroke-width="5"/>
+            <rect x="77" y="217" width="78" height="64" fill="#ffca6a" opacity=".92"/>
+            <path d="M103 217 L103 281 M129 217 L129 281 M77 238 L155 238 M77 260 L155 260" stroke="#8a5a20" stroke-width="3"/>
+            <g fill="#40260f">
+              <circle cx="90" cy="227" r="2.6"/><circle cx="116" cy="227" r="2.6"/><circle cx="142" cy="227" r="2.6"/>
+              <circle cx="90" cy="249" r="2.6"/><circle cx="116" cy="249" r="2.6"/><circle cx="142" cy="249" r="2.6"/>
+              <circle cx="90" cy="270" r="2.6"/><circle cx="116" cy="270" r="2.6"/><circle cx="142" cy="270" r="2.6"/>
+            </g>
+            <polygon class="spill" points="190,324 140,348 198,348" fill="#ffd98a" opacity="0"/>
+            <g class="door">
+              <path d="M184 324 L184 238 Q207 216 230 238 L230 324 Z" fill="#463356" stroke="#171008" stroke-width="5"/>
+              <path d="M196 300 L196 250 Q207 240 218 250 L218 300 Z" fill="#ffca6a" stroke="#171008" stroke-width="3"/>
+              <circle cx="222" cy="284" r="3.5" fill="#e8b13c" stroke="#171008" stroke-width="2"/>
+            </g>
+            <rect x="178" y="324" width="60" height="8" fill="#3d3d3d"/>
+            <ellipse cx="104" cy="340" rx="16" ry="4" fill="#6b6f76"/>
+          </svg>
+          <span class="bname">No. 4 &middot; The Name Apothecary</span>
         </button>
       </div>
-      <div class="sidewalk"></div>
-      <div class="road"></div>
+      <div class="court" aria-hidden="true"><span class="ctable" style="left:16%"></span><span class="ctable" style="right:14%"></span></div>
     </section>
-    <div class="street-cap"><span>Est. tonight. Open all hours.</span><span class="hint">On a phone? Swipe the street. Tap a storefront to step inside.</span></div>
+    <div class="street-cap"><span>Est. tonight. Open all hours.</span><span class="hint">Hover a building &mdash; doors open for the curious. Click to step inside.</span></div>
+    </div>
+
+    <!-- ============ INTERIOR ROOM VIEW ============ -->
+    <section id="roomView" hidden aria-label="Inside the shop">
+      <div class="room-top">
+        <div class="room-left">
+          <svg class="room-lamp" viewBox="0 0 60 96" aria-hidden="true"><path d="M30 0 L30 26" stroke="#0f0a05" stroke-width="4"/><path d="M11 45 L30 24 L49 45 Z" fill="#e8b13c" stroke="#0f0a05" stroke-width="4" stroke-linejoin="round"/><circle cx="30" cy="53" r="9" fill="#ffd98a"/><ellipse cx="30" cy="70" rx="25" ry="8" fill="#ffd98a" opacity=".22"/></svg>
+          <button type="button" class="exit-door" id="exitRoom">[ &#8592; Back Out to The Block ]</button>
+        </div>
+        <div class="room-title"><span class="rt-no" id="roomNo">No. 1</span><h2 id="roomName">The Cut-Up Cafe</h2><p class="rt-sub">You are inside. Mind the paper scraps.</p></div>
+      </div>
 
     <!-- ============ No. 1 THE CUT-UP CAFE ============ -->
     <section class="shopsec" id="cafe" style="--acc:#a63d3d">
-      <div class="shopsec-head"><span class="no">No. 1</span><h2>The Cut-Up Cafe</h2><a class="back" href="#top" data-top>&#8593; Back to the street</a></div>
       <p class="tagline">Rip your draft in half. Slide the pieces. Steal what collides. &mdash; the Burroughs method, served warm.</p>
       <div class="panel">
         <label class="flabel" for="draft">Your stuck paragraph (nobody sees this but you)</label>
@@ -146,7 +252,6 @@
 
     <!-- ============ No. 2 THE PITCH BAR ============ -->
     <section class="shopsec" id="pitch" style="--acc:#2e5d46">
-      <div class="shopsec-head"><span class="no">No. 2</span><h2>The Pitch Bar</h2><a class="back" href="#top" data-top>&#8593; Back to the street</a></div>
       <p class="tagline">Order a random pitch off the roulette, or let the bartender fix your real one.</p>
       <div class="pitchgrid">
         <div class="gamecard">
@@ -181,7 +286,6 @@
 
     <!-- ============ No. 3 THE TOWN ALMANAC ============ -->
     <section class="shopsec" id="almanac" style="--acc:#b07a2a">
-      <div class="shopsec-head"><span class="no">No. 3</span><h2>The Town Almanac</h2><a class="back" href="#top" data-top>&#8593; Back to the street</a></div>
       <p class="tagline">Every great story is a small town with one strange business and one old rumor. Spin the map.</p>
       <div class="btnrow" style="margin:0 0 18px">
         <button type="button" class="shop-btn gold" id="spinMap">[ SPIN THE MAP ]</button>
@@ -203,13 +307,13 @@
 
     <!-- ============ No. 4 THE NAME APOTHECARY ============ -->
     <section class="shopsec" id="apothecary" style="--acc:#5d4470">
-      <div class="shopsec-head"><span class="no">No. 4</span><h2>The Name Apothecary</h2><a class="back" href="#top" data-top>&#8593; Back to the street</a></div>
       <p class="tagline">Prescription-strength characters. Pull three drawers: a name, a day job, and the petty secret they are hiding.</p>
       <div class="btnrow" style="margin:0 0 18px">
         <button type="button" class="shop-btn gold" id="pullDrawers">[ PULL THREE DRAWERS ]</button>
       </div>
       <div class="cabinet" id="cabinet" style="display:none"></div>
     </section>
+    </section><!-- /roomView -->
   </div>
 
   <section class="cta">
@@ -233,6 +337,13 @@
     </nav>
   </div>
 </footer>
-<script src="/assets/block.js?v=20261021a"></script>
+<div id="hud" hidden role="navigation" aria-label="The Block map — hop between rooms">
+  <button type="button" data-room="cafe"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10 L20 10 L18.5 20 L5.5 20 Z M20 12 q3.5 1 0 4.5 M8.5 6.5 q1.2 -1.8 0 -3.5 M13 6.5 q1.2 -1.8 0 -3.5" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg><span>Cut-Up Cafe</span></button>
+  <button type="button" data-room="pitch"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 L14 8.8 L19.6 9 L15.2 12.3 L16.7 17.8 L12 14.7 L7.3 17.8 L8.8 12.3 L4.4 9 L10 8.8 Z" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"/></svg><span>Pitch Bar</span></button>
+  <button type="button" data-room="almanac"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 L15.5 8 L15.5 21 L8.5 21 L8.5 8 Z M12 8.2 v.2 M10.6 12.5 h2.8" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/><circle cx="12" cy="12.5" r="2.6" stroke="currentColor" stroke-width="1.6" fill="none"/></svg><span>Almanac</span></button>
+  <button type="button" data-room="apothecary"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5 h16 M4 12 h16 M4 19 h16 M9.3 5 v14 M14.7 5 v14" stroke="currentColor" stroke-width="1.8" fill="none"/><circle cx="6.6" cy="8.5" r=".4" fill="currentColor"/><circle cx="12" cy="15.5" r=".4" fill="currentColor"/></svg><span>Apothecary</span></button>
+  <button type="button" id="hudExit" class="hud-exit"><span>&#8592; Street</span></button>
+</div>
+<script src="/assets/block.js?v=20261021b"></script>
 </body>
 </html>

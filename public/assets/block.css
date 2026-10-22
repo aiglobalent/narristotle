@@ -1,46 +1,64 @@
 /* THE WRITER'S BLOCK — narristotle.com/block
    A dusk street of four working shops. Pure CSS scene, vanilla JS tools. */
 
-.block-hero{padding:56px 0 8px;text-align:center}
+.block-hero{padding:28px 0 2px;text-align:center}
 .block-hero .over{letter-spacing:.28em;font-size:12px;font-weight:700;color:var(--gold-dark);text-transform:uppercase}
-.block-hero h1{font-size:clamp(40px,6.5vw,72px);margin:10px 0 6px}
+.block-hero h1{font-size:clamp(36px,5.6vw,58px);margin:8px 0 4px}
 .block-hero .under{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:clamp(18px,2.4vw,23px);color:var(--navy-soft);margin:0 auto;max-width:640px}
 .block-hero .fine{color:var(--muted);font-size:14.5px;margin-top:12px}
 
-/* ---------- THE STREET ---------- */
-.street{margin:34px auto 0;border-radius:14px;overflow:hidden;box-shadow:0 24px 60px rgba(16,44,78,.28);background:linear-gradient(180deg,#0a1e36 0%,#122e4f 46%,#1a3a5c 62%,#233d59 100%)}
-.sky{position:relative;height:64px}
+/* ---------- THE TOWN PLAZA ---------- */
+.plaza{margin:20px auto 0;border-radius:16px;overflow:hidden;box-shadow:0 24px 60px rgba(10,25,45,.35);background:linear-gradient(180deg,#081a30 0%,#0e2a4a 42%,#173b5f 62%,#20382c 100%);position:relative}
+.sky{position:relative;height:58px}
 .star{position:absolute;width:3px;height:3px;border-radius:50%;background:#ffe9a8;opacity:.85}
-.lamp{position:absolute;top:6px;width:4px;height:58px;background:#0b1626;border-radius:2px}
+.lamp{position:absolute;top:6px;width:4px;height:52px;background:#0b1626;border-radius:2px;z-index:3}
 .lamp::before{content:"";position:absolute;top:-9px;left:50%;transform:translateX(-50%);width:15px;height:15px;border-radius:50%;background:#ffd98a;box-shadow:0 0 26px 13px rgba(255,196,84,.5),0 0 60px 30px rgba(255,196,84,.14)}
-.shops{display:flex;gap:16px;padding:6px 18px 0;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.shops::-webkit-scrollbar{display:none}
-.shop{flex:0 0 272px;scroll-snap-align:start;cursor:pointer;background:none;border:0;padding:0;text-align:center;font:inherit}
-@media (min-width:641px){.shops{overflow-x:visible;scroll-snap-type:none;gap:12px}.shop{flex:1 1 0;min-width:0}.signboard .nm{font-size:17px}}
-.shop:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
-.facade{height:308px;border-radius:9px 9px 0 0;position:relative;padding:14px 14px 0;box-shadow:inset 0 0 0 1px rgba(0,0,0,.22),inset 0 -18px 28px rgba(0,0,0,.18);transition:transform .18s ease}
-.shop:hover .facade,.shop:focus-visible .facade{transform:translateY(-5px)}
-.facade::before{content:"";position:absolute;inset:0;border-radius:inherit;background:repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 2px,transparent 2px 26px),repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 2px,transparent 2px 52px);pointer-events:none}
-.cornice{height:10px;border-radius:4px;background:rgba(0,0,0,.28);margin-bottom:12px;box-shadow:0 2px 0 rgba(255,255,255,.14)}
-.signboard{background:#fdf6df;border:2px solid var(--gold-dark);border-radius:4px;padding:9px 6px 7px;box-shadow:0 3px 8px rgba(0,0,0,.35);position:relative}
-.signboard .no{display:block;font-size:10px;letter-spacing:.3em;color:var(--gold-dark);font-weight:700}
-.signboard .nm{display:block;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:19.5px;letter-spacing:.04em;color:var(--navy);line-height:1.12;margin-top:2px}
-.signboard .sb{display:block;font-size:10.5px;letter-spacing:.13em;color:#54677c;font-weight:600;text-transform:uppercase;margin-top:3px}
-.awning{height:26px;margin:13px -2px 0;clip-path:polygon(3% 0,97% 0,100% 100%,0 100%);background:repeating-linear-gradient(90deg,var(--acc) 0 18px,#fdf6df 18px 36px);box-shadow:0 4px 6px rgba(0,0,0,.3)}
-.windows{display:flex;gap:12px;margin-top:16px;padding:0 6px}
-.win{flex:1;height:86px;border-radius:3px;background:linear-gradient(160deg,#ffe9ad,#f7bd54 70%,#eaa63c);box-shadow:inset 0 0 0 3px rgba(64,38,8,.55),inset 0 0 22px rgba(120,66,0,.35);position:relative}
-.win::before,.win::after{content:"";position:absolute;background:rgba(64,38,8,.5)}
-.win::before{left:50%;top:0;width:3px;height:100%;transform:translateX(-50%)}
-.win::after{top:50%;left:0;height:3px;width:100%;transform:translateY(-50%)}
-.win.dim{background:linear-gradient(160deg,#31435c,#22344c 70%,#1a2a3f)}
-.door{width:56px;height:74px;margin:14px auto 0;background:linear-gradient(180deg,#2a1d13,#1d130b);border-radius:5px 5px 0 0;box-shadow:inset 0 0 0 3px rgba(0,0,0,.4),inset 0 0 0 5px rgba(226,176,65,.25);position:relative}
-.door::after{content:"";position:absolute;right:8px;top:36px;width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 6px rgba(226,176,65,.9)}
-.step{height:8px;background:rgba(0,0,0,.35);margin:0 30px;border-radius:0 0 4px 4px}
-.sidewalk{height:20px;background:linear-gradient(180deg,#8d9299,#6f747b);box-shadow:inset 0 3px 0 rgba(255,255,255,.35)}
-.road{height:30px;background:#20242a;position:relative}
-.road::after{content:"";position:absolute;top:50%;left:0;right:0;border-top:3px dashed rgba(240,200,90,.55);transform:translateY(-50%)}
+.plaza-row{display:flex;align-items:flex-end;gap:clamp(4px,1.4vw,18px);padding:8px 12px 0;position:relative;z-index:2}
+.bldg{flex:1 1 0;min-width:0;background:none;border:0;padding:0;cursor:pointer;font:inherit;position:relative;transform:rotate(var(--tilt,0deg)) translateY(var(--lift,0px));transition:transform .25s ease}
+.bldg:hover,.bldg:focus-visible{transform:rotate(var(--tilt,0deg)) translateY(calc(var(--lift,0px) - 7px))}
+.bldg:focus-visible{outline:3px solid var(--gold);outline-offset:4px;border-radius:8px}
+.bldg svg{width:100%;height:auto;display:block;filter:drop-shadow(0 10px 14px rgba(0,0,0,.35))}
+.bldg .door{transform-box:fill-box;transform-origin:left center;transition:transform .38s ease}
+.bldg:hover .door,.bldg:focus-visible .door{transform:scaleX(.24) skewY(-3deg)}
+.bldg .spill{transition:opacity .38s ease}
+.bldg:hover .spill,.bldg:focus-visible .spill{opacity:.85}
+.bldg .beams{animation:beamPulse 2.6s ease-in-out infinite alternate}
+@keyframes beamPulse{from{opacity:.55}to{opacity:1}}
+.bubble{position:absolute;left:50%;top:-16px;transform:translate(-50%,8px);background:#fdf6df;color:#233044;font-size:13px;font-weight:600;line-height:1.35;padding:8px 12px;border-radius:12px;border:2px solid #171008;opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease;width:max-content;max-width:230px;z-index:6;box-shadow:0 8px 18px rgba(0,0,0,.3)}
+.bubble::after{content:"";position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);border:9px solid transparent;border-top-color:#171008;border-bottom:0}
+.bldg:hover .bubble,.bldg:focus-visible .bubble{opacity:1;transform:translate(-50%,-2px)}
+.bname{display:block;margin-top:9px;color:#fdf6df;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:clamp(11.5px,1.55vw,16.5px);letter-spacing:.03em;text-shadow:0 2px 8px rgba(0,0,0,.65);white-space:nowrap}
+.court{height:72px;margin-top:4px;position:relative;border-top:6px solid #565b62;background:radial-gradient(ellipse 95% 140% at 50% -30%,#9aa0a6 0%,#7c828a 55%,#62676e 100%)}
+.court::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 12px 12px,rgba(255,255,255,.15) 3px,transparent 4.5px),radial-gradient(circle at 34px 26px,rgba(0,0,0,.18) 3px,transparent 4.5px);background-size:44px 30px}
+.ctable{position:absolute;bottom:20px;width:40px;height:11px;border-radius:50%;background:#fdf6df;box-shadow:0 3px 0 #8b8f96,0 14px 0 -4px #565b62}
 .street-cap{display:flex;justify-content:space-between;align-items:center;padding:12px 4px 0;color:var(--muted);font-size:13.5px}
 .street-cap .hint{font-style:italic}
+
+/* ---------- INTERIOR ROOM ---------- */
+#roomView{margin-top:22px;background:linear-gradient(180deg,#2e2013,#20150a);border-radius:18px;padding:20px clamp(12px,3vw,30px) 30px;box-shadow:0 24px 60px rgba(16,20,30,.35),inset 0 0 0 2px rgba(232,177,60,.22)}
+.room-top{display:flex;gap:18px;align-items:flex-start;border-bottom:2px solid rgba(232,177,60,.25);padding-bottom:14px}
+.room-left{display:flex;flex-direction:column;align-items:flex-start;gap:2px;flex:none}
+.room-lamp{width:44px;height:auto;margin-top:-20px;filter:drop-shadow(0 8px 14px rgba(255,217,138,.35))}
+.exit-door{background:linear-gradient(180deg,#7a4b26,#5f3a1d);color:#fdf6df;border:2px solid #3c2412;border-radius:6px;padding:10px 14px;font:inherit;font-weight:700;font-size:14.5px;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,220,160,.35),0 6px 14px rgba(0,0,0,.4);white-space:nowrap}
+.exit-door:hover{background:linear-gradient(180deg,#8a562c,#6b4222)}
+.room-title{padding-top:8px}
+.room-title .rt-no{font-size:11.5px;letter-spacing:.3em;font-weight:700;color:var(--gold);text-transform:uppercase}
+.room-title h2{color:#fdf6df;font-size:clamp(28px,4vw,40px);margin:2px 0 0}
+.room-title .rt-sub{color:#cbb27f;font-style:italic;font-family:'Playfair Display',Georgia,serif;margin:2px 0 0;font-size:16px}
+#roomView .shopsec{padding:20px 0 4px}
+#roomView .tagline{color:#e8cf9a}
+body.in-room .cta{display:none}
+body.in-room{padding-bottom:88px}
+
+/* ---------- HUD (room-hopping map bar) ---------- */
+#hud{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:80;display:flex;gap:6px;align-items:stretch;background:rgba(11,22,38,.94);border:1.5px solid var(--gold-dark);border-radius:999px;padding:7px 8px;box-shadow:0 14px 34px rgba(0,0,0,.45);backdrop-filter:blur(6px);max-width:94vw}
+#hud[hidden]{display:none}
+#hud button{display:flex;align-items:center;gap:7px;background:transparent;color:#cfdaea;border:1.5px solid transparent;border-radius:999px;padding:7px 12px;font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;white-space:nowrap}
+#hud button svg{width:19px;height:19px;flex:none}
+#hud button:hover{color:#fff;background:rgba(255,255,255,.08)}
+#hud button.on{background:var(--gold);color:var(--navy);border-color:var(--gold-dark)}
+#hud .hud-exit{border-left:1.5px solid rgba(226,176,65,.35);border-radius:0 999px 999px 0;color:var(--gold)}
+@media (max-width:640px){#hud button span{display:none}#hud button{padding:8px 10px}#hud .hud-exit span{display:inline}#hud button svg{width:21px;height:21px}}
 
 /* ---------- SHOP SECTIONS ---------- */
 .shopsec{padding:64px 0 8px}
@@ -117,4 +135,4 @@ textarea.draft:focus,input.pfield:focus{outline:2px solid var(--gold);border-col
 .gamecard h3{color:#fdf6df;margin-top:0}
 .gamecard p{color:#cfdaea}
 
-@media (max-width:640px){.half{font-size:14.5px;height:64px}.shops{padding:6px 12px 0}.shop{flex-basis:238px}.facade{height:288px}}
+@media (max-width:640px){.half{font-size:14.5px;height:64px}.plaza-row{gap:2px;padding:8px 4px 0}.bubble{display:none}.bname{white-space:normal;line-height:1.2}}
