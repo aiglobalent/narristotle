@@ -16,6 +16,7 @@
 .shops{display:flex;gap:16px;padding:6px 18px 0;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .shops::-webkit-scrollbar{display:none}
 .shop{flex:0 0 272px;scroll-snap-align:start;cursor:pointer;background:none;border:0;padding:0;text-align:center;font:inherit}
+@media (min-width:901px){.shops{overflow-x:visible;scroll-snap-type:none}.shop{flex:1 1 0;min-width:0}.signboard .nm{font-size:18px}}
 .shop:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 .facade{height:308px;border-radius:9px 9px 0 0;position:relative;padding:14px 14px 0;box-shadow:inset 0 0 0 1px rgba(0,0,0,.22),inset 0 -18px 28px rgba(0,0,0,.18);transition:transform .18s ease}
 .shop:hover .facade,.shop:focus-visible .facade{transform:translateY(-5px)}
