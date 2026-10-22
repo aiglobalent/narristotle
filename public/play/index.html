@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Play — Narristotle</title>
+  <meta name="description" content="A stark black-and-white card game for writers. One black prompt card, four white answer cards, five taps — a micro-story, a pitch, or a song. Free in your browser at Narristotle.">
+  <meta property="og:title" content="Narristotle — Play">
+  <meta property="og:description" content="One black card. Four white cards. Five taps. You just wrote something unhinged.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://narristotle.com/play">
+  <meta property="og:image" content="https://narristotle.com/assets/og-play.png?v=2">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Narristotle — Play">
+  <meta name="twitter:description" content="One black card. Four white cards. Five taps. You just wrote something unhinged.">
+  <meta name="twitter:image" content="https://narristotle.com/assets/og-play.png?v=2">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/play-game.css?v=20261021l">
+</head>
+<body>
+  <nav class="packbar" aria-label="Card packs">
+    <button type="button" data-deck="barpitch" class="active">Bar Pitch</button><button type="button" data-deck="thriller">Thriller</button><button type="button" data-deck="romantasy">Romantasy</button><button type="button" data-deck="country">Country</button><button type="button" data-deck="sitcom">Sitcom</button>
+  </nav>
+
+  <div id="deckHint" hidden>Five decks up top. Tap one to switch games.</div>
+
+  <div class="steprow">
+    <span id="stepLabel">CARD 1 OF 5</span>
+    <button type="button" id="shuffleBtn">Shuffle.</button>
+  </div>
+
+  <main id="gameView">
+    <section class="blackcard" aria-live="polite">
+      <p id="promptText"></p>
+    </section>
+    <section class="hand">
+      <div class="handgrid" id="handGrid"></div>
+      <div class="ownrow">
+        <input id="ownInput" type="text" placeholder="Or type your own (like a friend's name)..." autocomplete="off" maxlength="90">
+        <button type="button" id="dealBtn">Deal 4 new cards.</button>
+      </div>
+    </section>
+  </main>
+
+  <main id="revealView" style="display:none">
+    <article class="storycard">
+      <h2 id="storyTitle"></h2>
+      <div class="storybody" id="storyBody"></div>
+      <div class="stamp"><b>&lsquo;Unhinged.&rsquo;</b><span>&mdash; Narristotle</span></div>
+    </article>
+    <div class="actionrow">
+      <button type="button" id="shareBtn">Share Card.</button>
+      <a id="stealBtn" href="https://roughdraftmaker.com" target="_blank" rel="noopener">Turn this pitch into a story -&gt;</a>
+    </div>
+    <div class="againrow">
+      <button type="button" id="againBtn">Play another round.</button>
+      <button type="button" id="deckBtn">Try another deck.</button>
+    </div>
+    <p class="sharenote" id="shareNote"></p>
+  </main>
+
+<script src="/assets/play-game.js?v=20261021l"></script>
+</body>
+</html>

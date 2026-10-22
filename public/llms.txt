@@ -13,6 +13,8 @@
 
 - Home: https://narristotle.com/
 - The Gadfly Gazette (essays and story clinic, Tuesdays and Fridays): https://narristotle.com/gazette
+- The Story & Song Arcade (an interactive in-browser game: give Narristotle 5 words, get an instant micro-story with Plot Roulette or a Verse + Chorus song draft with the Song Draft Maker; runs entirely client-side from built-in templates): https://narristotle.com/arcade
+- The Writer's Block (an interactive in-browser street of four working shops for stuck writers: The Cut-Up Cafe slices your own draft into sliding sentence halves Burroughs-style; The Pitch Bar fixes a real book pitch from five blanks; The Town Almanac generates a hyper-specific small-town setting; The Name Apothecary draws character names with day jobs and petty secrets; runs entirely client-side, sparks can be sent on to RoughDraft Maker): https://narristotle.com/block
 - The Method: https://narristotle.com/method
 - Bookshelf (recommended reading for writers): https://narristotle.com/bookshelf
 - About (the character, the facts, the company): https://narristotle.com/about

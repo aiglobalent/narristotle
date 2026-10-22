@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Story &amp; Song Arcade — Narristotle | Give Me 5 Words</title>
+<meta name="description" content="Narristotle's Story & Song Arcade: give him 5 words and get an instant micro-story or song draft — Plot Roulette and the Song Draft Maker, free to play right in your browser.">
+<link rel="canonical" href="https://narristotle.com/arcade">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Narristotle — The Gadfly Gazette">
+<meta property="og:title" content="Narristotle's Story &amp; Song Arcade — Give Me 5 Words">
+<meta property="og:description" content="An instant story and song game from Narristotle, the story-building mind behind RoughDraft Maker. Pick Plot Roulette or the Song Draft Maker.">
+<meta property="og:url" content="https://narristotle.com/arcade">
+<meta property="og:image" content="https://narristotle.com/assets/narristotle-bust.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Narristotle's Story &amp; Song Arcade">
+<meta name="twitter:description" content="Give Narristotle 5 words. Get a story or a song. Instantly.">
+<meta name="twitter:image" content="https://narristotle.com/assets/narristotle-bust.jpg">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=20261020c">
+<link rel="stylesheet" href="/assets/arcade.css?v=20261021c">
+</head>
+<body>
+<div class="news-strip"><span class="ns-tag">JUST DROPPED</span><a href="/bookshelf">Steve Smythe&rsquo;s <em>A Tomato, a Donkey, and the Stars</em> just joined Our Own Shelf &mdash; a children&rsquo;s chapter book draft, free to read &#8594;</a></div>
+<header class="site">
+  <div class="header-in">
+    <a class="brand" href="/" aria-label="Narristotle home">
+      <span class="brand-mark">N</span>
+      <span class="brand-name">NARRISTOTLE&#8482;<span class="brand-sub">THE GADFLY GAZETTE</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('nav.main').classList.toggle('open')">&#9776;</button>
+    <nav class="main">
+      <a href="/gazette">Gazette</a>
+      <a href="/arcade">The Arcade</a>
+      <a href="/block">The Writer&rsquo;s Block</a>
+      <a href="/bookshelf">Bookshelf</a>
+      <a href="/method">The Method</a>
+      <a href="/about">About</a>
+      <a class="btn" href="https://roughdraftmaker.com">RoughDraft Maker &#8594;</a>
+    </nav>
+  </div>
+</header>
+<main>
+<section class="arcade" id="arcade" data-arcade>
+  <div class="wrap">
+    <div class="arcade-banner">
+      <span class="emblem"><span class="crest-letter">N</span></span>
+      
+      <div>
+        <p>Narristotle&rsquo;s Story &amp; Song Arcade</p>
+        <h2>Think You Have Writer&rsquo;s Block? Give Me 5 Words and 30 Seconds.</h2>
+      </div>
+    </div>
+
+    <div class="arcade-toggle" role="tablist" aria-label="Arcade mode">
+      <span class="pill">
+        <button type="button" data-mode-btn="conference" class="featured">&#127864; Conference Pitch Roulette</button>
+        <button type="button" data-mode-btn="story" class="active">&#128214; Plot Roulette (Story Libs)</button>
+        <button type="button" data-mode-btn="song">&#127928; Song Draft Maker</button>
+      </span>
+    </div>
+
+    <div class="arcade-card">
+      <div class="arcade-panel">
+        <div class="arcade-genres" data-genres="story">
+          <span class="g-label">First, pick a genre:</span>
+          <button type="button" data-genre="thriller" class="active">&#127917; Thriller</button>
+          <button type="button" data-genre="cozy">&#128373;&#65038; Cozy Mystery</button>
+          <button type="button" data-genre="sitcom">&#128250; Sitcom Scene</button>
+          <button type="button" data-genre="dragon">&#128009;&#128293; Dragon Academy Romantasy</button>
+        </div>
+        <div class="arcade-genres" data-genres="song" style="display:none">
+          <span class="g-label">First, pick a genre:</span>
+          <button type="button" data-genre="country" class="active">&#129312; Country Heartbreak</button>
+          <button type="button" data-genre="hiphop">&#127908; Hip-Hop Roast</button>
+          <button type="button" data-genre="ballad">&#127928; 80s Power Ballad</button>
+        </div>
+        <div class="arcade-genres" data-genres="conference" style="display:none">
+          <span class="g-label">Live Event Special &mdash; for writers at this week&rsquo;s conferences:</span>
+          <button type="button" data-genre="live" class="active">&#127864; Panic at the Hotel Bar</button>
+        </div>
+        <h3>Your 5 Quick Inputs</h3>
+
+        <div data-fields="story">
+          <div class="arcade-field"><label>1. Someone terrible at their job</label><input type="text" value="A forgetful detective" data-default="A forgetful detective"></div>
+          <div class="arcade-field"><label>2. A weird object in their pocket</label><input type="text" value="A rubber duck" data-default="A rubber duck"></div>
+          <div class="arcade-field"><label>3. The worst place to get snowed in</label><input type="text" value="A haunted motel" data-default="A haunted motel"></div>
+          <div class="arcade-field"><label>4. Something they desperately want</label><input type="text" value="A second chance" data-default="A second chance"></div>
+          <div class="arcade-field"><label>5. A secret nobody should know</label><input type="text" value="The duck talks" data-default="The duck talks"></div>
+        </div>
+
+        <div data-fields="story-dragon" style="display:none">
+          <div class="arcade-field"><label>1. A brooding rival with a dangerous job</label><input type="text" value="The shadow-wielding Wing Commander" data-default="The shadow-wielding Wing Commander"></div>
+          <div class="arcade-field"><label>2. A dramatic magical heirloom</label><input type="text" value="An obsidian dagger that hums when people lie" data-default="An obsidian dagger that hums when people lie"></div>
+          <div class="arcade-field"><label>3. The worst place at the war college to get trapped together</label><input type="text" value="The storm-locked parapet tower" data-default="The storm-locked parapet tower"></div>
+          <div class="arcade-field"><label>4. A petty reason they hate each other</label><input type="text" value="They stole my family's last dragon egg" data-default="They stole my family's last dragon egg"></div>
+          <div class="arcade-field"><label>5. The inconvenient magical bond</label><input type="text" value="Our dragons refuse to fly unless we hold hands" data-default="Our dragons refuse to fly unless we hold hands"></div>
+        </div>
+
+        <div data-fields="song" style="display:none">
+          <div class="arcade-field"><label>1. A beat-up vehicle or ride</label><input type="text" value="2004 Honda Civic" data-default="2004 Honda Civic"></div>
+          <div class="arcade-field"><label>2. A specific local hangout spot</label><input type="text" value="Bakersfield Applebee's" data-default="Bakersfield Applebee's"></div>
+          <div class="arcade-field"><label>3. Something petty left behind</label><input type="text" value="half a bottle of ranch" data-default="half a bottle of ranch"></div>
+          <div class="arcade-field"><label>4. A 2 AM bad habit</label><input type="text" value="texting my ex from the booth" data-default="texting my ex from the booth"></div>
+          <div class="arcade-field"><label>5. The one thing you want back</label><input type="text" value="my vintage leather jacket" data-default="my vintage leather jacket"></div>
+        </div>
+
+        <div data-fields="story-sitcom" style="display:none">
+          <div class="arcade-field"><label>1. A roommate with one deeply specific obsession</label><input type="text" value="A retired game-show host who treats the apartment like a studio" data-default="A retired game-show host who treats the apartment like a studio"></div>
+          <div class="arcade-field"><label>2. An object nobody is allowed to touch</label><input type="text" value="A lava lamp signed by a minor celebrity" data-default="A lava lamp signed by a minor celebrity"></div>
+          <div class="arcade-field"><label>3. The neighbor who always picks this moment</label><input type="text" value="The upstairs tap dancer with insomnia" data-default="The upstairs tap dancer with insomnia"></div>
+          <div class="arcade-field"><label>4. A lie told to avoid a minor errand</label><input type="text" value="I already mailed the rent check" data-default="I already mailed the rent check"></div>
+          <div class="arcade-field"><label>5. The mundane thing treated like a season finale</label><input type="text" value="The thermostat war" data-default="The thermostat war"></div>
+        </div>
+
+        <div data-fields="conference" style="display:none">
+          <div class="arcade-field"><label>1. An exhausted writer archetype</label><input type="text" value="An over-caffeinated MFA grad on their 4th espresso" data-default="An over-caffeinated MFA grad on their 4th espresso"></div>
+          <div class="arcade-field"><label>2. A bizarre object dropped in the hotel elevator</label><input type="text" value="A crumpled query letter stained with hotel merlot" data-default="A crumpled query letter stained with hotel merlot"></div>
+          <div class="arcade-field"><label>3. The most awkward place to corner a literary agent</label><input type="text" value="The continental breakfast waffle iron" data-default="The continental breakfast waffle iron"></div>
+          <div class="arcade-field"><label>4. The unhinged comp-title pitch</label><input type="text" value="Succession meets Paw Patrol in space" data-default="Succession meets Paw Patrol in space"></div>
+          <div class="arcade-field"><label>5. The secret twist in Chapter 26</label><input type="text" value="The literary agent is actually three raccoons in a trench coat" data-default="The literary agent is actually three raccoons in a trench coat"></div>
+        </div>
+
+        <div class="arcade-btn-row">
+          <button type="button" class="arcade-reveal-btn" data-reveal>Reveal &rarr;</button>
+          <button type="button" class="arcade-surprise" data-surprise>&#127922; Shuffle Words</button>
+        </div>
+        <div class="arcade-hints" data-hints-wrap style="display:none">
+          <span class="h-label">Fresh out of words? Tap a hint tile:</span>
+          <div data-hints></div>
+        </div>
+      </div>
+
+      <div class="arcade-panel arcade-result">
+        <div data-tease>
+          <p class="r-kicker" data-tease-kicker>Plot Roulette &middot; Sealed &amp; Waiting</p>
+          <h3 data-tease-title>Something ridiculous is about to happen on this page.</h3>
+          <div class="r-body" data-tease-body>Right now, this card is blank, smug, and absolutely bursting with potential &mdash; rather like a writer before coffee.
+
+Your 5 words are the ingredients. The genre is the oven. Hit Reveal and I shall serve you a tiny story with a beginning, a middle, and a cliffhanger rude enough to make you glad you pressed Reveal.
+
+No spoilers. But between us? The duck is ready for its close-up.</div>
+        </div>
+
+        <div data-result-wrap style="display:none">
+          <div class="arcade-poster" data-poster style="display:none">
+            <span data-poster-tag></span>
+            <strong data-poster-name></strong>
+          </div>
+          <p class="r-kicker" data-result-kicker>Plot Roulette</p>
+          <h3 data-result-title></h3>
+          <div class="r-body" data-result-body></div>
+
+          <div class="arcade-bubble" data-song-bubble style="display:none">
+            <span class="bubble-crest">N</span>
+            
+            <p>&ldquo;Every great country song or rap track is just a 3-minute movie. Want to turn this into an actual screenplay or book?&rdquo;</p>
+          </div>
+
+          <div class="arcade-actions">
+            <button type="button" class="arcade-share" data-share-btn>&#128228; Share Meme Card</button>
+            <button type="button" class="arcade-share" data-vault-btn>&#128278; Save to My Vault</button>
+            <a class="arcade-feed" data-feed-btn href="https://roughdraftmaker.com" target="_blank" rel="noopener">Wait... This Is Actually Good. Build Chapter 1 on RoughDraft Maker &rarr;</a>
+            <a class="arcade-feed arcade-vault-open" data-vault-open href="https://roughdraftmaker.com" target="_blank" rel="noopener" style="display:none">Open in RoughDraft Maker &rarr;</a>
+            <p class="arcade-status" data-status aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arcade-modal" data-modal style="display:none" role="dialog" aria-label="Your meme card">
+    <div class="arcade-modal-backdrop" data-modal-close></div>
+    <div class="arcade-modal-panel">
+      <button type="button" class="arcade-modal-x" data-modal-close aria-label="Close">&times;</button>
+      <h3>Your Meme Card</h3>
+      <p class="arcade-modal-sub">Painted right in your browser. Post it anywhere.</p>
+      <img data-modal-img alt="Your Narristotle Arcade meme card">
+      <div class="arcade-picks">
+        <a data-pick="sms" href="#">&#128241; Text / iMessage</a>
+        <button type="button" data-pick="story">&#128248; IG / TikTok Story</button>
+        <a data-pick="x" href="#" target="_blank" rel="noopener">&#120143; Post</a>
+        <a data-pick="fb" href="#" target="_blank" rel="noopener">&#128216; Facebook</a>
+      </div>
+      <div class="arcade-modal-actions">
+        <button type="button" class="arcade-feed" data-download-btn>&#128248; Download Meme Card (PNG)</button>
+        <button type="button" class="arcade-share" data-copy-btn>&#128279; Copy Share Link</button>
+      </div>
+      <p class="arcade-status" data-modal-status aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+  <section class="cta">
+    <div class="cta-in">
+      <div>
+        <h2>Liked what the Arcade spun up?</h2>
+        <p>The Arcade plays with templates. RoughDraft Maker builds the whole draft.</p>
+      </div>
+      <a class="btn" href="https://roughdraftmaker.com">Explore RoughDraft Maker &#8594;</a>
+    </div>
+  </section>
+</main>
+<footer class="site">
+  <div class="footer-in">
+    <span><strong style="color:var(--navy);letter-spacing:.08em">NARRISTOTLE&#8482;</strong> &middot; An AI Global Entertainment publication.</span>
+    <nav>
+      <a href="/about">About</a>
+      <a href="/about#editorial">Editorial approach</a>
+      <a href="/about#contact">Contact</a>
+      <a href="/">narristotle.com</a>
+    </nav>
+  </div>
+</footer>
+<script src="/firebase-config.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="/assets/arcade.js?v=20261021c"></script>
+</body>
+</html>

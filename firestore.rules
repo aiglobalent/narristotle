@@ -1,9 +1,10 @@
 rules_version = '2';
-// Narristotle Studio editorial data.
+// Narristotle Studio editorial data + Arcade Vault.
 // Public site pages are static HTML (crawlable). Firestore holds the
-// editorial workflow: drafts, scheduled posts, and publication history.
-// Nothing in Firestore is publicly readable; only signed-in editors
-// on the allowlist can read or write.
+// editorial workflow (drafts, scheduled posts, history), the morning
+// Scout briefings, the live Arcade template shelf, and reader Vault saves.
+// Editors (allowlist) run the Studio; readers may read only what is
+// published/live, and may touch only their own Vault entries.
 service cloud.firestore {
   match /databases/{database}/documents {
     function isEditor() {
@@ -15,10 +16,26 @@ service cloud.firestore {
         ];
     }
     match /narristotle_posts/{postId} {
-      allow read, write: if isEditor();
+      // Published posts are rendered on the public Gazette page.
+      allow read: if isEditor() || resource.data.status == "published";
+      allow write: if isEditor();
     }
     match /narristotle_history/{entryId} {
       allow read, write: if isEditor();
+    }
+    match /narristotle_morning_briefings/{briefingId} {
+      allow read, write: if isEditor();
+    }
+    match /narristotle_arcade_templates/{templateId} {
+      // The Arcade serves only status == "live" templates, anonymously.
+      allow read: if isEditor() || resource.data.status == "live";
+      allow write: if isEditor();
+    }
+    match /narristotle_vault/{entryId} {
+      allow create: if request.auth != null &&
+        request.resource.data.uid == request.auth.uid;
+      allow read, update, delete: if isEditor() ||
+        (request.auth != null && resource.data.uid == request.auth.uid);
     }
   }
 }

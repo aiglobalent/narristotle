@@ -1,0 +1,195 @@
+/* Narristotle /play — stark black-and-white card game.
+   Apple HIG pass: fixed viewport (no drift, no rubber-band), safe areas,
+   44pt touch targets, readable type, nothing scrolls, nothing spills. */
+*{box-sizing:border-box;margin:0;padding:0}
+html{height:100%;overflow:hidden;overscroll-behavior:none}
+body{
+  background:#000000;color:#FFFFFF;
+  font-family:Inter,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  position:fixed;inset:0;width:100%;height:100dvh;overflow:hidden;
+  display:flex;flex-direction:column;
+  -webkit-font-smoothing:antialiased;
+  -webkit-text-size-adjust:100%;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  letter-spacing:-0.03em;
+  transition:background-color 250ms ease;
+}
+body.dealing{background-color:#131313}
+.packbar,.steprow{transition:opacity 250ms ease}
+body.dealing .packbar,body.dealing .steprow{opacity:0.3}
+button{font-family:inherit}
+/* ——— The yellow pack bar: five equal tabs, one row, no scrolling ——— */
+.packbar{
+  background:#FACC15;color:#000000;flex:none;
+  display:flex;align-items:stretch;height:56px;overflow:hidden;
+  padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);
+}
+.packbar button{
+  flex:1 1 0;min-width:0;height:56px;min-height:56px;
+  background:none;border:0;color:#000000;cursor:pointer;
+  font-weight:900;font-size:clamp(11.5px,3.2vw,14px);letter-spacing:0.01em;color:rgba(0,0,0,0.55);
+  text-transform:uppercase;padding:12px 1px;white-space:nowrap;text-align:center;
+}
+.packbar button.active{background:#000000;color:#FACC15;box-shadow:inset 0 -5px 0 #FACC15}
+.packbar.hinting button:not(.active){animation:tabPulse 0.85s ease 2}
+@keyframes tabPulse{0%,100%{background:transparent}50%{background:rgba(0,0,0,0.18)}}
+#deckHint{
+  position:fixed;top:66px;left:12px;right:12px;z-index:6;
+  background:#000000;color:#FFFFFF;border:2px solid #FACC15;border-radius:12px;
+  padding:12px 14px;font-size:14.5px;font-weight:800;letter-spacing:-0.01em;
+  box-shadow:0 10px 28px rgba(0,0,0,0.45);
+}
+#deckHint[hidden]{display:none}
+/* ——— Step row ——— */
+.steprow{
+  flex:none;display:flex;justify-content:space-between;align-items:center;
+  padding:10px 18px 2px;font-weight:900;font-size:13px;letter-spacing:0.05em;
+  padding-left:max(18px,env(safe-area-inset-left));padding-right:max(18px,env(safe-area-inset-right));
+}
+.steprow button{
+  background:none;border:0;color:#FFFFFF;cursor:pointer;
+  font-weight:900;font-size:13px;letter-spacing:0.05em;
+  text-decoration:underline;text-underline-offset:3px;
+  min-height:44px;padding:0 2px;margin:-12px -2px;
+}
+/* ——— Game view ——— */
+#gameView{
+  flex:1;min-height:0;display:flex;flex-direction:column;
+  padding:10px 12px calc(14px + env(safe-area-inset-bottom));gap:12px;
+  padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right));
+}
+.blackcard{
+  flex:0.92;min-height:148px;
+  background:#101010;border:2px solid #333338;border-radius:20px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.08);
+  padding:22px;display:flex;align-items:flex-start;
+}
+.blackcard p{
+  font-size:clamp(26px,6.6vw,36px);font-weight:800;line-height:1.16;
+}
+.blackcard .blank{
+  display:inline-block;width:128px;height:0.92em;margin-left:10px;
+  border-bottom:4px solid #FFFFFF;vertical-align:baseline;
+}
+.hand{flex:1.12;min-height:0;display:flex;flex-direction:column;gap:11px}
+/* ——— The deal: cards slide out left, next card slides in ——— */
+.blackcard,.hand{transition:transform 430ms cubic-bezier(.22,.9,.28,1.16),opacity 430ms ease,border-color 250ms ease,background-color 250ms ease}
+.lift{transform:translateY(-13px) scale(1.032)}
+.blackcard.lift{
+  border-color:#9a9a9a;background:#1e1e1e;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.16),0 26px 48px rgba(255,255,255,0.07);
+}
+.whitecard.picked{transform:scale(1.055)}
+.deal-out{transform:translateX(-64%) rotate(-7deg) translateY(26px);opacity:0;transition-duration:340ms,340ms,340ms,340ms}
+.hand.deal-out{transition-delay:35ms,35ms,0s}
+.blackcard.deal-out,.blackcard.deal-pre{border-color:#5c5c5c}
+.deal-pre{transform:translateX(64%) rotate(5deg) scale(1.02);opacity:0;transition:none !important}
+.hand{transition-delay:28ms,28ms,0s}
+.deal-in{transition:transform 430ms cubic-bezier(.22,.9,.28,1.16),opacity 240ms ease,border-color 250ms ease,background-color 250ms ease}
+#revealView.enter{animation:cardIn 480ms cubic-bezier(.22,.9,.28,1.16)}
+@keyframes cardIn{from{transform:translateX(60%) rotate(4deg) scale(1.02);opacity:0}to{transform:translateX(0) rotate(0) scale(1);opacity:1}}
+.handgrid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;box-sizing:border-box;gap:11px}
+.whitecard{
+  background:#FFFFFF;color:#000000;border:0;border-radius:15px;cursor:pointer;
+  padding:14px 13px;min-height:56px;height:100%;text-align:left;
+  box-sizing:border-box;display:flex;align-items:center;
+  overflow-wrap:break-word;word-break:break-word;hyphens:manual;
+  box-shadow:inset 0 -3px 0 rgba(0,0,0,0.16);
+  font-size:17px;font-weight:700;line-height:1.28;letter-spacing:-0.02em;
+  transition:background 120ms ease,transform 200ms ease;
+}
+.whitecard.picked{background:#FACC15}
+.ownrow{flex:none;display:flex;flex-direction:column;gap:4px}
+.ownrow input{
+  width:100%;background:#0a0a0a;border:2px solid #FFFFFF;border-radius:11px;
+  color:#FFFFFF;padding:13px 14px;font:inherit;font-size:16px;font-weight:600;letter-spacing:-0.01em;
+  min-height:48px;
+}
+.ownrow input::placeholder{color:#9a9a9a;font-weight:600}
+.ownrow input:focus{outline:2px solid #FACC15;outline-offset:1px}
+.ownrow button{
+  align-self:flex-start;background:none;border:0;color:#FFFFFF;cursor:pointer;
+  font:inherit;font-size:15px;font-weight:800;
+  text-decoration:underline;text-underline-offset:3px;
+  min-height:44px;padding:10px 2px;margin-bottom:-8px;
+}
+/* ——— Reveal view ——— */
+#revealView{
+  flex:1;min-height:0;display:flex;flex-direction:column;overflow-x:hidden;
+  padding:8px 12px calc(16px + env(safe-area-inset-bottom));gap:12px;
+  padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right));
+}
+.storycard{
+  background:#FFFFFF;color:#000000;border-radius:20px;
+  padding:24px 22px 22px;flex:1;min-height:0;overflow:hidden;
+  position:relative;display:flex;flex-direction:column;
+  box-shadow:inset 0 -4px 0 rgba(0,0,0,0.14);
+}
+.storycard h2{
+  font-size:26px;font-weight:900;line-height:1.1;margin-bottom:13px;flex:none;
+}
+.storybody{font-size:17.5px;font-weight:600;line-height:1.45;letter-spacing:-0.015em;flex:none}
+.storybody .pill{
+  background:#000000;color:#FFFFFF;font-weight:800;
+  padding:1px 8px 3px;border-radius:7px;margin:0 4px;
+  box-decoration-break:clone;-webkit-box-decoration-break:clone;
+}
+.storybody .sec-label{
+  display:block;font-size:12.5px;font-weight:900;letter-spacing:0.14em;margin:15px 0 2px;
+}
+.stamp{
+  margin-top:auto;align-self:flex-end;flex:none;
+  width:max-content;max-width:100%;
+  border:3px solid #000000;border-radius:10px;padding:8px 14px 10px;
+  transform:rotate(-3deg);line-height:1.25;
+  background:#FFFFFF;position:relative;z-index:2;text-decoration:none;
+}
+.stamp b{display:block;font-size:18px;font-weight:900}
+.stamp span{font-size:13px;font-weight:700}
+#shareBtn{
+  flex:none;background:#FFFFFF;color:#000000;border:0;border-radius:11px;cursor:pointer;
+  padding:16px;min-height:54px;font:inherit;font-size:17px;font-weight:900;letter-spacing:-0.01em;width:100%;
+}
+#stealBtn{
+  flex:none;display:block;text-align:center;background:#A7F3D0;color:#000000;
+  border-radius:11px;padding:16px;min-height:54px;font-size:17px;font-weight:900;letter-spacing:-0.01em;
+  text-decoration:none;
+}
+.againrow{flex:none;display:flex;gap:8px}
+.againrow button{flex:1}
+#againBtn,#deckBtn{
+  flex:1 1 0;background:none;border:0;color:#FFFFFF;cursor:pointer;font:inherit;
+  font-size:15px;font-weight:800;text-decoration:underline;text-underline-offset:3px;
+  min-height:44px;padding:10px 6px;margin-bottom:-6px;
+}
+.actionrow{flex:none;display:flex;flex-direction:column;gap:12px;max-width:100%}
+.actionrow>*{min-width:0}
+.sharenote{flex:none;color:#FFFFFF;font-size:13.5px;font-weight:600;text-align:center}
+.sharenote:empty{display:none}
+/* ——— Visible focus for keyboard and switch users ——— */
+:focus-visible{outline:3px solid #FACC15;outline-offset:2px}
+/* ——— Short screens: tighten before anything can crowd ——— */
+@media (max-height:720px){
+  .blackcard{flex:0.9;min-height:120px;padding:17px}
+  .blackcard p{font-size:22px}
+  .storycard{padding:18px}
+  .storycard h2{font-size:23px;margin-bottom:10px}
+  #shareBtn,#stealBtn{padding:13px;min-height:48px}
+  .stamp{padding:6px 10px 7px}
+  .stamp b{font-size:15px}
+  .stamp span{font-size:11.5px}
+}
+@media (min-width:760px){
+  #gameView,#revealView{max-width:720px;margin:0 auto;width:100%}
+  .whitecard{font-size:18px}
+  .storybody{font-size:18.5px}
+  .storycard h2{font-size:30px}
+}
+/* ——— Reduced motion ——— */
+@media (prefers-reduced-motion:reduce){
+  .whitecard{transition:none}
+  .blackcard,.hand{transition:opacity 120ms ease}
+  .deal-out,.deal-pre,.lift{transform:none}
+  #revealView.enter{animation:none}
+}

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Writer's Block — Narristotle | Four Shops for Stuck Writers</title>
+<meta name="description" content="The Writer's Block: a little street of hands-on tools for stuck writers. Slice your own draft in The Cut-Up Cafe, fix your pitch at The Pitch Bar, spin a small town in The Town Almanac, draw a character from The Name Apothecary. Free, instant, runs entirely in your browser.">
+<link rel="canonical" href="https://narristotle.com/block">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Narristotle — The Gadfly Gazette">
+<meta property="og:title" content="The Writer's Block — Four Shops for Stuck Writers">
+<meta property="og:description" content="A nostalgic interactive street block where each storefront houses a tactile creative tool to cure writer's block. 100% client-side — your words never leave your browser.">
+<meta property="og:url" content="https://narristotle.com/block">
+<meta property="og:image" content="https://narristotle.com/assets/narristotle-bust.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Writer's Block — Narristotle">
+<meta name="twitter:description" content="Four little shops. One cure for writer's block. Slice a draft, fix a pitch, spin a town, draw a name.">
+<meta name="twitter:image" content="https://narristotle.com/assets/narristotle-bust.jpg">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=20261020c">
+<link rel="stylesheet" href="/assets/block.css?v=20261021a">
+</head>
+<body>
+<div class="news-strip"><span class="ns-tag">JUST DROPPED</span><a href="/bookshelf">Steve Smythe&rsquo;s <em>A Tomato, a Donkey, and the Stars</em> just joined Our Own Shelf &mdash; a children&rsquo;s chapter book draft, free to read &#8594;</a></div>
+<header class="site">
+  <div class="header-in">
+    <a class="brand" href="/" aria-label="Narristotle home">
+      <span class="brand-mark">N</span>
+      <span class="brand-name">NARRISTOTLE&#8482;<span class="brand-sub">THE GADFLY GAZETTE</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('nav.main').classList.toggle('open')">&#9776;</button>
+    <nav class="main">
+      <a href="/gazette">Gazette</a>
+      <a href="/arcade">The Arcade</a>
+      <a href="/block">The Writer&rsquo;s Block</a>
+      <a href="/bookshelf">Bookshelf</a>
+      <a href="/method">The Method</a>
+      <a href="/about">About</a>
+      <a class="btn" href="https://roughdraftmaker.com">RoughDraft Maker &#8594;</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <section class="block-hero">
+      <p class="over">Narristotle Presents</p>
+      <h1>THE WRITER&rsquo;S BLOCK</h1>
+      <p class="under">Welcome to the Block &mdash; one little street, four working shops, every one of them built to unstick a stuck writer.</p>
+      <p class="fine">Dreamed up by Alex. Built by Narristotle. Every tool runs 100% in your browser &mdash; no accounts, no uploads, your words never leave the page.</p>
+    </section>
+
+    <section class="street" aria-label="The Writer's Block street view">
+      <div class="sky" aria-hidden="true">
+        <span class="star" style="left:6%;top:12px"></span><span class="star" style="left:22%;top:26px"></span>
+        <span class="star" style="left:47%;top:9px"></span><span class="star" style="left:71%;top:22px"></span>
+        <span class="star" style="left:88%;top:14px"></span><span class="star" style="left:96%;top:30px"></span>
+        <span class="lamp" style="left:24.5%"></span><span class="lamp" style="left:49.5%"></span><span class="lamp" style="left:74.5%"></span>
+      </div>
+      <div class="shops">
+        <button type="button" class="shop" data-goto="cafe" style="--acc:#a63d3d" aria-label="Enter The Cut-Up Cafe">
+          <div class="facade" style="background:linear-gradient(180deg,#8a4a3a,#74402f)">
+            <div class="cornice"></div>
+            <div class="signboard"><span class="no">No. 1</span><span class="nm">THE CUT-UP CAFE</span><span class="sb">Paper-Slicing Sentence Slider</span></div>
+            <div class="awning"></div>
+            <div class="windows"><div class="win"></div><div class="win"></div></div>
+            <div class="door"></div><div class="step"></div>
+          </div>
+        </button>
+        <button type="button" class="shop" data-goto="pitch" style="--acc:#2e5d46" aria-label="Enter The Pitch Bar">
+          <div class="facade" style="background:linear-gradient(180deg,#3c5a49,#2f4638)">
+            <div class="cornice"></div>
+            <div class="signboard"><span class="no">No. 2</span><span class="nm">THE PITCH BAR</span><span class="sb">Pitch Roulette &amp; Pitch Fixer</span></div>
+            <div class="awning"></div>
+            <div class="windows"><div class="win"></div><div class="win dim"></div></div>
+            <div class="door"></div><div class="step"></div>
+          </div>
+        </button>
+        <button type="button" class="shop" data-goto="almanac" style="--acc:#b07a2a" aria-label="Enter The Town Almanac">
+          <div class="facade" style="background:linear-gradient(180deg,#7d6242,#665031)">
+            <div class="cornice"></div>
+            <div class="signboard"><span class="no">No. 3</span><span class="nm">THE TOWN ALMANAC</span><span class="sb">Small-Town Setting Generator</span></div>
+            <div class="awning"></div>
+            <div class="windows"><div class="win"></div><div class="win"></div></div>
+            <div class="door"></div><div class="step"></div>
+          </div>
+        </button>
+        <button type="button" class="shop" data-goto="apothecary" style="--acc:#5d4470" aria-label="Enter The Name Apothecary">
+          <div class="facade" style="background:linear-gradient(180deg,#5f4a6e,#4a3a58)">
+            <div class="cornice"></div>
+            <div class="signboard"><span class="no">No. 4</span><span class="nm">THE NAME APOTHECARY</span><span class="sb">Names, Day Jobs &amp; Petty Secrets</span></div>
+            <div class="awning"></div>
+            <div class="windows"><div class="win dim"></div><div class="win"></div></div>
+            <div class="door"></div><div class="step"></div>
+          </div>
+        </button>
+      </div>
+      <div class="sidewalk"></div>
+      <div class="road"></div>
+    </section>
+    <div class="street-cap"><span>Est. tonight. Open all hours.</span><span class="hint">On a phone? Swipe the street. Tap a storefront to step inside.</span></div>
+
+    <!-- ============ No. 1 THE CUT-UP CAFE ============ -->
+    <section class="shopsec" id="cafe" style="--acc:#a63d3d">
+      <div class="shopsec-head"><span class="no">No. 1</span><h2>The Cut-Up Cafe</h2><a class="back" href="#top" data-top>&#8593; Back to the street</a></div>
+      <p class="tagline">Rip your draft in half. Slide the pieces. Steal what collides. &mdash; the Burroughs method, served warm.</p>
+      <div class="panel">
+        <label class="flabel" for="draft">Your stuck paragraph (nobody sees this but you)</label>
+        <textarea class="draft" id="draft" placeholder="Paste a paragraph or a page of your own stuck writing here&hellip;"></textarea>
+        <div class="btnrow">
+          <button type="button" class="shop-btn gold" id="sampleBtn">[ Load a Sample Draft ]</button>
+          <button type="button" class="shop-btn" id="sliceBtn">Slice It in Half &#9986;</button>
+        </div>
+        <p class="note">The Slicer cuts every sentence near its middle &mdash; at a conjunction or verb when it can find one &mdash; and lays the beginnings and endings on two paper strips.</p>
+      </div>
+      <div class="tablewrap" id="tableWrap" style="margin-top:20px;display:none">
+        <div class="strips">
+          <div>
+            <div class="colhead">Beginnings</div>
+            <div id="leftCol"></div>
+          </div>
+          <div>
+            <div class="colhead r">Endings &mdash; drag me</div>
+            <div class="rtrack-wrap" id="rWrap"><div class="rtrack" id="rTrack"></div></div>
+          </div>
+        </div>
+        <div class="focusbar">
+          <div class="fl">The Collided Sentence</div>
+          <div class="fs" id="focusText">&mdash;</div>
+        </div>
+        <div class="cafe-controls">
+          <button type="button" class="shop-btn ghost" id="slideUp">[ SLIDE PAPER STRIP &#8593; ]</button>
+          <button type="button" class="shop-btn ghost" id="slideDown">[ SLIDE PAPER STRIP &#8595; ]</button>
+          <button type="button" class="shop-btn ghost" id="shuffleBtn">[ SHUFFLE HALVES ]</button>
+          <button type="button" class="shop-btn gold" id="saveSpark">[ SAVE THIS SPARK ]</button>
+          <a class="shop-btn" id="sparkSend" href="https://roughdraftmaker.com" target="_blank" rel="noopener">[ Turn This Spark Into a Story on RoughDraft Maker &#8594; ]</a>
+        </div>
+        <div class="sparks" id="sparksBox" style="display:none">
+          <h3>Your saved sparks</h3>
+          <ul id="sparksList"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ No. 2 THE PITCH BAR ============ -->
+    <section class="shopsec" id="pitch" style="--acc:#2e5d46">
+      <div class="shopsec-head"><span class="no">No. 2</span><h2>The Pitch Bar</h2><a class="back" href="#top" data-top>&#8593; Back to the street</a></div>
+      <p class="tagline">Order a random pitch off the roulette, or let the bartender fix your real one.</p>
+      <div class="pitchgrid">
+        <div class="gamecard">
+          <h3>The House Game</h3>
+          <p>Our deadpan 5-card house game lives at the Arcade: <strong>Conference Pitch Roulette</strong> and <strong>Plot Roulette</strong> deal you a character, an object, a place, a want, and a secret &mdash; then dare you not to write it.</p>
+          <p>Thirty seconds a round. Bragging rights forever.</p>
+          <div class="btnrow"><a class="shop-btn gold" href="/arcade">Play the 5-Card Game at the Arcade &#8594;</a></div>
+        </div>
+        <div class="panel">
+          <h3 style="margin-top:0">Fix My Real Book Pitch</h3>
+          <p style="margin-top:0;color:var(--muted);font-size:15px">Five blanks in, one clean three-sentence elevator pitch out. The kind you can say at a workshop without rambling.</p>
+          <label class="flabel" for="pf1">1. Your hero (a person + one defining trait)</label>
+          <input class="pfield" id="pf1" type="text" value="a retired lighthouse keeper named June who has not spoken to a stranger in nine years">
+          <label class="flabel" for="pf2">2. Their ordinary world (where + the everyday life)</label>
+          <input class="pfield" id="pf2" type="text" value="a foggy harbor town where the ferry stopped running years ago">
+          <label class="flabel" for="pf3">3. The disruption (the day everything changes)</label>
+          <input class="pfield" id="pf3" type="text" value="a stranger washes ashore carrying a key to her door and claiming to be the brother who drowned in 1987">
+          <label class="flabel" for="pf4">4. What they must do (the mission)</label>
+          <input class="pfield" id="pf4" type="text" value="prove he is lying before the town council hands him her family's house">
+          <label class="flabel" for="pf5">5. What it will cost them (the price)</label>
+          <input class="pfield" id="pf5" type="text" value="digging up the one night she swore she would never speak of again">
+          <div class="btnrow">
+            <button type="button" class="shop-btn gold" id="fixPitch">[ FIX MY PITCH ]</button>
+            <button type="button" class="shop-btn ghost" id="copyPitch">[ COPY ]</button>
+            <a class="shop-btn" id="pitchSend" href="https://roughdraftmaker.com" target="_blank" rel="noopener" style="display:none">Send to RoughDraft Maker &#8594;</a>
+          </div>
+          <div class="pitchout" id="pitchOut"></div>
+          <p class="note" id="pitchNote" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ No. 3 THE TOWN ALMANAC ============ -->
+    <section class="shopsec" id="almanac" style="--acc:#b07a2a">
+      <div class="shopsec-head"><span class="no">No. 3</span><h2>The Town Almanac</h2><a class="back" href="#top" data-top>&#8593; Back to the street</a></div>
+      <p class="tagline">Every great story is a small town with one strange business and one old rumor. Spin the map.</p>
+      <div class="btnrow" style="margin:0 0 18px">
+        <button type="button" class="shop-btn gold" id="spinMap">[ SPIN THE MAP ]</button>
+        <a class="shop-btn" id="townSend" href="https://roughdraftmaker.com" target="_blank" rel="noopener" style="display:none">Send This Setting to RoughDraft Maker &#8594;</a>
+      </div>
+      <div class="dossier" id="townCard" style="display:none">
+        <span class="stamp" id="townStamp">Verified-ish</span>
+        <p class="county" id="townCounty">From the county almanac, page 114</p>
+        <h3 id="townName">&mdash;</h3>
+        <dl>
+          <dt>Population</dt><dd id="townPop">&mdash;</dd>
+          <dt>Primary Industry</dt><dd id="townInd">&mdash;</dd>
+          <dt>Strangest Business in the Yellow Pages</dt><dd id="townBiz">&mdash;</dd>
+          <dt>Local Cold Case / Rumor</dt><dd id="townRumor">&mdash;</dd>
+          <dt>Where the Locals Drink</dt><dd id="townDrink">&mdash;</dd>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============ No. 4 THE NAME APOTHECARY ============ -->
+    <section class="shopsec" id="apothecary" style="--acc:#5d4470">
+      <div class="shopsec-head"><span class="no">No. 4</span><h2>The Name Apothecary</h2><a class="back" href="#top" data-top>&#8593; Back to the street</a></div>
+      <p class="tagline">Prescription-strength characters. Pull three drawers: a name, a day job, and the petty secret they are hiding.</p>
+      <div class="btnrow" style="margin:0 0 18px">
+        <button type="button" class="shop-btn gold" id="pullDrawers">[ PULL THREE DRAWERS ]</button>
+      </div>
+      <div class="cabinet" id="cabinet" style="display:none"></div>
+    </section>
+  </div>
+
+  <section class="cta">
+    <div class="cta-in">
+      <div>
+        <h2>Found a spark on the Block?</h2>
+        <p>The shops hand you the flint. RoughDraft Maker builds the whole draft &mdash; blueprint, first chapter, and the ladder up.</p>
+      </div>
+      <a class="btn" href="https://roughdraftmaker.com">Explore RoughDraft Maker &#8594;</a>
+    </div>
+  </section>
+</main>
+<footer class="site">
+  <div class="footer-in">
+    <span><strong style="color:var(--navy);letter-spacing:.08em">NARRISTOTLE&#8482;</strong> &middot; An AI Global Entertainment publication.</span>
+    <nav>
+      <a href="/about">About</a>
+      <a href="/about#editorial">Editorial approach</a>
+      <a href="/about#contact">Contact</a>
+      <a href="/">narristotle.com</a>
+    </nav>
+  </div>
+</footer>
+<script src="/assets/block.js?v=20261021a"></script>
+</body>
+</html>

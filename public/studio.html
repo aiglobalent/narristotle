@@ -33,6 +33,15 @@
   .hist li{margin-bottom:8px;list-style:none;border-bottom:1px solid var(--line);padding-bottom:8px}
   .warn{display:none;border:1px solid #e5b4b4;background:#fdf3f3;color:#7a2323;border-radius:8px;padding:12px 16px;margin-top:14px;font-size:14.5px}
   #signin{text-align:center;padding:60px 20px}
+  .tabs{display:flex;gap:8px;margin-top:22px;border-bottom:2px solid var(--line)}
+  .tabs button{border:0;background:none;padding:10px 16px;font-size:15.5px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px}
+  .tabs button.active{color:var(--navy);border-bottom-color:var(--gold)}
+  .scout-sec{margin-top:22px}
+  .scout-sec h3{font-size:19px;margin-bottom:8px}
+  .scout-sec ul{margin:0 0 0 20px}
+  .scout-sec li{margin-bottom:7px;font-size:15.5px;line-height:1.55}
+  .scout-body{white-space:pre-wrap;font-size:14px;line-height:1.55;background:#fffdf6;border:1px solid var(--line);border-radius:8px;padding:12px 14px;max-height:260px;overflow:auto}
+  .scout-note{font-size:13.5px;color:var(--muted);margin-top:8px}
 </style>
 <script src="/firebase-config.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -71,7 +80,18 @@
       <button class="btn btn-navy btn-sm" id="new-btn" style="margin-left:auto">+ New post</button>
     </div>
 
-    <div class="cols">
+    <div class="tabs">
+      <button id="tab-posts" class="active">Posts</button>
+      <button id="tab-scout">☕ Steve’s 4:00 AM Scout Briefing</button>
+    </div>
+
+    <div id="view-scout" style="display:none">
+      <div class="card scout-sec">
+        <div id="scout-content"><p style="color:var(--muted)">Loading the latest briefing…</p></div>
+      </div>
+    </div>
+
+    <div class="cols" id="view-posts">
       <div>
         <div class="card">
           <h3 style="font-size:18px;margin-bottom:12px">Posts</h3>
@@ -257,6 +277,84 @@
   });
   $('signout').addEventListener('click', function(e){ e.preventDefault(); if (auth) auth.signOut(); location.reload(); });
   if (auth) { auth.onAuthStateChanged(function(u){ if (u) enter(u.email); }); }
+
+  // ------- ☕ Steve's 4:00 AM Scout Briefing -------
+  var scoutBriefing = null;
+  function showTab(which){
+    $('tab-posts').classList.toggle('active', which==='posts');
+    $('tab-scout').classList.toggle('active', which==='scout');
+    $('view-posts').style.display = which==='posts' ? '' : 'none';
+    $('view-scout').style.display = which==='scout' ? '' : 'none';
+    if (which==='scout') loadScout();
+  }
+  $('tab-posts').addEventListener('click', function(){ showTab('posts'); });
+  $('tab-scout').addEventListener('click', function(){ showTab('scout'); });
+  function loadScout(){
+    var box = $('scout-content');
+    if (!db) { box.innerHTML = '<p style="color:var(--muted)">The Scout Briefing lives in Firestore — sign in with an editor account to read it. (Local preview mode has no briefings.)</p>'; return; }
+    box.innerHTML = '<p style="color:var(--muted)">Loading the latest briefing…</p>';
+    db.collection('narristotle_morning_briefings').orderBy('createdAt','desc').limit(1).get().then(function(s){
+      if (s.empty) { box.innerHTML = '<p style="color:var(--muted)">No briefing yet. The Night-Shift Scout runs at 3:30 AM PT — the next one lands before you wake.</p>'; return; }
+      var d = s.docs[0]; var b = d.data(); b.id = d.id; scoutBriefing = b;
+      renderScout(b);
+    }).catch(function(e){ box.innerHTML = '<p style="color:#a33">Could not load the briefing: '+escapeHtml(e.message)+'</p>'; });
+  }
+  function renderScout(b){
+    var box = $('scout-content');
+    var approved = b.status === 'approved';
+    var tpl = b.template || {};
+    var html = '';
+    html += '<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><h3 style="font-size:22px;margin:0">☕ ' + escapeHtml(b.headline || ('Scout Briefing — ' + (b.date||''))) + '</h3>'
+      + '<span class="badge' + (approved ? ' live' : '') + '">' + (approved ? 'APPROVED & LIVE' : 'AWAITING YOUR APPROVAL') + '</span></div>';
+    html += '<p class="scout-note">Scouted at 3:30 AM PT from writers’ conferences, #BookTok / #WriterTok / #AmWriting, and top threads in r/writing and r/Screenwriting. Drafts only — nothing goes live until you approve.</p>';
+    html += '<div class="scout-sec"><h3>What writers are talking about today</h3><ul>'
+      + (b.bullets||[]).map(function(x){ return '<li>'+escapeHtml(x)+'</li>'; }).join('') + '</ul></div>';
+    if (b.article) {
+      html += '<div class="scout-sec"><h3>📰 Gazette draft — “' + escapeHtml(b.article.title||'') + '”</h3>'
+        + '<p style="font-size:15px;line-height:1.55"><strong>Summary:</strong> ' + escapeHtml(b.article.summary||'') + '</p>'
+        + '<div class="scout-body">' + escapeHtml(b.article.body||'') + '</div></div>';
+    }
+    if (tpl.title) {
+      html += '<div class="scout-sec"><h3>🕹️ New Arcade template — “' + escapeHtml(tpl.title) + '”</h3>'
+        + '<p style="font-size:15px;line-height:1.55"><strong>Mode:</strong> ' + escapeHtml(tpl.modeName||tpl.title) + ' &middot; <strong>Slots:</strong> ' + (tpl.fields||[]).map(escapeHtml).join(' · ') + '</p>'
+        + '<div class="scout-body">' + escapeHtml(tpl.body||'') + '</div></div>';
+    }
+    if (b.daughtersText) {
+      html += '<div class="scout-sec"><h3>💬 Ready-to-send text for your daughters</h3>'
+        + '<div class="scout-body">' + escapeHtml(b.daughtersText) + '</div>'
+        + '<div class="row"><button class="btn btn-ghost btn-sm" id="scout-copy-text">Copy text</button></div>'
+        + '<p class="scout-note">Yours to send — the Scout drafts, never sends.</p></div>';
+    }
+    html += '<div class="row" style="margin-top:24px"><button class="btn btn-navy" id="scout-approve" ' + (approved ? 'disabled style="opacity:.55"' : '') + '>' + (approved ? '✅ Approved & Live' : '✅ Approve All & Push Live') + '</button></div>'
+      + '<p class="scout-note">Pushing live publishes the Gazette article (it appears on the Gazette page and in Posts as Published), serves the Arcade template in the Arcade and on /play, and marks this briefing approved. The text stays a draft in your hands.</p>'
+      + '<p class="scout-note" id="scout-status"></p>';
+    box.innerHTML = html;
+    var copyBtn = $('scout-copy-text');
+    if (copyBtn) copyBtn.addEventListener('click', function(){ if (navigator.clipboard) navigator.clipboard.writeText(b.daughtersText||''); copyBtn.textContent = 'Copied ✓'; });
+    var apBtn = $('scout-approve');
+    if (apBtn && !approved) apBtn.addEventListener('click', approveScout);
+  }
+  function approveScout(){
+    var b = scoutBriefing; if (!b || !db) return;
+    var st = $('scout-status'); st.textContent = 'Pushing live…';
+    var jobs = [];
+    if (b.article) {
+      var p = { id: null, title: b.article.title, category: b.article.category || 'Contrarian Craft', author: 'Narristotle',
+        summary: b.article.summary || '', body: b.article.body || '', status: 'published', scheduledFor: null,
+        createdAt: Date.now(), updatedAt: Date.now() };
+      jobs.push(new Promise(function(res){ savePost(p, function(saved){ res(saved); }); }));
+    }
+    if (b.template && b.template.title) {
+      var t = Object.assign({}, b.template, { status: 'live', approvedAt: Date.now() });
+      jobs.push(db.collection('narristotle_arcade_templates').doc(b.template.key || ('tpl-' + (b.date||'x'))).set(t));
+    }
+    jobs.push(db.collection('narristotle_morning_briefings').doc(b.id).update({ status: 'approved', approvedAt: Date.now() }));
+    Promise.all(jobs).then(function(){
+      logHist('approved scout briefing', b.headline || b.date || 'Scout Briefing', function(){});
+      b.status = 'approved'; renderScout(b);
+      var st2 = $('scout-status'); if (st2) st2.textContent = 'Live ✓ — article published, template serving in the Arcade, briefing marked approved.';
+    }).catch(function(e){ st.textContent = 'Push hit a snag: ' + e.message; });
+  }
 })();
 </script>
 </body>

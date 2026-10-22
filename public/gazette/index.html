@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="/assets/style.css?v=20261020c">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -37,6 +37,7 @@
 </script>
 </head>
 <body>
+<div class="news-strip"><span class="ns-tag">JUST DROPPED</span><a href="/bookshelf">Steve Smythe&rsquo;s <em>A Tomato, a Donkey, and the Stars</em> just joined Our Own Shelf &mdash; a children&rsquo;s chapter book draft, free to read &#8594;</a></div>
 <header class="site">
   <div class="header-in">
     <a class="brand" href="/" aria-label="Narristotle home">
@@ -46,6 +47,8 @@
     <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('nav.main').classList.toggle('open')">&#9776;</button>
     <nav class="main">
       <a href="/gazette">Gazette</a>
+      <a href="/arcade">The Arcade</a>
+      <a href="/block">The Writer&rsquo;s Block</a>
       <a href="/bookshelf">Bookshelf</a>
       <a href="/method">The Method</a>
       <a href="/about">About</a>
@@ -94,6 +97,14 @@
   </div>
 </section>
 
+<section class="block" id="studio-latest" style="display:none;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <h2 style="font-size:clamp(26px,3.4vw,34px);margin-bottom:6px">Fresh from the Studio</h2>
+    <p class="sec-sub">The newest dispatches, published straight from the Narristotle Studio — including the 4 AM Scout’s approved picks.</p>
+    <div id="studio-posts"></div>
+  </div>
+</section>
+
   <section class="cta">
     <div class="cta-in">
       <div>
@@ -127,6 +138,55 @@ document.querySelectorAll('.filter').forEach(function(btn){
     });
   });
 });
+</script>
+<script src="/firebase-config.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+/* Fresh from the Studio: renders Firestore-published posts (rules allow
+   public read of status == "published" only). The three launch dispatches
+   above are static + crawlable; duplicates are filtered by title. */
+(function(){
+  try {
+    var cfg = window.NARRISTOTLE_FIREBASE_CONFIG || {};
+    if (!window.firebase || !cfg.apiKey) return;
+    if (!firebase.apps.length) firebase.initializeApp(cfg);
+    var db = firebase.firestore();
+    var STATIC_TITLES = [
+      "Why “Waiting for the Muse” Is Just Procrastination With Better PR",
+      "How to Turn Messy Notes Into a Story Outline",
+      "A Twist Is Only as Good as the Promise You Planted"
+    ];
+    function esc(s){ return String(s||"").replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+    function slug(cat){
+      var c = String(cat||"").toLowerCase();
+      if (c.indexOf("contrarian") > -1) return "contrarian-craft";
+      if (c.indexOf("clinic") > -1) return "story-clinic";
+      if (c.indexOf("bookshelf") > -1) return "bookshelf";
+      return "matt-steve-desk";
+    }
+    db.collection("narristotle_posts").where("status","==","published").orderBy("updatedAt","desc").limit(8).get().then(function(s){
+      var rows = [];
+      s.docs.forEach(function(d){
+        var p = d.data();
+        if (!p.title || STATIC_TITLES.indexOf(p.title) > -1) return;
+        var when = p.updatedAt ? new Date(p.updatedAt).toLocaleDateString("en-US",{month:"long", day:"numeric", year:"numeric"}) : "";
+        rows.push(
+          '<div class="article-row" data-category="' + slug(p.category) + '">' +
+          '<p class="meta"><span class="cat">' + esc(p.category || "The Gadfly Gazette") + '</span> &middot; From the Studio' + (when ? ' &middot; ' + esc(when) : '') + '</p>' +
+          '<h3>' + esc(p.title) + '</h3>' +
+          (p.summary ? '<div class="verdict"><p class="v-label">NARRISTOTLE’S VERDICT</p><p>' + esc(p.summary) + '</p></div>' : '') +
+          '<div class="studio-body">' + (p.body || "") + '</div>' +
+          '</div>'
+        );
+      });
+      if (rows.length) {
+        document.getElementById("studio-posts").innerHTML = rows.join("");
+        document.getElementById("studio-latest").style.display = "";
+      }
+    }).catch(function(){ /* static Gazette carries on */ });
+  } catch (e) { /* static Gazette carries on */ }
+})();
 </script>
 </body>
 </html>

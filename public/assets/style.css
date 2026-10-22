@@ -138,3 +138,60 @@ article.post .verdict{margin:26px 0}
   .nav-toggle{display:block}
   header.site .header-in{position:relative}
 }
+
+/* Own-book feature (Bookshelf) */
+.own-book{border:1px solid var(--line);border-radius:14px;background:linear-gradient(180deg,#fdfcf9,#f6f8fa);padding:34px;margin:36px 0 54px}
+.own-grid{display:grid;grid-template-columns:1.08fr 1fr;gap:38px;align-items:center}
+.own-media img{width:100%;display:block;border-radius:10px;box-shadow:0 18px 40px rgba(16,44,78,.22)}
+.own-title{font-family:'Playfair Display',serif;font-size:clamp(30px,3.6vw,42px);line-height:1.12;color:var(--navy);margin:2px 0 6px}
+.own-byline{color:var(--muted);font-size:16px;margin-bottom:16px}
+.own-frame{font-size:17.5px;line-height:1.65;margin-bottom:14px}
+.own-blurb{font-size:16.5px;line-height:1.65;color:var(--ink);margin-bottom:20px}
+.free-pill{display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;font-size:11.5px;letter-spacing:.14em;padding:5px 11px;border-radius:999px;vertical-align:2px;margin-right:10px}
+.own-meta{color:var(--muted);font-size:15px;margin-bottom:22px}
+.own-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.own-note{color:var(--muted);font-size:14.5px}
+.rec-head{font-family:'Playfair Display',serif;color:var(--navy);font-size:clamp(24px,3vw,32px);margin:6px 0 18px}
+.ladder{margin-top:28px;border-top:1px solid var(--line);padding-top:22px}
+.ladder h4{font-size:11.5px;letter-spacing:.2em;font-weight:700;color:var(--gold-dark);text-transform:uppercase;margin-bottom:16px}
+.ladder-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rung{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.rung strong{display:block;color:var(--navy);font-family:'Playfair Display',serif;font-size:18px;margin-bottom:5px}
+.rung p{font-size:14.5px;color:var(--muted);line-height:1.55}
+.ladder-note{margin-top:18px;font-size:15px;color:var(--ink)}
+@media(max-width:840px){.own-grid{grid-template-columns:1fr}.own-book{padding:24px}.ladder-grid{grid-template-columns:1fr}}
+
+/* Bookshelf v2: shelves, period covers, badges, meta spacing fix */
+.shelf-head{margin:46px 0 4px}
+.shelf-title{font-family:'Playfair Display',serif;color:var(--navy);font-size:clamp(26px,3.2vw,34px);margin:2px 0 6px}
+.shelf-sub{color:var(--muted);max-width:46em}
+.cover-img{margin-bottom:18px}
+.cover-img img{width:220px;max-width:100%;height:auto;border-radius:6px;box-shadow:0 10px 24px rgba(16,44,78,.18);display:block}
+.cover-img figcaption{font-size:12.5px;color:var(--muted);margin-top:8px;max-width:250px;line-height:1.45}
+.rec-badge{display:inline-block;border:1.5px solid var(--gold-dark);color:var(--gold-dark);font-family:'Inter',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.14em;padding:3px 9px;border-radius:999px;vertical-align:4px;margin-left:10px}
+.own-meta{display:flex;align-items:center;gap:6px 10px;flex-wrap:wrap}
+
+/* v3: news strip, homepage shelf feature, zone panel, bookstore grid + notes */
+.news-strip{background:var(--navy);color:#fff;padding:9px 16px;font-size:14.5px;text-align:center}
+.news-strip a{color:#fff;text-decoration:none;border-bottom:1px solid var(--gold)}
+.news-strip a:hover{color:var(--gold)}
+.ns-tag{background:var(--gold);color:var(--navy);font-weight:700;font-size:11px;letter-spacing:.14em;padding:3px 8px;border-radius:4px;margin-right:9px;white-space:nowrap}
+.cover-frame{aspect-ratio:2/3;overflow:hidden;border-radius:6px;box-shadow:0 10px 24px rgba(16,44,78,.18);margin-bottom:14px;background:var(--wash)}
+.cover-frame img{width:100%;height:100%;object-fit:cover;display:block}
+.shelf-feature{display:grid;grid-template-columns:340px 1fr;gap:30px;align-items:center;margin-top:30px;border:1px solid var(--line);border-radius:14px;padding:24px;background:linear-gradient(180deg,#fdfcf9,#f6f8fa)}
+.shelf-feature img{width:100%;display:block;border-radius:10px;box-shadow:0 14px 30px rgba(16,44,78,.2)}
+.sf-title{font-family:'Playfair Display',serif;font-size:27px;color:var(--navy);margin:2px 0 8px}
+.shelf-feature p{margin-bottom:14px}
+.zone-own{background:linear-gradient(180deg,#fdfcf9,#f1f5f8);border:1px solid var(--line);border-radius:16px;padding:30px 30px 10px;margin-top:34px}
+.zone-own .shelf-head{margin-top:0}
+.zone-own .own-book{border:none;background:transparent;padding:8px 0 26px;margin:0}
+.study-grid .book p.hook{font-size:15.5px;color:var(--ink)}
+.study-notes{margin-top:14px}
+.note{border-top:2px solid var(--gold);padding:28px 0 8px;margin-top:34px;max-width:46em}
+.note h3{font-family:'Playfair Display',serif;color:var(--navy);font-size:24px;margin-bottom:4px}
+.note p{margin-bottom:12px}
+.note p strong{color:var(--navy)}
+@media(max-width:840px){.shelf-feature{grid-template-columns:1fr}.zone-own{padding:22px 18px 4px}}
+.cover-frame.contain img{object-fit:contain}
+.cover-frame.paper{background:#f1ead6}
+.note .credit{font-size:13px;color:var(--muted);margin-top:-6px}

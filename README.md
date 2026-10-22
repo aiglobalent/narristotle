@@ -24,7 +24,15 @@ Static site on Firebase Hosting (site `narristotle`, project `myroughdrafter`), 
 Deploys use the established AGE pattern: the `firebase-deployer@myroughdrafter`
 service account (roles/firebasehosting.admin; key at `~/firebase-deployer-key.json`
 on Steve's Mac, supplied transiently per deploy, never stored) exchanged for an
-OAuth token — or a normal `firebase login` session. Create the site once, then:
+OAuth token — or a normal `firebase login` session.
+
+From the Muse VM, `node deploy-via-api.cjs` deploys via the Firebase Hosting
+REST API using an access token minted from the VM's gcloud ADC
+(`gcloud auth print-access-token`). It mirrors the live version's hosting
+config, uploads every file under `public/`, finalizes, and releases. (Upload
+gotcha, learned 2026-10-21: populate hashes are SHA256 of the gzipped bytes,
+and uploads must carry only Authorization + Content-Length headers — no
+Content-Type / Content-Encoding.) Create the site once, then:
 
 ```bash
 firebase hosting:sites:create narristotle --project myroughdrafter   # once
