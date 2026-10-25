@@ -33,9 +33,11 @@
   .hist li{margin-bottom:8px;list-style:none;border-bottom:1px solid var(--line);padding-bottom:8px}
   .warn{display:none;border:1px solid #e5b4b4;background:#fdf3f3;color:#7a2323;border-radius:8px;padding:12px 16px;margin-top:14px;font-size:14.5px}
   #signin{text-align:center;padding:60px 20px}
-  .tabs{display:flex;gap:8px;margin-top:22px;border-bottom:2px solid var(--line)}
-  .tabs button{border:0;background:none;padding:10px 16px;font-size:15.5px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px}
-  .tabs button.active{color:var(--navy);border-bottom-color:var(--gold)}
+  .tabs{display:flex;gap:6px;margin-top:26px;border-bottom:2px solid var(--line);align-items:flex-end;padding:0 4px}
+  .tabs button{border:1.5px solid var(--line);border-bottom:none;border-radius:11px 11px 0 0;background:#E9E5DB;padding:11px 20px 12px;font-size:15.5px;font-weight:600;color:var(--muted);cursor:pointer;margin-bottom:-2px;position:relative;box-shadow:inset 0 -6px 8px -8px rgba(16,44,78,.45)}
+  .tabs button:hover{background:#F4F1EA;color:var(--navy)}
+  .tabs button.active{background:#fff;color:var(--navy);font-weight:700;border-top:3.5px solid var(--gold);padding-top:9.5px;box-shadow:none;z-index:1}
+  @media(max-width:680px){ .tabs{gap:4px;padding:0 2px} .tabs button{padding:9px 12px;font-size:13.5px;border-radius:9px 9px 0 0} }
   .scout-sec{margin-top:22px}
   .scout-sec h3{font-size:19px;margin-bottom:8px}
   .scout-sec ul{margin:0 0 0 20px}
@@ -289,18 +291,36 @@
   }
   $('tab-posts').addEventListener('click', function(){ showTab('posts'); });
   $('tab-scout').addEventListener('click', function(){ showTab('scout'); });
+  var scoutBriefings = [];
   function loadScout(){
     var box = $('scout-content');
     if (!db) { box.innerHTML = '<p style="color:var(--muted)">The Scout Briefing lives in Firestore — sign in with an editor account to read it. (Local preview mode has no briefings.)</p>'; return; }
-    box.innerHTML = '<p style="color:var(--muted)">Loading the latest briefing…</p>';
-    db.collection('narristotle_morning_briefings').orderBy('createdAt','desc').limit(1).get().then(function(s){
+    box.innerHTML = '<p style="color:var(--muted)">Loading briefings…</p>';
+    db.collection('narristotle_morning_briefings').orderBy('createdAt','desc').limit(14).get().then(function(s){
       if (s.empty) { box.innerHTML = '<p style="color:var(--muted)">No briefing yet. The Night-Shift Scout runs at 3:30 AM PT — the next one lands before you wake.</p>'; return; }
-      var d = s.docs[0]; var b = d.data(); b.id = d.id; scoutBriefing = b;
-      renderScout(b);
-    }).catch(function(e){ box.innerHTML = '<p style="color:#a33">Could not load the briefing: '+escapeHtml(e.message)+'</p>'; });
+      scoutBriefings = s.docs.map(function(d){ var b = d.data(); b.id = d.id; return b; });
+      renderScoutList();
+    }).catch(function(e){ box.innerHTML = '<p style="color:#a33">Could not load the briefings: '+escapeHtml(e.message)+'</p>'; });
   }
-  function renderScout(b){
+  function renderScoutList(){
     var box = $('scout-content');
+    var pending = scoutBriefings.filter(function(b){ return b.status !== 'approved'; });
+    var done = scoutBriefings.filter(function(b){ return b.status === 'approved'; });
+    var html = '';
+    if (pending.length) html += '<p class="scout-note" style="margin-bottom:6px"><strong>' + pending.length + ' briefing' + (pending.length > 1 ? 's' : '') + ' awaiting your approval</strong> — newest first. Each one approves on its own; nothing can get buried again.</p>';
+    else html += '<p class="scout-note">All caught up — no briefings waiting for approval.</p>';
+    box.innerHTML = html + '<div id="scout-list"></div>';
+    var list = $('scout-list');
+    pending.concat(done).forEach(function(b){
+      var wrap = document.createElement('div');
+      wrap.style.cssText = 'border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:14px 0;background:#fff';
+      wrap.id = 'scout-wrap-' + b.id;
+      list.appendChild(wrap);
+      renderScout(b, wrap);
+    });
+  }
+  function renderScout(b, wrap){
+    var box = wrap || $('scout-content');
     var approved = b.status === 'approved';
     var tpl = b.template || {};
     var html = '';
@@ -322,21 +342,21 @@
     if (b.daughtersText) {
       html += '<div class="scout-sec"><h3>💬 Ready-to-send text for your daughters</h3>'
         + '<div class="scout-body">' + escapeHtml(b.daughtersText) + '</div>'
-        + '<div class="row"><button class="btn btn-ghost btn-sm" id="scout-copy-text">Copy text</button></div>'
+        + '<div class="row"><button class="btn btn-ghost btn-sm" id="scout-copy-' + b.id + '">Copy text</button></div>'
         + '<p class="scout-note">Yours to send — the Scout drafts, never sends.</p></div>';
     }
-    html += '<div class="row" style="margin-top:24px"><button class="btn btn-navy" id="scout-approve" ' + (approved ? 'disabled style="opacity:.55"' : '') + '>' + (approved ? '✅ Approved & Live' : '✅ Approve All & Push Live') + '</button></div>'
+    html += '<div class="row" style="margin-top:24px"><button class="btn btn-navy" id="scout-approve-' + b.id + '" ' + (approved ? 'disabled style="opacity:.55"' : '') + '>' + (approved ? '✅ Approved & Live' : '✅ Approve All & Push Live') + '</button></div>'
       + '<p class="scout-note">Pushing live publishes the Gazette article (it appears on the Gazette page and in Posts as Published), serves the Arcade template in the Arcade and on /play, and marks this briefing approved. The text stays a draft in your hands.</p>'
-      + '<p class="scout-note" id="scout-status"></p>';
+      + '<p class="scout-note" id="scout-status-' + b.id + '"></p>';
     box.innerHTML = html;
-    var copyBtn = $('scout-copy-text');
+    var copyBtn = $('scout-copy-' + b.id);
     if (copyBtn) copyBtn.addEventListener('click', function(){ if (navigator.clipboard) navigator.clipboard.writeText(b.daughtersText||''); copyBtn.textContent = 'Copied ✓'; });
-    var apBtn = $('scout-approve');
-    if (apBtn && !approved) apBtn.addEventListener('click', approveScout);
+    var apBtn = $('scout-approve-' + b.id);
+    if (apBtn && !approved) apBtn.addEventListener('click', function(){ approveScout(b); });
   }
-  function approveScout(){
-    var b = scoutBriefing; if (!b || !db) return;
-    var st = $('scout-status'); st.textContent = 'Pushing live…';
+  function approveScout(b){
+    if (!b || !db) return;
+    var st = $('scout-status-' + b.id); if (st) st.textContent = 'Pushing live…';
     var jobs = [];
     if (b.article) {
       var p = { id: null, title: b.article.title, category: b.article.category || 'Contrarian Craft', author: 'Narristotle',
@@ -351,10 +371,12 @@
     jobs.push(db.collection('narristotle_morning_briefings').doc(b.id).update({ status: 'approved', approvedAt: Date.now() }));
     Promise.all(jobs).then(function(){
       logHist('approved scout briefing', b.headline || b.date || 'Scout Briefing', function(){});
-      b.status = 'approved'; renderScout(b);
-      var st2 = $('scout-status'); if (st2) st2.textContent = 'Live ✓ — article published, template serving in the Arcade, briefing marked approved.';
-    }).catch(function(e){ st.textContent = 'Push hit a snag: ' + e.message; });
+      b.status = 'approved';
+      renderScoutList();
+      var st2 = $('scout-status-' + b.id); if (st2) st2.textContent = 'Live ✓ — article published, template serving in the Arcade, briefing marked approved.';
+    }).catch(function(e){ if (st) st.textContent = 'Push hit a snag: ' + e.message; });
   }
+
 })();
 </script>
 </body>

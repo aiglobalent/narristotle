@@ -37,5 +37,21 @@ service cloud.firestore {
       allow read, update, delete: if isEditor() ||
         (request.auth != null && resource.data.uid == request.auth.uid);
     }
+    match /gift_orders/{orderId} {
+      // Gift-book orders: a signed-in buyer creates their own order
+      // (status must start "queued") and reads it back while it is
+      // fulfilled; editors run fulfillment.
+      allow create: if request.auth != null &&
+        request.resource.data.uid == request.auth.uid &&
+        request.resource.data.status == "queued";
+      allow read: if isEditor() ||
+        (request.auth != null && resource.data.uid == request.auth.uid);
+      allow update, delete: if isEditor();
+    }
+
+    // Wonderbound ALPHA console runs (editors only) — added 2026-10-22.
+    match /gift_alpha_runs/{runId} {
+      allow read, write: if isEditor();
+    }
   }
 }
