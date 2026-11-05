@@ -10,7 +10,7 @@ const crypto = require("crypto");
 const https = require("https");
 const { execSync } = require("child_process");
 
-const ROOT = path.join(process.env.HOME, "workspace/narristotle-build/public");
+const ROOT = process.env.PREVIEW_ROOT || path.join(process.env.HOME, "workspace/narristotle-build/public");
 const BASE = "https://firebasehosting.googleapis.com/v1beta1";
 const SITE = `${BASE}/projects/myroughdrafter/sites/narristotle`;
 const CHANNEL_ID = "publish-queue";
