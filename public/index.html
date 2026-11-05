@@ -12,11 +12,11 @@
 <meta property="og:title" content="Learn to build stories where every cause earns its effect — with Narristotle.">
 <meta property="og:description" content="Narristotle is AI Global Entertainment's AI story-teacher: story structure, character arcs, setups and payoffs.">
 <meta property="og:url" content="https://narristotle.com/">
-<meta property="og:image" content="https://narristotle.com/assets/narristotle-bust.jpg">
+<meta property="og:image" content="https://narristotle.com/assets/og-narristotle.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Narristotle — The Gadfly Gazette">
 <meta name="twitter:description" content="Practical storytelling. A little philosophical mischief. The story-building mind behind RoughDraft Maker.">
-<meta name="twitter:image" content="https://narristotle.com/assets/narristotle-bust.jpg">
+<meta name="twitter:image" content="https://narristotle.com/assets/og-narristotle.png">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -216,16 +216,18 @@
         <a class="link-arrow" href="/bookshelf">Browse the Bookshelf &#8594;</a>
       </div>
 
-      <div class="shelf-feature">
-        <a href="/bookshelf"><img src="/assets/tomato-mockup-hero.jpg" alt="A Tomato, a Donkey, and the Stars by Steve Smythe — the children&rsquo;s chapter book as a book"></a>
+<!-- HOMEPAGE-FEATURED-BOOK:BEGIN -->
+<div class="shelf-feature">
+        <a href="/books/no-contact/"><img src="/assets/no-contact-cover.jpg" alt="NO CONTACT by M. R. Saran"></a>
         <div>
           <p class="kicker">Our Own Shelf &mdash; New</p>
-          <h3 class="sf-title">A Tomato, a Donkey, and the Stars</h3>
-          <p>Steve Smythe&rsquo;s children&rsquo;s chapter book joins the shelf: a complete working draft, published free. A giant tomato, a thoughtful donkey, a tiny robot &mdash; and a draft that doesn&rsquo;t pretend to be a finished book. That&rsquo;s the deal, stated plainly.</p>
-          <p><a class="btn btn-navy" href="/books/a-tomato-a-donkey-and-the-stars.pdf">Read the PDF &#8594;</a>&nbsp;&nbsp;<a class="link-arrow" href="/bookshelf">About this draft</a></p>
-          <p style="margin-top:12px">Also on Our Own Shelf: <a class="link-arrow" href="/bookshelf">The House of Second Chances</a> &mdash; Narristotle&rsquo;s working-draft novel.</p>
+          <h3 class="sf-title">NO CONTACT</h3>
+          <p>By M. R. Saran &mdash; A completed horror novella in sixteen chapters, created with AI assistance. Free in PDF, EPUB, and Kindle editions. That&rsquo;s the deal, stated plainly.</p>
+          <p><a class="btn btn-navy" href="/books/no-contact.pdf">Read the PDF &#8594;</a>&nbsp;&nbsp;<a class="link-arrow" href="/books/no-contact/">About this book</a></p>
+          <p style="margin-top:12px">Also on Our Own Shelf: <a class="link-arrow" href="/bookshelf">A Tomato, a Donkey, and the Stars</a> &mdash; Steve Smythe&rsquo;s children&rsquo;s chapter book &mdash; and <a class="link-arrow" href="/bookshelf">The House of Second Chances</a> &mdash; Narristotle&rsquo;s working-draft novel.</p>
         </div>
       </div>
+<!-- HOMEPAGE-FEATURED-BOOK:END -->
 
       <p class="meta" style="margin-top:36px">THE STUDY SHELF &mdash; RECOMMENDED</p>
       <div class="books">
@@ -262,13 +264,26 @@
     </div>
   </section>
 
-  <!-- 8. EMAIL SIGNUP — DESIGNED, NOT WIRED -->
+  <!-- 7b. MORE FROM AI GLOBAL ENTERTAINMENT -->
+  <section class="block">
+    <div class="wrap">
+      <h2>More from AI Global Entertainment</h2>
+      <p><strong>Has It Been Cleared</strong> &mdash; the clearance check for AI-assisted work. <a class="link-arrow" href="https://hasitbeencleared.com">Check a work &#8594;</a></p>
+      <p><strong>AI Film School</strong> &mdash; courses on making films with AI. <a class="link-arrow" href="https://aifilmschool.ai">Visit the school &#8594;</a></p>
+      <p><strong>RambleBook</strong> &mdash; talk your idea out loud and get back an illustrated book. <a class="link-arrow" href="https://ramblebook.com">Ramble a book &#8594;</a></p>
+    </div>
+  </section>
+
+  <!-- 8. EMAIL SIGNUP -->
   <section class="block">
     <div class="wrap">
       <div class="email-slot">
         <h2 style="margin-bottom:8px">Get the Gazette in your inbox.</h2>
-        <p class="sec-sub">Two dispatches a week. No signup is being collected yet &mdash; this slot is designed, not wired, and the form below does nothing.</p>
-        <p><input type="email" placeholder="you@example.com" disabled aria-label="Email address (disabled)">&nbsp;<button type="button" disabled>Sign up</button></p>
+        <p class="sec-sub">Two dispatches a week &mdash; Tuesdays and Fridays.</p>
+        <form id="newsletter-form" novalidate>
+          <p><input id="newsletter-email" type="email" placeholder="you@example.com" aria-label="Email address" required>&nbsp;<button type="submit">Sign up</button></p>
+          <p id="newsletter-note" class="sec-sub" aria-live="polite"></p>
+        </form>
       </div>
     </div>
   </section>
@@ -296,5 +311,9 @@
     </nav>
   </div>
 </footer>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="/firebase-config.js"></script>
+<script src="/assets/newsletter.js"></script>
 </body>
 </html>

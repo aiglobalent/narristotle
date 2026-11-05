@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}} by {{AUTHOR}} — Narristotle</title>
+<meta name="description" content="{{BLURB}}">
+<link rel="canonical" href="https://narristotle.com{{BOOK_URL}}">
+<meta property="og:type" content="book">
+<meta property="og:site_name" content="Narristotle — The Gadfly Gazette">
+<meta property="og:title" content="{{TITLE}} by {{AUTHOR}}">
+<meta property="og:description" content="{{BLURB}}">
+<meta property="og:url" content="https://narristotle.com{{BOOK_URL}}">
+<meta property="og:image" content="https://narristotle.com{{COVER_URL}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{TITLE}} by {{AUTHOR}}">
+<meta name="twitter:description" content="{{BLURB}}">
+<meta name="twitter:image" content="https://narristotle.com{{COVER_URL}}">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=20261022a">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": "{{TITLE}}",
+  "author": { "@type": "Person", "name": "{{AUTHOR}}" },
+  "datePublished": "{{PUBLISHED}}",
+  "publisher": { "@type": "Organization", "name": "{{PUBLISHER}}" },
+  "bookFormat": "EBook",
+  "numberOfPages": {{PAGES}},
+  "inLanguage": "en",
+  "url": "https://narristotle.com{{BOOK_URL}}",
+  "image": "https://narristotle.com{{COVER_URL}}",
+  "description": "{{BLURB}}"
+}
+</script>
+<style>
+.book-page{display:grid;grid-template-columns:280px 1fr;gap:32px;align-items:start}
+.book-page img{width:100%;border-radius:8px}
+.book-by{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6B5D43;margin:0 0 12px}
+.book-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.book-actions .btn{font-size:15px;padding:10px 18px}
+@media (max-width:560px){.book-page{grid-template-columns:1fr}.book-page img{max-width:280px}}
+</style>
+</head>
+<body>
+<div class="news-strip"><span class="ns-tag">JUST DROPPED</span><a href="/bookshelf">M. R. Saran&rsquo;s <em>NO CONTACT</em> just joined Our Own Shelf &mdash; a completed horror novella, free to read &#8594;</a></div>
+<header class="site">
+  <div class="header-in">
+    <a class="brand" href="/" aria-label="Narristotle home">
+      <span class="brand-mark">N</span>
+      <span class="brand-name">NARRISTOTLE&#8482;<span class="brand-sub">THE GADFLY GAZETTE</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('nav.main').classList.toggle('open')">&#9776;</button>
+    <nav class="main">
+      <a href="/start-here">Start Here</a>
+      <a href="/gazette">Learn</a>
+      <a href="/bookshelf">Bookshelf</a>
+      <a href="/play">Play</a>
+      <a href="/tools">Tools</a>
+      <a href="/about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="page">
+  <div class="reading">
+    <p class="kicker">Our Books</p>
+    <h1>{{TITLE}}</h1>
+    <div class="book-page">
+      <div><img src="{{COVER_URL}}" alt="{{TITLE}} by {{AUTHOR}}"></div>
+      <div>
+        <p class="book-by">{{AUTHOR}} &middot; {{SHELF_BYLINE}}</p>
+        <p>{{BLURB}}</p>
+        <p>{{CHAPTERS}} chapters, {{PAGES}} pages. Published {{PUBLISHED_HUMAN}} by {{PUBLISHER}}. Free to read.</p>
+        <div class="book-actions"><a class="btn btn-navy" href="{{PDF_URL}}">Read the Book &rarr;</a><a class="btn btn-ghost" href="{{EPUB_URL}}">Download the EPUB</a><a class="btn btn-ghost" href="{{KINDLE_URL}}">Kindle edition</a></div>
+{{ABOUT_AUTHOR_BLOCK}}      </div>
+    </div>
+    <p style="margin-top:28px"><a class="link-arrow" href="/bookshelf">&larr; Back to the Bookshelf</a>&nbsp;&nbsp;<a class="link-arrow" href="/press">Press kit &#8594;</a></p>
+  </div>
+</div>
+
+  <section class="cta">
+    <div class="cta-in">
+      <div>
+        <h2>Bring the idea. Even the messy version.</h2>
+        <p>Your notes, your voice, your story. Let&rsquo;s get to the draft.</p>
+      </div>
+      <a class="btn" href="https://roughdraftmaker.com">Explore RoughDraft Maker &#8594;</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="footer-in">
+    <span><strong style="color:var(--navy);letter-spacing:.08em">NARRISTOTLE&#8482;</strong> &middot; An AI Global Entertainment publication.</span>
+    <nav>
+      <a href="/about">About</a>
+      <a href="/about#editorial">Editorial approach</a>
+      <a href="/about#contact">Contact</a>
+      <a href="/">narristotle.com</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

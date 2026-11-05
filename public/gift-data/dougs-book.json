@@ -1,0 +1,18 @@
+{
+ "slug": "dougs-book",
+ "title": "Doug's Book",
+ "author": "RambleBook",
+ "tagline": "A storybook to keep & share",
+ "blurb": "Doug is 16 years old. A keepsake storybook about Doug, made for Doug to keep, to show, and to read aloud.",
+ "pages": 25,
+ "pdfUrl": "/books/dougs-book.pdf",
+ "epubUrl": "/books/dougs-book.epub",
+ "kindleUrl": "/books/dougs-book-kindle.epub",
+ "mockupUrl": "/assets/dougs-book-mockup-pair.jpg",
+ "recipientName": "Doug",
+ "fromName": "Steve Static",
+ "message": "Dooooooge!",
+ "makerLine": "",
+ "giftCardUrl": "/books/dougs-book-gift-card.pdf",
+ "coverUrl": "/assets/dougs-book-cover.jpg"
+}
