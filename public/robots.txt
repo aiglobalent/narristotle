@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /studio
 Disallow: /studio.html
+Disallow: /admin/
 
 Sitemap: https://narristotle.com/sitemap.xml

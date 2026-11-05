@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Publishing Queue — Narristotle (Editors Only)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<style>
+  .queue{max-width:1080px;margin:0 auto;padding:34px 24px 70px}
+  .badge{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.12em;padding:4px 10px;border-radius:999px;background:#fdf3d7;color:#8a6410;border:1px solid var(--gold)}
+  .badge.live{background:#e7f5e9;color:#22652c;border-color:#9fd0a4}
+  .badge.sample{background:#eef2f7;color:#2c4a73;border-color:#b9c6d8}
+  .card{border:1px solid var(--line);border-radius:8px;padding:18px;background:#fff}
+  .qrow{border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin-bottom:12px;cursor:pointer;background:#fff}
+  .qrow:hover{border-color:var(--navy)}
+  .qrow h4{font-family:'Inter',sans-serif;font-size:16px;color:var(--navy);margin:4px 0}
+  .status{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+  .st-pending{color:#8a6410}.st-approved{color:#22652c}.st-rejected{color:#a33}.st-published{color:#2c4a73}
+  .meta{font-size:13.5px;color:var(--muted)}
+  .cols{display:grid;grid-template-columns:360px 1fr;gap:28px;margin-top:24px}
+  @media(max-width:860px){.cols{grid-template-columns:1fr}}
+  label{display:block;font-size:13px;font-weight:600;color:var(--navy);margin:14px 0 5px}
+  select{width:100%;border:1px solid var(--line);border-radius:6px;padding:9px 11px;font:inherit;font-size:15px}
+  .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  button{font:inherit;cursor:pointer}
+  .btn-sm{padding:8px 14px;font-size:14px}
+  .btn-danger{background:#fff;color:#a33;border-color:#a33}
+  .btn-danger:hover{background:#fdf0f0}
+  .hist{font-size:14px;color:var(--muted)}
+  .hist li{margin-bottom:8px;list-style:none;border-bottom:1px solid var(--line);padding-bottom:8px}
+  .banner{border:1px solid #e5b4b4;background:#fdf3f3;color:#7a2323;border-radius:8px;padding:12px 16px;margin-top:16px;font-size:14.5px}
+  .note{border:1px solid var(--line);background:var(--wash);border-radius:8px;padding:12px 16px;margin-top:16px;font-size:14.5px;color:var(--muted)}
+  .field{margin-bottom:10px;font-size:15px}
+  .field b{color:var(--navy)}
+  .coverbox{border:1.5px dashed var(--line);border-radius:8px;padding:22px;text-align:center;color:var(--muted);font-size:14px;background:var(--wash)}
+  #signin{text-align:center;padding:60px 20px}
+  .empty{border:1.5px dashed var(--line);border-radius:8px;padding:28px;text-align:center;color:var(--muted)}
+</style>
+<script src="/firebase-config.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+</head>
+<body>
+<header class="site">
+  <div class="header-in">
+    <a class="brand" href="/" aria-label="Narristotle home">
+      <span class="brand-mark">N</span>
+      <span class="brand-name">NARRISTOTLE&#8482;<span class="brand-sub">PUBLISHING QUEUE — EDITORS ONLY</span></span>
+    </a>
+    <nav class="main" style="display:flex">
+      <a href="/">View site</a>
+      <a href="#" id="signout" style="display:none">Sign out</a>
+    </nav>
+  </div>
+</header>
+
+<main class="queue">
+  <div id="signin">
+    <h1 style="font-size:32px;margin-bottom:10px">Publishing Queue</h1>
+    <p style="color:var(--muted);max-width:34em;margin:0 auto 22px">One desk for the whole machine. Book manuscripts from email, Narristotle articles, and PAiR kits all land here first. Nothing publishes without a tap. Editors only — this page is not in the public navigation.</p>
+    <p id="mode-badge" style="margin-bottom:20px"></p>
+    <button class="btn btn-navy" id="signin-btn">Sign in with Google</button>
+    <button class="btn btn-ghost" id="local-btn">Continue in local preview mode</button>
+    <p id="signin-note" style="color:var(--muted);font-size:14px;margin-top:16px"></p>
+  </div>
+
+  <div id="app" style="display:none">
+    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+      <h1 style="font-size:30px">Publishing Queue</h1>
+      <span class="badge" id="app-mode">LOCAL PREVIEW</span>
+      <span class="badge" id="pending-badge" style="display:none"></span>
+      <span style="color:var(--muted);font-size:14.5px" id="who"></span>
+    </div>
+
+    <div class="banner"><strong>Curation rule:</strong> test outputs are never content. Only curated, intentional content goes public. Approving a row marks it approved — it does <strong>not</strong> publish anything. Publishing wiring (bookshelf, Gazette, outlets) is a separate step that does not exist in this preview.</div>
+    <div class="note" id="mode-note"></div>
+
+    <div class="cols">
+      <div>
+        <div class="card">
+          <h3 style="font-size:18px;margin-bottom:12px">Requests</h3>
+          <label>Status</label>
+          <select id="filter-status" style="margin-bottom:6px">
+            <option value="all">All statuses</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+            <option value="published">Published</option>
+          </select>
+          <label>Source</label>
+          <select id="filter-source" style="margin-bottom:14px">
+            <option value="all">All sources</option>
+            <option value="book-email">Book manuscript (email)</option>
+            <option value="article">Narristotle article</option>
+            <option value="pair-kit">PAiR kit</option>
+          </select>
+          <div id="list"></div>
+          <button class="btn btn-ghost btn-sm" id="empty-toggle" style="margin-top:10px">Show the empty state</button>
+        </div>
+        <div class="card" style="margin-top:20px">
+          <h3 style="font-size:18px;margin-bottom:12px">Decision log</h3>
+          <ul class="hist" id="history"></ul>
+        </div>
+        <div class="card" style="margin-top:20px">
+          <h3 style="font-size:18px;margin-bottom:12px">Fast lane (setting, not default)</h3>
+          <p style="font-size:14.5px;color:var(--muted)">Fast lane is <strong>OFF</strong> by default. Exception on file: <strong>Matt Allen — No Contact test only</strong> (Steve, Oct 28). A fast-lane sender's request is marked pre-approved by that setting, but it still waits for the publish step — a fast lane never auto-publishes, and it never skips the approval record.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="font-size:18px" id="detail-title">Select a request to preview it</h3>
+        <div id="detail"></div>
+        <div class="row" id="detail-actions" style="display:none">
+          <button class="btn btn-navy btn-sm" id="approve-btn">Approve</button>
+          <button class="btn btn-danger btn-sm" id="reject-btn">Reject</button>
+        </div>
+        <p style="color:var(--muted);font-size:13.5px;margin-top:14px">AGE Control dashboard reads its pending count from the <code>narristotle_publish_queue</code> collection (status == pending). Dashboard wiring is a go-live step, not part of this preview.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+(function(){
+  var EDITORS = ["steve@aiglobalentertainment.com","stephensmythe@gmail.com","matt@aiglobalentertainment.com"];
+  var cfg = window.NARRISTOTLE_FIREBASE_CONFIG || {};
+  var connected = !!(cfg.apiKey && cfg.projectId);
+  var db = null, auth = null, actor = "Local editor", liveMode = false;
+  var $ = function(id){ return document.getElementById(id); };
+  var modeBadge = $('mode-badge'), note = $('signin-note');
+
+  if (connected) {
+    try { firebase.initializeApp(cfg); auth = firebase.auth(); db = firebase.firestore(); } catch(e) { db = null; auth = null; }
+    modeBadge.innerHTML = '<span class="badge live">CONNECTED TO FIRESTORE</span>';
+    note.textContent = 'Sign in with an editor account (Steve or Matt). If the queue collection is not open yet, the page falls back to local sample rows.';
+  } else {
+    modeBadge.innerHTML = '<span class="badge">LOCAL PREVIEW — NOT YET CONNECTED</span>';
+    note.textContent = 'No Firebase config found, so this page runs in this browser only with sample rows.';
+    $('signin-btn').style.display = 'none';
+  }
+
+  // ------- data layer: Firestore collection narristotle_publish_queue, localStorage fallback -------
+  var LS_Q='narr_queue_v1', LS_H='narr_queue_hist_v1';
+  function lsGet(k,d){ try{ return JSON.parse(localStorage.getItem(k))||d; }catch(e){ return d; } }
+  function lsSet(k,v){ localStorage.setItem(k, JSON.stringify(v)); }
+  function samples(){
+    var now = Date.now();
+    return [
+      {id:'sample-book', sample:true, source:'book-email', sourceLabel:'Book manuscript (email)', title:'No Contact', requestedBy:'Matt Allen', requestedAt:now-3600000, destination:'Narristotle bookshelf', status:'pending', excerpt:'[Sample placeholder — the real manuscript excerpt appears here when a request lands. No manuscript text is invented for this preview.]', coverNote:'Supplied cover on file (pseudonym cover). Engine covers are poor — supplied covers win; approval tap still required.', blurb:'[Sample — author-supplied back-cover text appears here. Default imprint stamp is AI Global Entertainment unless a custom blurb is supplied.]', imprint:'AI Global Entertainment (default stamp)', formats:['PDF','EPUB','Kindle'], fastLane:true, fastLaneNote:'Fast-lane sender: Matt Allen — No Contact test only (Steve, Oct 28).'},
+      {id:'sample-article', sample:true, source:'article', sourceLabel:'Narristotle article', title:'SAMPLE — Gazette draft: The Story Clinic', requestedBy:'Narristotle', requestedAt:now-7200000, destination:'Gadfly Gazette', status:'pending', excerpt:'[Sample placeholder — the article draft excerpt appears here when a request lands.]', coverNote:'No cover — Gazette articles do not use covers.', blurb:'[Sample — summary box appears here.]', imprint:'Narristotle', formats:['Web article'], fastLane:false},
+      {id:'sample-kit', sample:true, source:'pair-kit', sourceLabel:'PAiR kit', title:'SAMPLE — PAiR kit: HIBC story angles', requestedBy:'PAiR (via Rick)', requestedAt:now-10800000, destination:'Jimmy outlets (via Jim Jim)', status:'pending', excerpt:'[Sample placeholder — matched outlets, contacts, draft, and posting instructions appear here when a kit lands.]', coverNote:'No cover — kits are text + contacts.', blurb:'[Sample — pitch summary appears here.]', imprint:'AI Global Entertainment', formats:['Pitch kit'], fastLane:false}
+    ];
+  }
+  function seedLocal(){
+    if (!lsGet(LS_Q,null)) { lsSet(LS_Q, samples()); lsSet(LS_H, []); }
+  }
+  function getRows(cb){
+    if (db && liveMode) {
+      db.collection('narristotle_publish_queue').orderBy('requestedAt','desc').get().then(function(s){
+        cb(s.docs.map(function(d){ var x=d.data(); x.id=d.id; return x; }));
+      }).catch(function(){ enterLocal('Firestore collection not open yet (rules deploy is a go-live step) — showing sample rows in this browser only.'); });
+    } else { seedLocal(); cb(lsGet(LS_Q,[])); }
+  }
+  function saveRow(r, cb){
+    if (db && liveMode) {
+      var ref = db.collection('narristotle_publish_queue').doc(r.id);
+      ref.set(r).then(function(){ cb && cb(); }).catch(function(){ cb && cb(); });
+    } else {
+      var rows = lsGet(LS_Q,[]).map(function(x){ return x.id===r.id ? r : x; });
+      lsSet(LS_Q, rows); cb && cb();
+    }
+  }
+  function logHist(action, title, extra, cb){
+    var entry = {at: Date.now(), actor: actor, action: action, title: title, extra: extra||''};
+    if (db && liveMode) { db.collection('narristotle_publish_history').add(entry).then(function(){ cb && cb(); }).catch(function(){ cb && cb(); }); }
+    else { var h = lsGet(LS_H,[]); h.unshift(entry); lsSet(LS_H, h.slice(0,100)); cb && cb(); }
+  }
+  function getHist(cb){
+    if (db && liveMode) {
+      db.collection('narristotle_publish_history').orderBy('at','desc').limit(50).get().then(function(s){ cb(s.docs.map(function(d){ return d.data(); })); }).catch(function(){ cb([]); });
+    } else { cb(lsGet(LS_H,[])); }
+  }
+
+  // ------- UI -------
+  var current = null, showingEmpty = false;
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function fmt(t){ return new Date(t).toLocaleString(); }
+  function emptyBlock(){
+    return '<div class="empty"><h3 style="font-size:19px;margin-bottom:8px">Nothing waiting.</h3><p style="font-size:15px">When a book manuscript, article, or PAiR kit is requested, it lands here first. Nothing publishes without a tap.</p></div>';
+  }
+  function refresh(){
+    var fs = $('filter-status').value, fo = $('filter-source').value;
+    getRows(function(rows){
+      var pending = rows.filter(function(r){ return r.status==='pending'; }).length;
+      var pb = $('pending-badge');
+      pb.textContent = pending + ' pending'; pb.style.display = pending ? 'inline-block' : 'none';
+      if (showingEmpty) { $('list').innerHTML = emptyBlock(); return; }
+      var vis = rows.filter(function(r){ return (fs==='all'||r.status===fs) && (fo==='all'||r.source===fo); });
+      $('list').innerHTML = vis.map(function(r){
+        return '<div class="qrow" data-id="'+r.id+'"><span class="status st-'+r.status+'">'+r.status+'</span>'
+          + (r.sample ? ' <span class="badge sample">SAMPLE</span>' : '')
+          + (r.fastLane ? ' <span class="badge">FAST-LANE SENDER</span>' : '')
+          + '<h4>'+esc(r.title)+'</h4>'
+          + '<div class="meta">'+esc(r.sourceLabel)+' → '+esc(r.destination)+' · '+esc(r.requestedBy)+' · '+fmt(r.requestedAt)+'</div></div>';
+      }).join('') || emptyBlock();
+      document.querySelectorAll('.qrow').forEach(function(el){ el.addEventListener('click', function(){
+        getRows(function(all){ load(all.filter(function(r){ return r.id===el.getAttribute('data-id'); })[0]); });
+      }); });
+    });
+    getHist(function(h){
+      $('history').innerHTML = h.map(function(e){ return '<li><strong>'+esc(e.action)+'</strong> — '+esc(e.title)+(e.extra?' ('+esc(e.extra)+')':'')+'<br>'+fmt(e.at)+' · '+esc(e.actor)+'</li>'; }).join('') || '<li>No decisions yet in this preview.</li>';
+    });
+  }
+  function load(r){
+    current = r;
+    if (!r) { $('detail-title').textContent = 'Select a request to preview it'; $('detail').innerHTML = ''; $('detail-actions').style.display = 'none'; return; }
+    $('detail-title').textContent = r.title;
+    $('detail').innerHTML =
+      (r.sample ? '<span class="badge sample">SAMPLE ROW — NOT A REAL REQUEST</span> ' : '')
+      + '<span class="status st-'+r.status+'">'+r.status+'</span>'
+      + '<div class="field" style="margin-top:14px"><b>Source:</b> '+esc(r.sourceLabel)+'</div>'
+      + '<div class="field"><b>Requested by:</b> '+esc(r.requestedBy)+' · '+fmt(r.requestedAt)+'</div>'
+      + '<div class="field"><b>Goes to:</b> '+esc(r.destination)+'</div>'
+      + '<div class="field"><b>Formats:</b> '+esc((r.formats||[]).join(', '))+'</div>'
+      + '<div class="field"><b>Imprint:</b> '+esc(r.imprint)+'</div>'
+      + (r.fastLaneNote ? '<div class="field"><b>Fast lane:</b> '+esc(r.fastLaneNote)+'</div>' : '')
+      + '<div class="field"><b>Excerpt:</b><br>'+esc(r.excerpt)+'</div>'
+      + '<div class="coverbox">Cover preview: '+esc(r.coverNote)+'</div>'
+      + '<div class="field" style="margin-top:10px"><b>Blurb / back cover:</b><br>'+esc(r.blurb)+'</div>'
+      + (r.rejectReason ? '<div class="field"><b>Reject reason:</b> '+esc(r.rejectReason)+'</div>' : '')
+      + (r.status!=='pending' ? '<div class="field"><b>Decided:</b> '+esc(r.status)+' · '+esc(r.decidedBy||'')+' · '+(r.decidedAt?fmt(r.decidedAt):'')+'</div>' : '');
+    $('detail-actions').style.display = r.status==='pending' ? 'flex' : 'none';
+  }
+  function decide(status){
+    if (!current || current.status!=='pending') return;
+    var extra = '';
+    if (status==='rejected') { extra = prompt('Optional reject reason (leave blank for none):') || ''; }
+    if (status==='approved' && !confirm('Approving marks this request approved. It does NOT publish anything — publishing wiring is a separate step. Continue?')) return;
+    current.status = status; current.decidedBy = actor; current.decidedAt = Date.now();
+    if (extra) current.rejectReason = extra;
+    var title = current.title;
+    saveRow(current, function(){ logHist(status, title, extra, function(){ refresh(); load(null); }); });
+  }
+  $('approve-btn').addEventListener('click', function(){ decide('approved'); });
+  $('reject-btn').addEventListener('click', function(){ decide('rejected'); });
+  $('filter-status').addEventListener('change', function(){ showingEmpty=false; $('empty-toggle').textContent='Show the empty state'; refresh(); });
+  $('filter-source').addEventListener('change', function(){ showingEmpty=false; $('empty-toggle').textContent='Show the empty state'; refresh(); });
+  $('empty-toggle').addEventListener('click', function(){
+    showingEmpty = !showingEmpty;
+    $('empty-toggle').textContent = showingEmpty ? 'Back to the queue' : 'Show the empty state';
+    refresh();
+  });
+
+  function enterLocal(msg){
+    liveMode = false;
+    $('app-mode').textContent = 'LOCAL PREVIEW';
+    $('app-mode').className = 'badge';
+    $('mode-note').innerHTML = msg || 'Local preview mode: rows and decisions live in this browser only. Nothing here publishes, emails, or posts anything.';
+    $('signin').style.display='none'; $('app').style.display='block'; $('signout').style.display='inline';
+    $('who').textContent = 'Signed in as '+actor+' (local preview)';
+    refresh(); load(null);
+  }
+  function enterLive(email){
+    liveMode = true;
+    $('app-mode').textContent = 'CONNECTED TO FIRESTORE';
+    $('app-mode').className = 'badge live';
+    $('mode-note').innerHTML = 'Connected to Firestore collection <code>narristotle_publish_queue</code>. Approving or rejecting writes the decision record only — publishing wiring is a separate step.';
+    $('signin').style.display='none'; $('app').style.display='block'; $('signout').style.display='inline';
+    $('who').textContent = 'Signed in as '+email;
+    refresh(); load(null);
+  }
+  $('local-btn').addEventListener('click', function(){ actor = 'Local editor'; enterLocal(); });
+  $('signin-btn').addEventListener('click', function(){
+    if (!auth) return;
+    auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(function(e){ alert(e.message); });
+  });
+  $('signout').addEventListener('click', function(e){ e.preventDefault(); if (auth) auth.signOut(); location.reload(); });
+  if (auth) { auth.onAuthStateChanged(function(u){
+    if (!u) return;
+    actor = u.email;
+    if (EDITORS.indexOf(u.email) === -1) {
+      alert('This page is editors-only. Signed in as '+u.email+', which is not on the editor allowlist.');
+      auth.signOut(); return;
+    }
+    // Try the live collection; permission errors fall back to local sample rows.
+    db.collection('narristotle_publish_queue').limit(1).get().then(function(){ enterLive(u.email); }).catch(function(){ actor = u.email; enterLocal('Signed in as '+u.email+', but the queue collection is not open yet (rules deploy is a go-live step) — showing sample rows in this browser only.'); });
+  }); }
+})();
+</script>
+</body>
+</html>
