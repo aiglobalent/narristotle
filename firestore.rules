@@ -23,6 +23,17 @@ service cloud.firestore {
     match /narristotle_history/{entryId} {
       allow read, write: if isEditor();
     }
+    match /narristotle_publish_queue/{requestId} {
+      // Publishing approval queue (one desk): editors only. Rows are
+      // requests, never published content. Approval writes status only;
+      // publishing itself is a separate step. Rules deployed 2026-11-05
+      // with the newsletter rules; the queue flow itself is not live yet
+      // — nothing writes to it.
+      allow read, write: if isEditor();
+    }
+    match /narristotle_publish_history/{entryId} {
+      allow read, write: if isEditor();
+    }
     match /narristotle_morning_briefings/{briefingId} {
       allow read, write: if isEditor();
     }
@@ -37,21 +48,14 @@ service cloud.firestore {
       allow read, update, delete: if isEditor() ||
         (request.auth != null && resource.data.uid == request.auth.uid);
     }
-    match /gift_orders/{orderId} {
-      // Gift-book orders: a signed-in buyer creates their own order
-      // (status must start "queued") and reads it back while it is
-      // fulfilled; editors run fulfillment.
-      allow create: if request.auth != null &&
-        request.resource.data.uid == request.auth.uid &&
-        request.resource.data.status == "queued";
-      allow read: if isEditor() ||
-        (request.auth != null && resource.data.uid == request.auth.uid);
-      allow update, delete: if isEditor();
-    }
-
-    // Wonderbound ALPHA console runs (editors only) — added 2026-10-22.
-    match /gift_alpha_runs/{runId} {
-      allow read, write: if isEditor();
+    match /newsletter_subscribers/{docId} {
+      // Gazette signup (homepage): anyone may add their own email, nothing
+      // else. No public read/update/delete; editors read the list.
+      allow create: if request.resource.data.email is string
+        && request.resource.data.email.matches('^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$')
+        && request.resource.data.source is string
+        && request.resource.data.keys().hasOnly(['email', 'source', 'createdAt']);
+      allow read, update, delete: if isEditor();
     }
   }
 }

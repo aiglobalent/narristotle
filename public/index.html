@@ -12,11 +12,11 @@
 <meta property="og:title" content="Learn to build stories where every cause earns its effect — with Narristotle.">
 <meta property="og:description" content="Narristotle is AI Global Entertainment's AI story-teacher: story structure, character arcs, setups and payoffs.">
 <meta property="og:url" content="https://narristotle.com/">
-<meta property="og:image" content="https://narristotle.com/assets/narristotle-bust.jpg">
+<meta property="og:image" content="https://narristotle.com/assets/og-narristotle.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Narristotle — The Gadfly Gazette">
 <meta name="twitter:description" content="Practical storytelling. A little philosophical mischief. The story-building mind behind RoughDraft Maker.">
-<meta name="twitter:image" content="https://narristotle.com/assets/narristotle-bust.jpg">
+<meta name="twitter:image" content="https://narristotle.com/assets/og-narristotle.png">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -274,13 +274,16 @@
     </div>
   </section>
 
-  <!-- 8. EMAIL SIGNUP — DESIGNED, NOT WIRED -->
+  <!-- 8. EMAIL SIGNUP -->
   <section class="block">
     <div class="wrap">
       <div class="email-slot">
         <h2 style="margin-bottom:8px">Get the Gazette in your inbox.</h2>
-        <p class="sec-sub">Two dispatches a week. No signup is being collected yet &mdash; this slot is designed, not wired, and the form below does nothing.</p>
-        <p><input type="email" placeholder="you@example.com" disabled aria-label="Email address (disabled)">&nbsp;<button type="button" disabled>Sign up</button></p>
+        <p class="sec-sub">Two dispatches a week &mdash; Tuesdays and Fridays.</p>
+        <form id="newsletter-form" novalidate>
+          <p><input id="newsletter-email" type="email" placeholder="you@example.com" aria-label="Email address" required>&nbsp;<button type="submit">Sign up</button></p>
+          <p id="newsletter-note" class="sec-sub" aria-live="polite"></p>
+        </form>
       </div>
     </div>
   </section>
@@ -308,5 +311,9 @@
     </nav>
   </div>
 </footer>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="/firebase-config.js"></script>
+<script src="/assets/newsletter.js"></script>
 </body>
 </html>
