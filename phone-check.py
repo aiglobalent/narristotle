@@ -57,7 +57,8 @@ JS_OVERFLOW = """() => {
 }"""
 
 with sync_playwright() as p:
-    browser = p.chromium.launch(**proxy_arg())
+    host = urlparse(BASE).hostname or ""
+    browser = p.chromium.launch(**({} if host in ("localhost", "127.0.0.1", "::1") else proxy_arg()))
     page = browser.new_page(viewport={"width": 390, "height": 844})
     for name, path in PAGES:
         url = BASE + path
