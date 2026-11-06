@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thank you — Puppy's First 30 Days — Narristotle</title>
+<meta name="description" content="Your copy of Puppy's First 30 Days is ready to download.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://narristotle.com/books/puppy-first-30-days/thank-you/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Narristotle — The Gadfly Gazette">
+<meta property="og:title" content="Thank you — Puppy's First 30 Days">
+<meta property="og:description" content="Your copy of Puppy's First 30 Days is ready to download.">
+<meta property="og:url" content="https://narristotle.com/books/puppy-first-30-days/thank-you/">
+<meta property="og:image" content="https://narristotle.com/assets/og-narristotle.png">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=20261022a">
+<style>
+[hidden]{display:none!important}
+.thanks h1{font-family:'Playfair Display',Georgia,serif;font-size:30px;color:#102C4E;margin:0 0 12px}
+.thanks p{line-height:1.65}
+.thanks .book-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.thanks .book-actions .btn{font-size:15px;padding:10px 18px}
+.oto{margin-top:32px;border:1px solid #E3DCC8;border-radius:8px;padding:18px 20px;background:#FBF8EF}
+.oto h2{font-family:'Playfair Display',Georgia,serif;font-size:20px;color:#102C4E;margin:0 0 6px}
+.oto p{margin:0 0 8px}
+.oto .coming{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#6B5D43}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="header-in">
+    <a class="brand" href="/" aria-label="Narristotle home">
+      <span class="brand-mark">N</span>
+      <span class="brand-name">NARRISTOTLE&#8482;<span class="brand-sub">THE GADFLY GAZETTE</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('nav.main').classList.toggle('open')">&#9776;</button>
+    <nav class="main">
+      <a href="/start-here">Start Here</a>
+      <a href="/gazette">Learn</a>
+      <a href="/bookshelf">Bookshelf</a>
+      <a href="/play">Play</a>
+      <a href="/tools">Tools</a>
+      <a href="/about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="page">
+  <div class="reading thanks">
+    <p class="kicker">Puppy&rsquo;s First 30 Days</p>
+    <div id="thanksChecking">
+      <h1>Checking your order&hellip;</h1>
+      <p>Give us a second &mdash; we&rsquo;re confirming your payment.</p>
+    </div>
+    <div id="thanksPaid" hidden>
+      <h1>Thank you &mdash; it&rsquo;s yours.</h1>
+      <p>Your payment went through. The book is below, ready to download and keep.</p>
+      <div class="book-actions">
+        <a class="btn btn-navy" href="/books/puppy-first-30-days/puppy-first-30-days.pdf">Download the book (PDF) &darr;</a>
+        <span id="packDownload"></span>
+      </div>
+      <p style="margin-top:20px"><strong>What&rsquo;s next:</strong> start with chapter 1 before your puppy comes home, and print the first-week checklist from the appendix so it&rsquo;s on the fridge on day one. The first night is the hardest part &mdash; the book walks through it step by step, so you don&rsquo;t have to figure it out at 2 a.m.</p>
+      <p>Keep this page bookmarked if you like &mdash; your download link lives here.</p>
+    </div>
+    <div id="thanksUnknown" hidden>
+      <h1>We couldn&rsquo;t confirm your order</h1>
+      <p>We weren&rsquo;t able to confirm a payment for this order. If you just paid, give it a minute and refresh this page. If it still doesn&rsquo;t show up, check your email for a receipt &mdash; and if there&rsquo;s no receipt, no charge went through.</p>
+      <p><a class="link-arrow" href="/books/puppy-first-30-days/">&larr; Back to Puppy&rsquo;s First 30 Days</a></p>
+    </div>
+    <div class="oto" id="otoBox" hidden>
+      <span class="coming">One more thing, while you&rsquo;re here</span>
+      <h2>The Reactive Dog Guide</h2>
+      <p>Your puppy is small now. In a few months that puppy is a strong dog on a leash, and the walks are where it shows. The guide is the 4-week plan for the dog who barks, lunges, and loses it on walks. Give up. Your dog will never obey you. Good. Here&rsquo;s what works instead. <strong>$9.95 PDF.</strong> Add it now and it downloads with your book.</p>
+      <div class="book-actions" id="otoBuy" hidden>
+        <button type="button" class="btn btn-navy" id="otoBtn">Get the Reactive Dog Guide &mdash; $9.95</button>
+        <a href="#" id="otoDecline" class="link-arrow">No thanks, take me to my book</a>
+      </div>
+      <span id="otoDownload"></span>
+    </div>
+    <p style="margin-top:28px"><a class="link-arrow" href="/bookshelf">&larr; Back to the Bookshelf</a></p>
+  </div>
+</div>
+
+  <section class="cta">
+    <div class="cta-in">
+      <div>
+        <h2>Bring the idea. Even the messy version.</h2>
+        <p>Your notes, your voice, your story. Let&rsquo;s get to the draft.</p>
+      </div>
+      <a class="btn" href="https://roughdraftmaker.com">Explore RoughDraft Maker &#8594;</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="footer-in">
+    <span><strong style="color:var(--navy);letter-spacing:.08em">NARRISTOTLE&#8482;</strong> &middot; An AI Global Entertainment publication.</span>
+    <nav>
+      <a href="/about">About</a>
+      <a href="/about#editorial">Editorial approach</a>
+      <a href="/about#contact">Contact</a>
+      <a href="/">narristotle.com</a>
+    </nav>
+  </div>
+</footer>
+<script>
+(function () {
+  // Checkout service base URL (puppy-checkout Cloud Run, LIVE mode).
+  var CHECKOUT_BASE = 'https://puppy-checkout-2vho3uwfhq-uw.a.run.app';
+  var checking = document.getElementById('thanksChecking');
+  var paid = document.getElementById('thanksPaid');
+  var unknown = document.getElementById('thanksUnknown');
+  var otoBox = document.getElementById('otoBox');
+  var otoBuy = document.getElementById('otoBuy');
+  var otoBtn = document.getElementById('otoBtn');
+  function showUnknown() {
+    checking.hidden = true;
+    paid.hidden = true;
+    unknown.hidden = false;
+  }
+  function showGuideDownload() {
+    var span = document.getElementById('otoDownload');
+    if (span.childNodes.length) return;
+    var a = document.createElement('a');
+    a.className = 'btn btn-ghost';
+    a.href = '/books/puppy-first-30-days/reactive-dog-guide.pdf';
+    a.textContent = 'Download the Reactive Dog Guide (PDF) \u2193';
+    span.appendChild(a);
+  }
+  function showPaid(data) {
+    checking.hidden = true;
+    unknown.hidden = true;
+    paid.hidden = false;
+    // Printable pack download appears only when the order included it.
+    if (data && (data.bumpPurchased === true || data.bump === true)) {
+      var span = document.getElementById('packDownload');
+      var a = document.createElement('a');
+      a.className = 'btn btn-ghost';
+      a.href = '/books/puppy-first-30-days/printable-pack.pdf';
+      a.textContent = 'Download the printable pack (PDF) \u2193';
+      span.appendChild(a);
+    }
+  }
+  var params = new URLSearchParams(window.location.search);
+  var sessionId = params.get('session_id');
+  if (!sessionId) {
+    showUnknown();
+    return;
+  }
+  fetch(CHECKOUT_BASE + '/session/' + encodeURIComponent(sessionId))
+    .then(function (res) {
+      if (!res.ok) throw new Error('session check returned ' + res.status);
+      return res.json();
+    })
+    .then(function (data) {
+      if (data && (data.paid === true || data.status === 'paid' || data.payment_status === 'paid')) {
+        if (data.guidePurchased === true) {
+          // This session paid for the guide: show its download, then
+          // recover the book session (carried in metadata) for the
+          // book + printable pack downloads.
+          otoBox.hidden = false;
+          otoBuy.style.display = 'none';
+          showGuideDownload();
+          if (data.bookSessionId) {
+            fetch(CHECKOUT_BASE + '/session/' + encodeURIComponent(data.bookSessionId))
+              .then(function (res) { return res.json(); })
+              .then(function (bookData) {
+                if (bookData && bookData.paid === true) showPaid(bookData);
+                else showPaid(data);
+              })
+              .catch(function () { showPaid(data); });
+          } else {
+            showPaid(data);
+          }
+        } else {
+          showPaid(data);
+          otoBox.hidden = false;
+          otoBuy.hidden = false;
+        }
+      } else {
+        showUnknown();
+      }
+    })
+    .catch(function () {
+      showUnknown();
+    });
+  otoBtn.addEventListener('click', function () {
+    otoBtn.disabled = true;
+    otoBtn.textContent = 'Taking you to checkout\u2026';
+    fetch(CHECKOUT_BASE + '/create-guide-checkout-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ bookSessionId: sessionId })
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (d) {
+        if (d && d.url) {
+          window.location.href = d.url;
+        } else {
+          otoBtn.disabled = false;
+          otoBtn.textContent = 'Get the Reactive Dog Guide \u2014 $9.95';
+        }
+      })
+      .catch(function () {
+        otoBtn.disabled = false;
+        otoBtn.textContent = 'Get the Reactive Dog Guide \u2014 $9.95';
+      });
+  });
+  var otoDecline = document.getElementById('otoDecline');
+  if (otoDecline) otoDecline.addEventListener('click', function (e) {
+    e.preventDefault();
+    otoBox.hidden = true;
+  });
+})();
+</script>
+</body>
+</html>
