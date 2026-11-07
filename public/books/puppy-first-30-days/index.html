@@ -165,8 +165,9 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 </div>
 <script>
 (function () {
-  // Checkout service base URL (puppy-checkout Cloud Run, LIVE mode).
-  var CHECKOUT_BASE = 'https://puppy-checkout-2vho3uwfhq-uw.a.run.app';
+  // Buy buttons go to the interstitial order page, which creates the
+  // checkout session (book + printable pack + guide) and sends the buyer
+  // to Stripe. No checkout call happens on this page.
   var bump = document.getElementById('bumpPack');
   var stickyPrice = document.querySelector('.sticky-price');
   function updateLabels() {
@@ -177,30 +178,10 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   bump.addEventListener('change', updateLabels);
   updateLabels();
   document.querySelectorAll('.buyBtn').forEach(function (btn) {
-  var err = btn.parentElement.querySelector('.buy-error');
   btn.addEventListener('click', function () {
-    if (err) { err.classList.remove('show'); err.textContent = ''; }
     btn.disabled = true;
-    btn.textContent = 'Taking you to checkout\u2026';
-    fetch(CHECKOUT_BASE + '/create-checkout-session', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ bump: bump.checked })
-    })
-      .then(function (res) {
-        if (!res.ok) throw new Error('checkout returned ' + res.status);
-        return res.json();
-      })
-      .then(function (data) {
-        var url = data && (data.url || data.checkoutUrl);
-        if (!url) throw new Error('no checkout url returned');
-        window.location.href = url;
-      })
-      .catch(function () {
-        if (err) { err.textContent = 'Sorry \u2014 checkout didn\u2019t open. Please try again in a moment.'; err.classList.add('show'); }
-        btn.disabled = false;
-        updateLabels();
-      });
+    btn.textContent = 'Continuing to your order\u2026';
+    window.location.href = '/books/puppy-first-30-days/order/?bump=' + (bump.checked ? '1' : '0');
   });
   });
   var sticky = document.getElementById('stickyCta');
