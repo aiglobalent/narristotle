@@ -224,3 +224,12 @@ article.post .verdict{margin:26px 0}
 .cover-frame.contain img{object-fit:contain}
 .cover-frame.paper{background:#f1ead6}
 .note .credit{font-size:13px;color:var(--muted);margin-top:-6px}
+
+/* Book covers — the one component every surface uses (redesign Nov 6, 2026).
+   A cover is never cropped and never stretched: the figure locks the box to a
+   ratio and the img fills it with object-fit:contain, so the whole cover
+   always shows, undistorted. No per-page cover rules, no overrides — a new
+   cover just uses .book-cover, plus --tall when its true ratio isn't 2/3. */
+.book-cover{position:relative;display:block;margin:0;width:100%;aspect-ratio:2/3;background:#F6F2E9;border-radius:8px;overflow:hidden;box-shadow:0 16px 28px rgba(16,44,78,.28)}
+.book-cover img,.cover-card .book-cover img,.modal-grid .book-cover img{display:block;width:100%;height:100%;object-fit:contain}
+.book-cover--tall{aspect-ratio:1275/1650}

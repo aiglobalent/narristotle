@@ -11,16 +11,16 @@
 <meta property="og:title" content="Puppy's First 30 Days by PetsBuzz">
 <meta property="og:description" content="Your puppy is home. Now what? The first month, in the order you'll actually live it. Twelve chapters, 55 pages. $17 PDF.">
 <meta property="og:url" content="https://narristotle.com/books/puppy-first-30-days/">
-<meta property="og:image" content="https://narristotle.com/books/puppy-first-30-days/cover.jpg">
+<meta property="og:image" content="https://narristotle.com/assets/puppy-first-30-days-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Puppy's First 30 Days by PetsBuzz">
 <meta name="twitter:description" content="Your puppy is home. Now what? The first month, in the order you'll actually live it. Twelve chapters, 55 pages. $17 PDF.">
-<meta name="twitter:image" content="https://narristotle.com/books/puppy-first-30-days/cover.jpg">
+<meta name="twitter:image" content="https://narristotle.com/assets/puppy-first-30-days-cover.jpg">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=20261022a">
+<link rel="stylesheet" href="/assets/style.css?v=20261106a">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -37,22 +37,25 @@
 }
 </script>
 <style>
-.book-page{display:grid;grid-template-columns:280px 1fr;gap:32px;align-items:start}
-.book-page img{width:100%;border-radius:8px}
+.book-top{display:grid;grid-template-columns:280px 1fr;gap:32px;align-items:start}
+.book-body{max-width:680px;margin:36px auto 0}
 .book-by{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6B5D43;margin:0 0 12px}
-.book-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-.book-actions .btn{font-size:15px;padding:10px 18px}
+.buy-area{margin-top:16px}
+.buy-area .btn{font-size:17px;min-height:48px;padding:12px 22px}
+.buy-area--bottom{margin-top:28px;text-align:center}
 button.btn{font-family:inherit;cursor:pointer}
 button.btn:disabled{opacity:.6;cursor:wait}
 .bump{display:flex;gap:10px;align-items:flex-start;margin-top:14px;max-width:560px}
-.bump input{width:18px;height:18px;margin-top:2px;flex:none;accent-color:#102C4E}
-.bump label{font-size:15px;line-height:1.5;cursor:pointer}
+.bump input{width:22px;height:22px;margin-top:2px;flex:none;accent-color:#102C4E}
+.bump label{font-size:17px;line-height:1.5;cursor:pointer}
 .bump label strong{color:#102C4E}
-.buy-error{display:none;margin-top:12px;color:#8A1F1F;font-size:14px}
+.buy-error{display:none;margin-top:12px;color:#8A1F1F;font-size:16px}
 .buy-error.show{display:block}
 .cover-credit{font-size:12px;color:#6B5D43;margin-top:8px}
 .hook{font-family:'Playfair Display',Georgia,serif;font-size:30px;line-height:1.25;color:#102C4E;margin:0 0 10px}
 .lede{font-size:17px;line-height:1.6;margin:0 0 16px}
+.book-facts{font-size:17px;line-height:1.6;margin:0 0 16px}
+.book-facts strong{color:#102C4E}
 .star-story h2{font-family:'Playfair Display',Georgia,serif;font-size:22px;color:#102C4E;margin:22px 0 8px}
 .star-story p{line-height:1.65;margin:0 0 12px}
 .offer{margin-top:22px;border:1px solid #E3DCC8;border-radius:8px;padding:18px 20px;background:#FBF8EF}
@@ -60,12 +63,30 @@ button.btn:disabled{opacity:.6;cursor:wait}
 .offer ul{margin:0 0 10px;padding-left:20px;line-height:1.65}
 .offer ul li{margin-bottom:6px}
 .offer .total{font-weight:700;color:#102C4E}
-.urgency{margin-top:16px;font-size:15px;line-height:1.6}
+.urgency{margin-top:16px;font-size:17px;line-height:1.6}
 .urgency strong{color:#102C4E}
 .contents{margin-top:28px}
-.contents h2{font-family:'Playfair Display',Georgia,serif;font-size:22px;color:#102C4E;margin:0 0 10px}
+.buy-area--mid{margin:20px 0 4px;text-align:center}
+.accord{border-top:1px solid #E3DCC8}
+.accord summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;cursor:pointer;font-family:'Playfair Display',Georgia,serif;font-size:22px;color:#102C4E;padding:10px 0}
+.accord summary::-webkit-details-marker{display:none}
+.accord summary .chev{font-size:26px;line-height:1;color:#102C4E;transition:transform .2s ease;flex:none}
+.accord[open] summary .chev{transform:rotate(90deg)}
+.accord .accord-body{padding:0 0 16px}
+.faq{margin-top:28px}
+.faq h2{font-family:'Playfair Display',Georgia,serif;font-size:22px;color:#102C4E;margin:0 0 6px}
+.faq .accord summary{font-family:'Inter',system-ui,sans-serif;font-size:17px;font-weight:600;min-height:48px}
+.faq .accord p{font-size:17px;line-height:1.65;margin:0 0 12px}
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:50;background:#fff;border-top:1px solid #E3DCC8;box-shadow:0 -4px 16px rgba(16,44,78,.12);padding:10px 16px calc(10px + env(safe-area-inset-bottom));transform:translateY(110%);visibility:hidden;transition:transform .25s ease,visibility 0s .25s}
+.sticky-cta.show{transform:none;visibility:visible;transition:transform .25s ease}
+.sticky-in{max-width:680px;margin:0 auto}
+.sticky-row{display:flex;align-items:center;justify-content:space-between;gap:12px 16px;flex-wrap:wrap}
+.sticky-price{font-size:15px;font-weight:600;color:#102C4E}
+.sticky-cta .btn{font-size:17px;min-height:48px;padding:12px 20px;flex:none}
+.sticky-row .buy-error{flex:1 1 100%;margin:2px 0 0;font-size:15px}
+body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .contents ol{margin:0;padding-left:22px;line-height:1.7}
-@media (max-width:560px){.book-page{grid-template-columns:1fr}.book-page img{max-width:280px}}
+@media (max-width:560px){.book-top{grid-template-columns:1fr}.book-top .book-cover{max-width:280px}.book-body{margin-top:28px}.sticky-price{display:none}.sticky-row{justify-content:center}}
 </style>
 </head>
 <body>
@@ -92,14 +113,23 @@ button.btn:disabled{opacity:.6;cursor:wait}
   <div class="reading">
     <p class="kicker">Our Books</p>
     <h1 class="hook">Your puppy is home. Now what?</h1>
-    <div class="book-page">
+    <div class="book-top">
       <div>
-        <img src="cover.jpg" alt="Puppy's First 30 Days — a smiling golden retriever puppy in green grass" width="1275" height="1650">
+        <figure class="book-cover book-cover--tall"><img src="/assets/puppy-first-30-days-cover-600.jpg" srcset="/assets/puppy-first-30-days-cover-600.jpg 600w, /assets/puppy-first-30-days-cover.jpg 1275w" sizes="280px" alt="Puppy's First 30 Days — a smiling golden retriever puppy in green grass" width="600" height="776"></figure>
         <p class="cover-credit">Cover photo: Les&#322;aw Dzik / Pexels</p>
       </div>
-      <div>
+      <div class="buy-box">
         <p class="book-by">PetsBuzz &middot; Puppy&rsquo;s First 30 Days &middot; A New Owner&rsquo;s Guide</p>
         <p class="lede">The first month only happens once. Here is the whole month, in the order you will actually live it.</p>
+        <p class="book-facts">Twelve chapters, 55 pages, written plain. <strong>$17 PDF.</strong></p>
+        <div class="buy-area"><button type="button" class="btn btn-navy buyBtn" id="buyBtn">Get the book &mdash; $17 PDF</button><p class="buy-error" role="alert"></p></div>
+        <div class="bump">
+          <input type="checkbox" id="bumpPack">
+          <label for="bumpPack"><strong>Yes, add the printable pack for $7.</strong> The checklists and schedules from the book, ready to print tonight: the full first-30-days schedule, the full potty log, and the socialization tracker. One tick and it comes with your book. No second checkout.</label>
+        </div>
+      </div>
+    </div>
+    <div class="book-body">
         <div class="star-story">
           <h2>This is you, right now</h2>
           <p>You brought home a puppy. Tonight is the first night. The crate is in the bedroom, the puppy is crying, and you are awake at 2 a.m. wondering if you are doing any of this right. By morning there is a puddle by the door, a chewed shoe, and a list of questions for the vet. Google gives you ten answers that disagree with each other. That is the first week. It gets better, but only if the first month goes right.</p>
@@ -117,17 +147,11 @@ button.btn:disabled{opacity:.6;cursor:wait}
           </ul>
           <p class="total">That is the whole first month, handled, for $24. Add the guide and it is $33.95.</p>
         </div>
+        <div class="buy-area buy-area--mid"><button type="button" class="btn btn-navy buyBtn">Get the book &mdash; $17 PDF</button><p class="buy-error" role="alert"></p></div>
         <p class="urgency"><strong>The first month only happens once.</strong> The socialization window closes around fourteen to sixteen weeks, and it does not reopen. This book is written for the month you are in, not the month after. If your puppy is home now, this is the month.</p>
-        <div class="book-actions"><button type="button" class="btn btn-navy" id="buyBtn">Buy the book &mdash; $17 PDF</button></div>
-        <div class="bump">
-          <input type="checkbox" id="bumpPack">
-          <label for="bumpPack"><strong>Yes, add the printable pack for $7.</strong> The checklists and schedules from the book, ready to print tonight: the full first-30-days schedule, the full potty log, and the socialization tracker. One tick and it comes with your book. No second checkout.</label>
-        </div>
-        <p class="buy-error" id="buyError" role="alert"></p>
-      </div>
-    </div>
-    <div class="contents">
-      <h2>Inside the book</h2>
+    <details class="accord contents">
+      <summary><span>Inside the book &mdash; all 12 chapters</span><span class="chev" aria-hidden="true">&rsaquo;</span></summary>
+      <div class="accord-body">
       <ol>
         <li>Before Day One</li>
         <li>The First Night</li>
@@ -143,8 +167,44 @@ button.btn:disabled{opacity:.6;cursor:wait}
         <li>Weeks 5&ndash;12 &amp; Beyond</li>
       </ol>
       <p>Plus an appendix: first-week checklist, potty-log starter, first-month milestones, vet-visit questions, and a puppy first-aid kit.</p>
-    </div>
+      </div>
+    </details>
+    <section class="faq">
+      <h2>Questions, answered</h2>
+      <details class="accord" open>
+        <summary><span>What exactly do I get?</span><span class="chev" aria-hidden="true">&rsaquo;</span></summary>
+        <div class="accord-body">
+        <p>The book as a PDF: twelve chapters, 55 pages, plus an appendix with the first-week checklist, a potty-log starter, first-month milestones, vet-visit questions, and a puppy first-aid kit. If you tick the box, the $7 printable pack comes with it. After checkout, you will be offered The Reactive Dog Guide for $9.95 &mdash; only if you want it.</p>
+        </div>
+      </details>
+      <details class="accord">
+        <summary><span>How do I get the book after I buy?</span><span class="chev" aria-hidden="true">&rsaquo;</span></summary>
+        <div class="accord-body">
+        <p>Right after checkout, you land on a thank-you page with the download link. The book is a PDF, so you can read it on your phone or tablet, or print it.</p>
+        </div>
+      </details>
+      <details class="accord">
+        <summary><span>Is this a physical book?</span><span class="chev" aria-hidden="true">&rsaquo;</span></summary>
+        <div class="accord-body">
+        <p>No &mdash; it is a PDF download. Nothing ships, and there is nothing to wait for.</p>
+        </div>
+      </details>
+      <details class="accord">
+        <summary><span>What is the printable pack?</span><span class="chev" aria-hidden="true">&rsaquo;</span></summary>
+        <div class="accord-body">
+        <p>The full first-30-days schedule, the full potty log, and the socialization tracker, ready to print and stick on the fridge. It is $7, and you add it by ticking the box before you buy &mdash; it comes with your book, no second checkout.</p>
+        </div>
+      </details>
+      <details class="accord">
+        <summary><span>Who is this for?</span><span class="chev" aria-hidden="true">&rsaquo;</span></summary>
+        <div class="accord-body">
+        <p>New puppy owners in the first month. If your puppy is 8 to 12 weeks old, this is the month the book is written for &mdash; the socialization window runs to about fourteen weeks.</p>
+        </div>
+      </details>
+    </section>
+    <div class="buy-area buy-area--bottom"><button type="button" class="btn btn-navy buyBtn" id="buyBottom">Get the book &mdash; $17 PDF</button><p class="buy-error" role="alert"></p></div>
     <p style="margin-top:28px"><a class="link-arrow" href="/bookshelf">&larr; Back to the Bookshelf</a></p>
+    </div>
   </div>
 </div>
 
@@ -161,16 +221,24 @@ button.btn:disabled{opacity:.6;cursor:wait}
     </nav>
   </div>
 </footer>
+<div class="sticky-cta" id="stickyCta">
+  <div class="sticky-in">
+    <div class="sticky-row">
+      <span class="sticky-price">Puppy&rsquo;s First 30 Days &mdash; $17 PDF</span>
+      <button type="button" class="btn btn-navy buyBtn">Get the book &mdash; $17 PDF</button>
+      <p class="buy-error" role="alert"></p>
+    </div>
+  </div>
+</div>
 <script>
 (function () {
   // Checkout service base URL (puppy-checkout Cloud Run, LIVE mode).
   var CHECKOUT_BASE = 'https://puppy-checkout-2vho3uwfhq-uw.a.run.app';
-  var btn = document.getElementById('buyBtn');
   var bump = document.getElementById('bumpPack');
-  var err = document.getElementById('buyError');
+  document.querySelectorAll('.buyBtn').forEach(function (btn) {
+  var err = btn.parentElement.querySelector('.buy-error');
   btn.addEventListener('click', function () {
-    err.classList.remove('show');
-    err.textContent = '';
+    if (err) { err.classList.remove('show'); err.textContent = ''; }
     btn.disabled = true;
     btn.textContent = 'Taking you to checkout\u2026';
     fetch(CHECKOUT_BASE + '/create-checkout-session', {
@@ -188,12 +256,30 @@ button.btn:disabled{opacity:.6;cursor:wait}
         window.location.href = url;
       })
       .catch(function () {
-        err.textContent = 'Sorry \u2014 checkout didn\u2019t open. Please try again in a moment.';
-        err.classList.add('show');
+        if (err) { err.textContent = 'Sorry \u2014 checkout didn\u2019t open. Please try again in a moment.'; err.classList.add('show'); }
         btn.disabled = false;
-        btn.textContent = 'Buy the book \u2014 $17 PDF';
+        btn.textContent = 'Get the book \u2014 $17 PDF';
       });
   });
+  });
+  var sticky = document.getElementById('stickyCta');
+  var heroBtn = document.getElementById('buyBtn');
+  var finalBtn = document.getElementById('buyBottom');
+  var heroVisible = true, finalVisible = false;
+  function updateSticky() {
+    if (sticky) sticky.classList.toggle('show', !heroVisible && !finalVisible);
+  }
+  if (sticky && heroBtn && finalBtn && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.target === heroBtn) heroVisible = entry.isIntersecting;
+        if (entry.target === finalBtn) finalVisible = entry.isIntersecting;
+      });
+      updateSticky();
+    });
+    io.observe(heroBtn);
+    io.observe(finalBtn);
+  }
 })();
 </script>
 </body>
