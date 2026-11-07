@@ -42,13 +42,13 @@
 .book-by{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6B5D43;margin:0 0 12px}
 .buy-area{margin-top:16px}
 .buy-area .btn{font-size:17px;min-height:48px;padding:12px 22px}
-.buy-area--bottom{margin-top:28px;text-align:center}
 button.btn{font-family:inherit;cursor:pointer}
 button.btn:disabled{opacity:.6;cursor:wait}
-.bump{display:flex;gap:10px;align-items:flex-start;margin-top:14px;max-width:560px}
-.bump input{width:22px;height:22px;margin-top:2px;flex:none;accent-color:#102C4E}
+.bump{display:flex;gap:12px;align-items:flex-start;margin:16px 0;border:2px dashed #E8A33D;border-radius:6px;background:#FFF8E6;padding:14px 16px;max-width:560px}
+.bump input{width:22px;height:22px;margin-top:2px;flex:none;accent-color:#C0392B}
 .bump label{font-size:17px;line-height:1.5;cursor:pointer}
 .bump label strong{color:#102C4E}
+.bump .bump-sub{display:block;color:#6B5D43;font-size:15px;margin-top:4px}
 .buy-error{display:none;margin-top:12px;color:#8A1F1F;font-size:16px}
 .buy-error.show{display:block}
 .cover-credit{font-size:12px;color:#6B5D43;margin-top:8px}
@@ -65,18 +65,7 @@ button.btn:disabled{opacity:.6;cursor:wait}
 .offer .total{font-weight:700;color:#102C4E}
 .urgency{margin-top:16px;font-size:17px;line-height:1.6}
 .urgency strong{color:#102C4E}
-.contents{margin-top:28px}
 .buy-area--mid{margin:20px 0 4px;text-align:center}
-.accord{border-top:1px solid #E3DCC8}
-.accord summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;cursor:pointer;font-family:'Playfair Display',Georgia,serif;font-size:22px;color:#102C4E;padding:10px 0}
-.accord summary::-webkit-details-marker{display:none}
-.accord summary .chev{font-size:26px;line-height:1;color:#102C4E;transition:transform .2s ease;flex:none}
-.accord[open] summary .chev{transform:rotate(90deg)}
-.accord .accord-body{padding:0 0 16px}
-.faq{margin-top:28px}
-.faq h2{font-family:'Playfair Display',Georgia,serif;font-size:22px;color:#102C4E;margin:0 0 6px}
-.faq .accord summary{font-family:'Inter',system-ui,sans-serif;font-size:17px;font-weight:600;min-height:48px}
-.faq .accord p{font-size:17px;line-height:1.65;margin:0 0 12px}
 .sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:50;background:#fff;border-top:1px solid #E3DCC8;box-shadow:0 -4px 16px rgba(16,44,78,.12);padding:10px 16px calc(10px + env(safe-area-inset-bottom));transform:translateY(110%);visibility:hidden;transition:transform .25s ease,visibility 0s .25s}
 .sticky-cta.show{transform:none;visibility:visible;transition:transform .25s ease}
 .sticky-in{max-width:680px;margin:0 auto}
@@ -85,7 +74,6 @@ button.btn:disabled{opacity:.6;cursor:wait}
 .sticky-cta .btn{font-size:17px;min-height:48px;padding:12px 20px;flex:none}
 .sticky-row .buy-error{flex:1 1 100%;margin:2px 0 0;font-size:15px}
 body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
-.contents ol{margin:0;padding-left:22px;line-height:1.7}
 @media (max-width:560px){.book-top{grid-template-columns:1fr}.book-top .book-cover{max-width:280px}.book-body{margin-top:28px}.sticky-price{display:none}.sticky-row{justify-content:center}}
 </style>
 </head>
@@ -122,11 +110,11 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
         <p class="book-by">PetsBuzz &middot; Puppy&rsquo;s First 30 Days &middot; A New Owner&rsquo;s Guide</p>
         <p class="lede">The first month only happens once. Here is the whole month, in the order you will actually live it.</p>
         <p class="book-facts">Twelve chapters, 55 pages, written plain. <strong>$17 PDF.</strong></p>
-        <div class="buy-area"><button type="button" class="btn btn-navy buyBtn" id="buyBtn">Get the book &mdash; $17 PDF</button><p class="buy-error" role="alert"></p></div>
         <div class="bump">
           <input type="checkbox" id="bumpPack">
-          <label for="bumpPack"><strong>Yes, add the printable pack for $7.</strong> The checklists and schedules from the book, ready to print tonight: the full first-30-days schedule, the full potty log, and the socialization tracker. One tick and it comes with your book. No second checkout.</label>
+          <label for="bumpPack"><strong>YES &middot; Add the printable pack (+$7.00)</strong><span class="bump-sub">The checklists and schedules from the book, ready to print tonight: the full first-30-days schedule, the full potty log, and the socialization tracker. One tick and it comes with your book. No second checkout.</span></label>
         </div>
+        <div class="buy-area"><button type="button" class="btn btn-navy buyBtn" id="buyBtn">Get the book &mdash; $17 PDF</button><p class="buy-error" role="alert"></p></div>
       </div>
     </div>
     <div class="book-body">
@@ -142,67 +130,12 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
           <h2>Here is everything you get</h2>
           <ul>
             <li><strong>The book: Puppy&rsquo;s First 30 Days, $17 PDF.</strong> Twelve chapters, 55 pages, plus an appendix with the first-week checklist, a potty-log starter, first-month milestones, vet-visit questions, and a puppy first-aid kit.</li>
-            <li><strong>The printable pack, $7.</strong> Tick the box below and it comes with your book. The full first-30-days schedule, the full potty log, and the socialization tracker, ready to print and stick on the fridge.</li>
-            <li><strong>After checkout, one more thing: The Reactive Dog Guide, $9.95.</strong> Your puppy is small now. In a few months that puppy is a strong dog on a leash, and the walks are where it shows. The guide is the 4-week plan for the dog who barks, lunges, and loses it on walks.</li>
+            <li><strong>The printable pack, $7.</strong> Tick the box above and it comes with your book. The full first-30-days schedule, the full potty log, and the socialization tracker, ready to print and stick on the fridge.</li>
           </ul>
-          <p class="total">That is the whole first month, handled, for $24. Add the guide and it is $33.95.</p>
+          <p class="total">That is the whole first month, handled, for $24.</p>
         </div>
-        <div class="buy-area buy-area--mid"><button type="button" class="btn btn-navy buyBtn">Get the book &mdash; $17 PDF</button><p class="buy-error" role="alert"></p></div>
+        <div class="buy-area buy-area--mid"><button type="button" class="btn btn-navy buyBtn" id="buyBottom">Get the book &mdash; $17 PDF</button><p class="buy-error" role="alert"></p></div>
         <p class="urgency"><strong>The first month only happens once.</strong> The socialization window closes around fourteen to sixteen weeks, and it does not reopen. This book is written for the month you are in, not the month after. If your puppy is home now, this is the month.</p>
-    <details class="accord contents">
-      <summary><span>Inside the book &mdash; all 12 chapters</span><span class="chev" aria-hidden="true">&rsaquo;</span></summary>
-      <div class="accord-body">
-      <ol>
-        <li>Before Day One</li>
-        <li>The First Night</li>
-        <li>House Training</li>
-        <li>The First Vet Visit</li>
-        <li>Food &amp; Feeding</li>
-        <li>Socialization</li>
-        <li>Basic Commands</li>
-        <li>Walking on Leash</li>
-        <li>Biting, Chewing &amp; Jumping</li>
-        <li>Alone Time &amp; Separation</li>
-        <li>Health &amp; Grooming</li>
-        <li>Weeks 5&ndash;12 &amp; Beyond</li>
-      </ol>
-      <p>Plus an appendix: first-week checklist, potty-log starter, first-month milestones, vet-visit questions, and a puppy first-aid kit.</p>
-      </div>
-    </details>
-    <section class="faq">
-      <h2>Questions, answered</h2>
-      <details class="accord" open>
-        <summary><span>What exactly do I get?</span><span class="chev" aria-hidden="true">&rsaquo;</span></summary>
-        <div class="accord-body">
-        <p>The book as a PDF: twelve chapters, 55 pages, plus an appendix with the first-week checklist, a potty-log starter, first-month milestones, vet-visit questions, and a puppy first-aid kit. If you tick the box, the $7 printable pack comes with it. After checkout, you will be offered The Reactive Dog Guide for $9.95 &mdash; only if you want it.</p>
-        </div>
-      </details>
-      <details class="accord">
-        <summary><span>How do I get the book after I buy?</span><span class="chev" aria-hidden="true">&rsaquo;</span></summary>
-        <div class="accord-body">
-        <p>Right after checkout, you land on a thank-you page with the download link. The book is a PDF, so you can read it on your phone or tablet, or print it.</p>
-        </div>
-      </details>
-      <details class="accord">
-        <summary><span>Is this a physical book?</span><span class="chev" aria-hidden="true">&rsaquo;</span></summary>
-        <div class="accord-body">
-        <p>No &mdash; it is a PDF download. Nothing ships, and there is nothing to wait for.</p>
-        </div>
-      </details>
-      <details class="accord">
-        <summary><span>What is the printable pack?</span><span class="chev" aria-hidden="true">&rsaquo;</span></summary>
-        <div class="accord-body">
-        <p>The full first-30-days schedule, the full potty log, and the socialization tracker, ready to print and stick on the fridge. It is $7, and you add it by ticking the box before you buy &mdash; it comes with your book, no second checkout.</p>
-        </div>
-      </details>
-      <details class="accord">
-        <summary><span>Who is this for?</span><span class="chev" aria-hidden="true">&rsaquo;</span></summary>
-        <div class="accord-body">
-        <p>New puppy owners in the first month. If your puppy is 8 to 12 weeks old, this is the month the book is written for &mdash; the socialization window runs to about fourteen weeks.</p>
-        </div>
-      </details>
-    </section>
-    <div class="buy-area buy-area--bottom"><button type="button" class="btn btn-navy buyBtn" id="buyBottom">Get the book &mdash; $17 PDF</button><p class="buy-error" role="alert"></p></div>
     <p style="margin-top:28px"><a class="link-arrow" href="/bookshelf">&larr; Back to the Bookshelf</a></p>
     </div>
   </div>
@@ -235,6 +168,14 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   // Checkout service base URL (puppy-checkout Cloud Run, LIVE mode).
   var CHECKOUT_BASE = 'https://puppy-checkout-2vho3uwfhq-uw.a.run.app';
   var bump = document.getElementById('bumpPack');
+  var stickyPrice = document.querySelector('.sticky-price');
+  function updateLabels() {
+    var label = bump.checked ? 'Get the book \u2014 $24 PDF' : 'Get the book \u2014 $17 PDF';
+    document.querySelectorAll('.buyBtn').forEach(function (b) { if (!b.disabled) b.textContent = label; });
+    if (stickyPrice) stickyPrice.textContent = bump.checked ? 'Puppy\u2019s First 30 Days \u2014 $24 PDF' : 'Puppy\u2019s First 30 Days \u2014 $17 PDF';
+  }
+  bump.addEventListener('change', updateLabels);
+  updateLabels();
   document.querySelectorAll('.buyBtn').forEach(function (btn) {
   var err = btn.parentElement.querySelector('.buy-error');
   btn.addEventListener('click', function () {
@@ -258,7 +199,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
       .catch(function () {
         if (err) { err.textContent = 'Sorry \u2014 checkout didn\u2019t open. Please try again in a moment.'; err.classList.add('show'); }
         btn.disabled = false;
-        btn.textContent = 'Get the book \u2014 $17 PDF';
+        updateLabels();
       });
   });
   });

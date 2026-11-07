@@ -24,10 +24,13 @@
 .thanks p{line-height:1.65}
 .thanks .book-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
 .thanks .book-actions .btn{font-size:15px;padding:10px 18px}
-.oto{margin-top:32px;border:1px solid #E3DCC8;border-radius:8px;padding:18px 20px;background:#FBF8EF}
-.oto h2{font-family:'Playfair Display',Georgia,serif;font-size:20px;color:#102C4E;margin:0 0 6px}
-.oto p{margin:0 0 8px}
-.oto .coming{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#6B5D43}
+.oto{margin-top:32px;border:2px dashed #E8A33D;border-radius:6px;padding:20px 22px;background:#FFF8E6}
+.oto h2{font-family:'Playfair Display',Georgia,serif;font-size:22px;color:#102C4E;margin:0 0 6px}
+.oto p{margin:0 0 12px}
+.oto .coming{font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#8A1F1F}
+.oto .btn-red{background:#C0392B;color:#fff;font-size:17px;min-height:48px;padding:12px 22px}
+.oto .btn-red:disabled{opacity:.6;cursor:wait}
+.oto .oto-decline{font-size:15px;color:#6B5D43;text-decoration:underline}
 </style>
 </head>
 <body>
@@ -73,12 +76,12 @@
       <p><a class="link-arrow" href="/books/puppy-first-30-days/">&larr; Back to Puppy&rsquo;s First 30 Days</a></p>
     </div>
     <div class="oto" id="otoBox" hidden>
-      <span class="coming">One more thing, while you&rsquo;re here</span>
+      <span class="coming">Wait &middot; One-time post-purchase offer</span>
       <h2>The Reactive Dog Guide</h2>
       <p>Your puppy is small now. In a few months that puppy is a strong dog on a leash, and the walks are where it shows. The guide is the 4-week plan for the dog who barks, lunges, and loses it on walks. Give up. Your dog will never obey you. Good. Here&rsquo;s what works instead. <strong>$9.95 PDF.</strong> Add it now and it downloads with your book.</p>
       <div class="book-actions" id="otoBuy" hidden>
-        <button type="button" class="btn btn-navy" id="otoBtn">Get the Reactive Dog Guide &mdash; $9.95</button>
-        <a href="#" id="otoDecline" class="link-arrow">No thanks, take me to my book</a>
+        <button type="button" class="btn btn-red" id="otoBtn">Get the Reactive Dog Guide &mdash; $9.95</button>
+        <a href="#" id="otoDecline" class="oto-decline">No thanks, take me to my book</a>
       </div>
       <span id="otoDownload"></span>
     </div>
